@@ -1,4 +1,0 @@
-function imc_calculator()
-{
-    
-}

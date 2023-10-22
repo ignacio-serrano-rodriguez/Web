@@ -1,3 +1,10 @@
+/*
+Crea una página web HTML que determine si una cadena de texto solicitada al usuario es un palíndromo, 
+es decir, si se lee de la misma forma desde la izquierda y desde la derecha.
+Ejemplo de palíndromo complejo: "La ruta nos aporto otro paso natural".
+Muestra el resultado en un pop-up.
+*/
+
 function check()
 {
     // Store the given string in a local variable.
@@ -15,6 +22,6 @@ function check()
     }
     else
     {
-        alert("No es un palíndromo");
+        alert("No es un palíndromo.");
     }
 }
