@@ -9,17 +9,17 @@ Utiliza objetos para definir los colores de cada tema.
 
 const lightTheme = 
 {
-    backgrundColor: "white",
+    backgroundColor: "white",
     paragraphColor: "#000000",
 };
 const darkTheme = 
 {
-    backgrundColor: "#000000",
+    backgroundColor: "#000000",
     paragraphColor: "white",
 };
 const coloursTheme = 
 {
-    backgrundColor: "blue",
+    backgroundColor: "blue",
     paragraphColor: "#f5ce0a",
 };
 
@@ -27,23 +27,23 @@ var paragraphs = document.getElementsByTagName('p');
 
 function change_theme() 
 {
-    let theme = document.getElementById("themeSelect").value;
+    let themeSelect = document.getElementById("themeSelect").value;
     let backgroundColor;
     let paragraphColor;
 
-    if(theme == "lightTheme")
+    if(themeSelect == "lightTheme")
     {
-        backgroundColor = lightTheme.backgrundColor;
+        backgroundColor = lightTheme.backgroundColor;
         paragraphColor = lightTheme.paragraphColor;
     }
-    else if(theme == "darkTheme")
+    else if(themeSelect == "darkTheme")
     {
-        backgroundColor = darkTheme.backgrundColor;
+        backgroundColor = darkTheme.backgroundColor;
         paragraphColor = darkTheme.paragraphColor;
     }
-    else if(theme == "coloursTheme")
+    else if(themeSelect == "coloursTheme")
     {
-        backgroundColor = coloursTheme.backgrundColor;
+        backgroundColor = coloursTheme.backgroundColor;
         paragraphColor = coloursTheme.paragraphColor;
     }
     else

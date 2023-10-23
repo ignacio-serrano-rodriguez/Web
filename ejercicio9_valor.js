@@ -7,6 +7,22 @@ campo de texto. Utiliza JavaScript para verificar el tipo de dato ingresado
 function value_check()
 {
     let givenValue = document.getElementById("givenValue").value;
+    let dateGenerated = new Date(givenValue);
     
-    console.log(typeof givenValue);
+    if (!isNaN(givenValue))
+    {
+        console.log("Número.");
+    }
+    else if (givenValue == "true" || givenValue == 'false')
+    {
+        console.log("Booleano.");
+    }
+    else if (dateGenerated != "Invalid Date")
+    {
+        console.log("Fecha.");
+    }
+    else
+    {
+        console.log("Cadena.");
+    }
 }
