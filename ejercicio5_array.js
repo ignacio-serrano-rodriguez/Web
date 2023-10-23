@@ -16,7 +16,7 @@ var valores=[true, 5, false, "hola", "adiós", 2];
 var valores = [true, 5, false, "hola", "adios", 2];
 
 // 1. 
-function part1() 
+function part_1() 
 {
     if(valores[3].length > valores[4].length)
     {
@@ -31,7 +31,7 @@ function part1()
 }
 
 // 2.
-function part2() 
+function part_2() 
 {
     // AND logic operator to get "true" boolean value
     console.log((valores[0] || valores[2]));
@@ -42,7 +42,7 @@ function part2()
 }
 
 // 3.
-function part3() 
+function part_3() 
 {
     console.log("(suma) 5 + 2 = " + (valores[1]+valores[5]));
     console.log("(resta) 5 - 2 = " + (valores[1]-valores[5]));

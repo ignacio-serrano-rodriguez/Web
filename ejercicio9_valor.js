@@ -4,7 +4,7 @@ campo de texto. Utiliza JavaScript para verificar el tipo de dato ingresado
 (número, cadena, booleano, etc.). Muestra por consola el tipo de dato, al pulsar un botón.
 */
 
-function valueCheck()
+function value_check()
 {
     let givenValue = document.getElementById("givenValue").value;
     

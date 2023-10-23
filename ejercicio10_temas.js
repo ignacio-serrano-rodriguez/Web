@@ -25,7 +25,7 @@ const coloursTheme =
 
 var paragraphs = document.getElementsByTagName('p');
 
-function changeTheme() 
+function change_theme() 
 {
     let theme = document.getElementById("themeSelect").value;
     let backgroundColor;

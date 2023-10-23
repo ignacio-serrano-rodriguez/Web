@@ -14,9 +14,9 @@ function check()
     characters = characters.toLowerCase().replaceAll(' ','');
 
     // Transform the string in array, reverse it and transform it again in string
-    charactersInversed = characters.split("").reverse().join("");
+    let charactersInverted = characters.split("").reverse().join("");
 
-    if(characters == charactersInversed)
+    if(characters == charactersInverted)
     {
         alert("Es un palíndromo.");
     }

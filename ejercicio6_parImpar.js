@@ -4,7 +4,7 @@ indicando si es par o impar.
 Ej: “El número 2 es par”.
 */
 
-function evenOdd()
+function even_odd()
 {
     let number = parseInt(document.getElementById("number").value);
     
