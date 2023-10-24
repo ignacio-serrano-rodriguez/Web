@@ -1,0 +1,16 @@
+1. ¿Cómo puedo hacer para que se muestre el texto “Tu navegador no permite la ejecución de scripts” 
+cuando el navegador no soporte la ejecución de scripts?
+
+Agregar la etiqueta <noscript> El navegador no soporta la ejecución de scripts. </noscript> tras
+la etiqueta de inicio del body de fichero HTML.
+
+2. ¿Cuál de estas afirmaciones es verdadera?
+a.) Un error en un script puede hacer que deje de cargarse una página.
+b.) Resulta más escalable llamar a un script de forma interna.
+c.) Solo se pueden utilizar como máximo 2 etiquetas <script> en un documento, una para 
+escribir directamente código javascript en el HTML, y otra para invocar a un fichero externo.
+d.) Aunque es recomendable declararlo en <head>, donde se declare un script en un documento 
+no afecta a la ejecución.
+
+a.) porque hay páginas que necesitan el uso del lenguaje JavaScript para poder visualizarse
+correctamente.
