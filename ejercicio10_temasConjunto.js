@@ -32,7 +32,6 @@ var paragraphs = document.getElementsByTagName('p');
 
 function change_theme() 
 {
-    var paragraphs = document.getElementsByTagName('p');
     let themeSelect = document.getElementById("themeSelect").value;
 
     document.body.style.backgroundColor = themes[themeSelect].backgroundColor;
