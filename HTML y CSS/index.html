@@ -12,21 +12,26 @@
 
         <title> Inicio </title>
 
-        <link href="styles.css"/>
+        <link href="styles/styles.css"/>
 		<script></script>
 		<base/>
 
     </head>
 
     <body>
+		
+		<!-- CABECERAS -->
+        <h1 id="cabecera_1"> CABECERAS (cabecera 1 - h1) </h1>
+		<h2> cabecera 2 - h2 </h2>
+		<h3> cabecera 3 - h3 </h3>
+		<h4> cabecera 4 - h4 </h4>
+		<h5> cabecera 5 - h4 </h5>
+		<h6> cabecera 6 - h6 </h6>
 
-        <h1> cabecera 1 </h1>
-		<h2> cabecera 2 </h2>
-		<h3> cabecera 3 </h3>
-		<h4> cabecera 4 </h4>
-		<h5> cabecera 5 </h5>
-		<h6> cabecera 6 </h6>
+		<hr/>
 
+		<!-- PÁRRAFOS Y MARCADOS -->
+		<h1> PÁRRAFOS Y MARCADOS </h1>
 		<p> Párrafo en español. </p>
 		<p> <b> Negrita </b> </p>
 		<p> <i> Cursiva </i> </p>
@@ -38,6 +43,8 @@
 		<p> <q> Cita pequeña </q> </p>
 		<p> <time> 16:30 </time> </p>								<!-- html 5 -->
 
+		<!-- CITAS -->
+		<h1> CITAS </h1>
 		<p> 
 			<cite> Título de un artículo </cite>
 			<blockquote> 
@@ -45,19 +52,115 @@
 			</blockquote>
 		</p>
 
+		<!-- DIRECCIONES -->
+		<h1> DIRECCIONES </h1>
 		<address> 
 			<p> Ignacio Serrano Rodríguez </p>
 			<p> IES Fernando Aguilar </p>
 			<p> Cádiz </p> 
 		</address> 
-		
-		Hola <br/> Adios
-        
 
-		<hr/> Cambiamos de tema
+		<hr/>
 
-		<img src="img/imagen1.png"/>
-        <!--<input type="text"/>-->
+		<!-- IMÁGENES -->
+		<h1> IMÁGENES </h1>
+		<img width="700px" height="100px" alt="barra de herramientas ubuntu" src="img/imagen1.png"/>
+
+		<figure> <!-- html 5 -->
+			<img src="img/imagen1.png" alt="barra de herramientas ubuntu"/>
+			<figcaption> Barra de herramientas ubuntu </figcaption>
+		</figure>
+
+		<hr/>
+
+		<!-- ENLACES EXTERNOS -->
+		<h1> ENLACES EXTERNOS </h1>
+		<a href="https://www.google.com/"> not blank attribute </a> <br/>
+		<a href="https://www.google.com/" target="_blank"> blank attribute </a> <br/>
+
+		<!-- ENLACES INTERNOS -->
+		<h1> ENLACES INTERNOS </h1>
+		<a href="#cabecera_1"> enlace interno a cabecera 1 </a>
+
+		<hr/>
+
+		<!-- ENLACES CON IMÁGENES -->
+		<h1> ENLACES CON IMÁGENES </h1>
+		<p style="text-align: center;">
+			<a href="https://developer.mozilla.org/es/docs/Web/HTML" target="_blank">
+				<img alt="logo css" width="225px" height="225px" src="img/htmlLogo.png"/>
+			</a>
+			<a href="https://developer.mozilla.org/es/docs/Web/CSS" target="_blank">
+				<img alt="logo html" width="225px" height="225px" src="img/cssLogo.png"/>
+			</a>
+		</p>
+		<p style="text-align: center;">
+			<a href="https://www.google.com/intl/es_es/chrome/" target="_blank">
+				<img alt="logo chrome" width="225px" height="225px" src="img/chromeLogo.png"/>
+			</a>
+		</p>
+
+		<hr/>
+
+		<!-- LISTAS -->
+		<h1> LISTAS </h1>
+
+		<h2> Ordered list </h2>
+		<ol>
+			<li>Primero</li>
+			<li>Segundo</li>
+			<li>Tercero</li>
+			<li>Cuarto</li>
+			<li>Quinto</li>
+		</ol>
+
+		<h2> Unordered list </h2>
+		<ul>
+			<li>manzana</li>
+			<li>platano</li>
+			<li>naranja</li>
+			<li>mandarina</li>
+			<li>limón</li>
+		</ul>
+
+		<h2> Discription list </h2>
+		<dl>
+			<dt>HTML</dt>
+			<dd>lenguaje de la web</dd>
+
+			<dt>CSS</dt>
+			<dd>hojas de estilo</dd>
+		</dl>
+
+		<!-- LISTAS DENTRO DE LISTAS -->
+		<h1> LISTAS DENTRO DE LISTAS </h1>
+
+		<ol type="i">
+			<li> General Aviation
+				<ol>
+					<li>Single Avitation Aircraft</li>
+					<li>Dual Engine Aircraft</li>
+				</ol>
+			</li>
+			<li> Commercial Aviation
+				<ol style="list-style-type: disc;">
+					<li>Dual Engine</li>
+					<li>Tri Engine</li>
+				</ol>
+			</li>
+		</ol>
+
+		<ul>
+			<li>A</li>
+			<ul>
+				<li>B</li>
+				<ol>
+					<li>C</li>
+					<li>D</li>
+				</ol>
+			</ul>
+		</ul>
+
 
     </body>
 
