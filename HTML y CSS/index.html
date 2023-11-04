@@ -150,17 +150,173 @@
 			</li>
 		</ol>
 
-		<ul>
+		<ul style="list-style-type: square;">
 			<li>A</li>
-			<ul>
+			<ul style="list-style-type: disc;">
 				<li>B</li>
 				<ol>
 					<li>C</li>
 					<li>D</li>
 				</ol>
+				<li>E</li>
+				<ol style="list-style-type: square;">
+					<li>F</li>
+					<li>G</li>
+				</ol>
 			</ul>
+			<li>B</li>
 		</ul>
 
+		<hr/>
+
+		<!-- TABLAS -->
+		<h1> TABLAS </h1>
+
+		<h2> Tabla simple (sólo filas y celdas) </h2>
+
+		<table>
+			<tr>
+				<th>DNI</th>
+				<th>Nombre</th>
+				<th>Apellidos</th>
+				<th>Dirección</th>
+				<th>Móvil</th>
+				<th>Email</th>
+			</tr>
+			<tr>
+				<td>1</td>
+				<td>Ignacio</td>
+				<td>Serrano Rodríguez</td>
+				<td>Puerto Real</td>
+				<td>123456789</td>
+				<td>isr@mail.com</td>
+			</tr>
+			<tr>
+				<td>2</td>
+				<td>Samuel</td>
+				<td>Urbina Apellido2</td>
+				<td>San Fernando</td>
+				<td>123456789</td>
+				<td>sua@mail.com</td>
+			</tr>
+			<tr>
+				<td>3</td>
+				<td>Lídia</td>
+				<td>López Apellido2</td>
+				<td>San Fernando</td>
+				<td>123456789</td>
+				<td>lla@mail.com</td>
+			</tr>
+		</table>
+
+		<h2> Tabla con estructura completa </h2>
+
+		<table>
+			<colgroup>
+				<col style="background-color: lightblue;"/>
+				<col span="2" style="background-color: lightgray;"/>
+				<col style="background-color: yellow;"/>
+				<col style="background-color: lightcoral;"/>
+				<col style="background-color: lightgreen;"/>
+			</colgroup>
+			<caption> Información Usuarios </caption>
+			<thead>
+				<tr>
+					<th>DNI</th>
+					<th>Nombre</th>
+					<th>Apellidos</th>
+					<th>Dirección</th>
+					<th>Móvil</th>
+					<th>Email</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>1</td>
+					<td>Ignacio</td>
+					<td>Serrano Rodríguez</td>
+					<td>Puerto Real</td>
+					<td>123456789</td>
+					<td>isr@mail.com</td>
+				</tr>
+				<tr>
+					<td>2</td>
+					<td>Samuel</td>
+					<td>Urbina Apellido2</td>
+					<td>San Fernando</td>
+					<td>123456789</td>
+					<td>sua@mail.com</td>
+				</tr>
+				<tr>
+					<td>3</td>
+					<td>Lídia</td>
+					<td>López Apellido2</td>
+					<td>San Fernando</td>
+					<td>123456789</td>
+					<td>lla@mail.com</td>
+				</tr>
+			</tbody>
+			<tfoot>
+				<tr>
+					<td>Esto el pie de tabla</td>
+				</tr>
+			</tfoot>
+		</table>
+
+		<h2> Tabla compleja </h2>
+
+		<table>
+			<caption> HORARIO CLASE </caption>
+			<thead>
+				<tr>
+					<th>HORAS</th>
+					<th>Lunes</th>
+					<th>Martes</th>
+					<th>Miércoles</th>
+					<th>Jueves</th>
+					<th>Viernes</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>8:00</td>
+					<td>Matemáticas</td>
+					<td>Lengua</td>
+					<td>Inglés</td>
+					<td>Ciencias</td>
+				</tr>
+				<tr>
+					<td>9:00</td>
+					<td>Historia</td>
+					<td>Ciencias</td>
+					<td>Matemáticas</td>
+					<td>Lengua</td>
+				</tr>
+				<tr>
+					<td>10:00</td>
+					<th>RECREO</th>
+				</tr>
+				<tr>
+					<td>10:30</td>
+					<td>Inglés</td>
+					<td>Matemáticas</td>
+					<td>Lengua</td>
+					<td>Historia</td>
+				</tr>
+				<tr>
+					<td>11:30</td>
+					<td>Historia</td>
+					<td>Ciencias</td>
+					<td>Matemáticas</td>
+					<td>Inglés</td>
+				</tr>
+			</tbody>
+			<tfoot>
+				<tr>
+					<td>Esto el pie de tabla</td>
+				</tr>
+			</tfoot>
+		</table>
 
     </body>
 
