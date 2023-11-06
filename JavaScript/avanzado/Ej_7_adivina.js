@@ -26,9 +26,9 @@ function advinaPalabraEscondida()
 	let usuarioQuiereJugar = "";
     let letraEncontrada = false;
 	let letraFalladaEncontrada = false;
-    let palabraAcertada = false;
 	let jugarDeNuevo = false;
 	let numeroPartidas = 1;
+	let palabraAcertada;
 	let palabraUsuarioArray;
 	let palabraSecreta; 
     let palabraSecretaArray;
@@ -42,6 +42,7 @@ function advinaPalabraEscondida()
 		palabraUsuarioArray = [];
 		letrasFalladasArray = [];
 		intentosFallidos = 0;
+		palabraAcertada = false;
 
 		for (let i=0; i<palabraSecretaArray.length; i++)
 		{
