@@ -22,11 +22,17 @@ function dividirNumeros(numero1, numero2)
     {
         throw new RangeError("La división por cero no está permitida. (RangeError)");
     }
-    
+
     else if (numero1 === undefined || numero2 === undefined)
     {
-        throw new ReferenceError("Ambos números son necesarios para realizar la división. (TypeError)");
+        throw new ReferenceError("Ambos variables han de estar definidas. (ReferenceError)");
     }
+
+    else if (isNaN(numero1) || isNaN(numero2))
+    {
+        throw new ReferenceError("Ambas variables han de ser un número. (TypeError)");
+    }
+
     else
     {
         resultado = numero1 / numero2;

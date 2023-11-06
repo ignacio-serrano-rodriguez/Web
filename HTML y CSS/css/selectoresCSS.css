@@ -1,0 +1,49 @@
+* /* todos */
+{
+    font-family: sans-serif;
+}
+
+#main /* elemento con id main */  
+{
+    color: grey;
+}
+
+h1.especial /* h1 con clase especial */
+{
+    color: blue;
+}
+
+h2, h3 /*h2 y h3 */
+{
+    border: 5px solid orange;
+}
+
+li /* li */
+{
+    color: red;
+}
+
+li li /* li dentro de li */
+{
+    color: green;
+}
+
+p > img /* img hijas de p */
+{
+    border: 5px solid cyan;
+}
+
+img[alt="segunda"] /* img con atributo alt="segunda" */
+{
+    border: 5px solid black;
+}
+
+p ~ h3.antes /* h3 con clase antes arriba de p */
+{
+    background-color: pink;
+}
+
+p + h3  /* h3 debajo de p */
+{
+    background-color: yellow;
+}

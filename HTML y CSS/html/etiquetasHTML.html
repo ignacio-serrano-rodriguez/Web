@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="es">
+
+    <head>
+
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+		<meta name="description" content="portfolio de desarrollador de software"/>
+		<meta name="keywords" content="web,software,desarrollo,perfil,profesional,trabajo,"/>
+		<meta name="author" content="Ignacio Serrano Rodríguez"/>
+
+        <title> Etiquetas HTML </title>
+
+<!--    <link href="styles/style.css" rel="stylesheet" type="text/css"/> -->
+		<script></script>
+		<base/>
+
+		<style>
+
+			p
+			{
+				padding: 0;
+				margin: 0;
+			}
+
+			textarea
+			{
+				resize: none;
+			}
+
+		</style>
+
+    </head>
+
+    <body>
+		
+        <h1 id="texto"> Texto (h1) </h1>
+		<h2> h2 </h2>
+		<h3> h3 </h3>
+		<h4> h4 </h4>
+		<h5> h5 </h5>
+		<h6> h6 </h6>
+
+		<h2> Párrafos con marcados </h2>
+		<p> <b> Negrita </b> </p>
+		<p> <i> Cursiva </i> </p>
+		<p> <del> Tachado </del> </p>
+		<p> <em> Énfasis </em> </p>
+		<p> <small> Pequeño </small> </p>
+		<p> <sup> Super índice </sup> <sub> Sub índice </sub> </p>
+		<p> <mark> Subrayado </mark> </p>							<!-- html 5 -->
+		<p> <q> Cita pequeña </q> </p>
+		<p> <time> 16:30 </time> </p>								<!-- html 5 -->
+
+		<h2> Citas </h2>
+		<p> 
+			<cite> Título de un artículo </cite>
+			<blockquote> 
+				Texto en el que hacemos referencia al artículo.
+			</blockquote>
+		</p>
+
+		<h2> Direcciones </h2>
+		<address> 
+			<p> Ignacio Serrano Rodríguez </p>
+			<p> IES Fernando Aguilar </p>
+			<p> Cádiz </p> 
+		</address> 
+
+		<hr/>
+		<h1> Imágenes </h1>
+
+		<h2> Usando img </h2>
+		<img width="752px" height="60px" alt="perro negro" src="https://picsum.photos/id/237/200/300"/>
+
+		<h2> Usando figure, img y figcaption </h2>
+		<figure> <!-- html 5 -->
+			<img alt="perro negro" src="https://picsum.photos/id/237/200/300"/>
+			<figcaption> Barra de herramientas ubuntu </figcaption>
+		</figure>
+
+		<hr/>
+		<h1> Enlaces </h1>
+
+		<h2> Externos </h2>
+		<a href="https://www.google.com/"> not blank attribute </a> <br/>
+		<a href="https://www.google.com/" target="_blank"> blank attribute </a> <br/>
+
+		<h2> Internos </h2>
+		<a href="#texto"> enlace interno a h1 </a>
+
+		<h2> En imágenes </h>
+		<p style="text-align: center;">
+			<a href="https://developer.mozilla.org/es/docs/Web/CSS" target="_blank">
+				<img alt="logo html" width="225px" height="225px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/HTML5_logo_and_wordmark.svg/768px-HTML5_logo_and_wordmark.svg.png"/>
+			</a>
+			<a href="https://developer.mozilla.org/es/docs/Web/HTML" target="_blank">
+				<img alt="logo css" width="225px" height="225px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/CSS3_logo_and_wordmark.svg/1452px-CSS3_logo_and_wordmark.svg.png"/>
+			</a>
+		</p>
+		<p style="text-align: center;">
+			<a href="https://www.google.com/intl/es_es/chrome/" target="_blank">
+				<img alt="logo chrome" width="225px" height="225px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Google_Chrome_icon_%28February_2022%29.svg/2048px-Google_Chrome_icon_%28February_2022%29.svg.png"/>
+			</a>
+		</p>
+
+		<hr/>
+		<h1> Listas </h1>
+
+		<h2> Ordenadas </h2>
+		<ol>
+			<li>Primero</li>
+			<li>Segundo</li>
+			<li>Tercero</li>
+			<li>Cuarto</li>
+			<li>Quinto</li>
+		</ol>
+
+		<h2> Desordenadas </h2>
+		<ul>
+			<li>manzana</li>
+			<li>platano</li>
+			<li>naranja</li>
+			<li>mandarina</li>
+			<li>limón</li>
+		</ul>
+
+		<h2> Descriptivas </h2>
+		<dl>
+			<dt>HTML</dt>
+			<dd>lenguaje de la web</dd>
+
+			<dt>CSS</dt>
+			<dd>hojas de estilo</dd>
+		</dl>
+
+		<h2> Listas dentro de listas </h2>
+		<ol type="i">
+			<li> General Aviation
+				<ol>
+					<li>Single Avitation Aircraft</li>
+					<li>Dual Engine Aircraft</li>
+				</ol>
+			</li>
+			<li> Commercial Aviation
+				<ol style="list-style-type: disc;">
+					<li>Dual Engine</li>
+					<li>Tri Engine</li>
+				</ol>
+			</li>
+		</ol>
+
+		<ul style="list-style-type: square;">
+			<li>A</li>
+			<ul style="list-style-type: disc;">
+				<li>B</li>
+				<ol>
+					<li>C</li>
+					<li>D</li>
+				</ol>
+				<li>E</li>
+				<ol style="list-style-type: square;">
+					<li>F</li>
+					<li>G</li>
+				</ol>
+			</ul>
+			<li>B</li>
+		</ul>
+
+		<hr/>
+		<h1> Tablas </h1>
+
+		<h2> Sólo filas y celdas </h2>
+		<table>
+			<tr>
+				<th>DNI</th>
+				<th>Nombre</th>
+				<th>Apellidos</th>
+				<th>Dirección</th>
+				<th>Móvil</th>
+				<th>Email</th>
+			</tr>
+			<tr>
+				<td>1</td>
+				<td>Ignacio</td>
+				<td>Serrano Rodríguez</td>
+				<td>Puerto Real</td>
+				<td>123456789</td>
+				<td>isr@mail.com</td>
+			</tr>
+			<tr>
+				<td>2</td>
+				<td>Samuel</td>
+				<td>Urbina Apellido2</td>
+				<td>San Fernando</td>
+				<td>123456789</td>
+				<td>sua@mail.com</td>
+			</tr>
+			<tr>
+				<td>3</td>
+				<td>Lídia</td>
+				<td>López Apellido2</td>
+				<td>San Fernando</td>
+				<td>123456789</td>
+				<td>lla@mail.com</td>
+			</tr>
+		</table>
+
+		<h2> Con colgroup, caption, thead, tbody y tfoot </h2>
+		<table>
+			<colgroup>
+				<col style="background-color: lightblue;"/>
+				<col span="2" style="background-color: lightgray;"/>
+				<col style="background-color: yellow;"/>
+				<col style="background-color: lightcoral;"/>
+				<col style="background-color: lightgreen;"/>
+			</colgroup>
+			<caption> Información Usuarios </caption>
+			<thead>
+				<tr>
+					<th>DNI</th>
+					<th>Nombre</th>
+					<th>Apellidos</th>
+					<th>Dirección</th>
+					<th>Móvil</th>
+					<th>Email</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>1</td>
+					<td>Ignacio</td>
+					<td>Serrano Rodríguez</td>
+					<td>Puerto Real</td>
+					<td>123456789</td>
+					<td>isr@mail.com</td>
+				</tr>
+				<tr>
+					<td>2</td>
+					<td>Samuel</td>
+					<td>Urbina Apellido2</td>
+					<td>San Fernando</td>
+					<td>123456789</td>
+					<td>sua@mail.com</td>
+				</tr>
+				<tr>
+					<td>3</td>
+					<td>Lídia</td>
+					<td>López Apellido2</td>
+					<td>San Fernando</td>
+					<td>123456789</td>
+					<td>lla@mail.com</td>
+				</tr>
+			</tbody>
+			<tfoot>
+				<tr>
+					<td colspan="6">Esto el pie de tabla</td>
+				</tr>
+			</tfoot>
+		</table>
+
+		<h2> Con rowspan y rowcol </h2>
+		<table>
+			<caption> HORARIO CLASE </caption>
+			<thead>
+				<tr>
+					<th>HORAS</th>
+					<th>Lunes</th>
+					<th>Martes</th>
+					<th>Miércoles</th>
+					<th>Jueves</th>
+					<th>Viernes</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>8:00</td>
+					<td rowspan="2">Matemáticas</td>
+					<td>Lengua</td>
+					<td>Inglés</td>
+					<td>Ciencias</td>
+					<td rowspan="2">Lengua</td>
+				</tr>
+				<tr>
+					<td>9:00</td>
+					<td>Historia</td>
+					<td>Ciencias</td>
+					<td>Matemáticas</td>
+				</tr>
+				<tr>
+					<td>10:00</td>
+					<th colspan="5">RECREO</th>
+				</tr>
+				<tr>
+					<td>10:30</td>
+					<td>Inglés</td>
+					<td rowspan="2">Ciencias</td>
+					<td>Matemáticas</td>
+					<td>Lengua</td>
+					<td>Historia</td>
+				</tr>
+				<tr>
+					<td>11:30</td>
+					<td>Historia</td>
+					<td>Ciencias</td>
+					<td>Matemáticas</td>
+					<td>Inglés</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<h2> Mezcla </h2>
+		<table>
+			<tr>
+				<td> </td>
+				<th colspan="3"> <img alt="mp3 amarillo" width="100px" height="100px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/MpMan_mp-f60.jpg/220px-MpMan_mp-f60.jpg"/> </th>
+				<th colspan="2"> <img alt="mp3 gris" width="100px" height="100px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Ipod_backlight_transparent.png/220px-Ipod_backlight_transparent.png"/> </th>
+			</tr>
+			<tr>
+				<th> Capacidad </th>
+				<td> <p>2GB</p> </td>
+				<td> <p>4GB</p> </td>
+				<td> <p>8GB</p> </td>
+				<td> <p>32GB</p> </td>
+				<td> <p>2GB</p> </td>
+			</tr>
+			<tr>
+				<th> Colores </th>
+				<th> Blanco </th>
+				<td>
+					<ul>
+						<li> Negro </li>
+						<li> Rosa </li>
+						<li> Dorado </li>
+					</ul>
+				</td>
+				<th> Negro </th>
+				<td colspan="2">
+					<ul>
+						<li> Blanco </li>
+						<li> Negro </li>
+					</ul>
+				</td>
+			</tr>
+			<tr>
+				<th> Pantalla </th>
+				<th colspan="3"> 3 pulgadas </th>
+				<th colspan="2"> 7 pulgadas </th>
+			</tr>
+			<tr>
+				<th rowspan="2"> Tiempo de Carga </th>
+				<th rowspan="2" colspan="3"> 1 hora </th>
+				<th colspan="2"> 5 horas </th>
+			</tr>
+			<tr>
+	
+				<th colspan="2"> 30 minutos para 75% </th>
+			</tr>
+		</table>
+
+		<br/> 
+		<hr/>
+		<h1> Formularios </h1>
+
+		<h2> Tipos de input </h2>
+		<form method="post" action="index.html">
+		<fieldset>
+		<legend> leyend </legend>
+
+			<p>
+				<label for="nombre"> input text (required) </label> <br/>
+				<input type="text" id="nombre" name="nombre" placeholder="es obligatorio" required/>
+			</p>
+
+			<p>
+				<label for="apellidos"> input text (disabled) </label> <br/>
+				<input type="text" id="apellidos" name="apellidos" disabled placeholder="no se puede usar"/>
+			</p>
+
+			<p>
+				<label for="dni"> input text (readonly) </label> <br/>
+				<input type="text" id="dni" name="dni" readonly placeholder="solo se puede leer"/>
+			</p>
+
+			<p>
+				<label for="provincia"> select (selected) </label> <br/>
+				<!-- en select podemos usar el atributo multiple -->
+				<select id="provincia" name="provincia">
+					<option value="cadiz" selected> Cádiz </option>
+					<option value="sevilla"> Sevilla </option>
+					<option value="malaga"> Malaga </option>
+				</select>
+			</p>
+
+			<p>
+				<label> textarea </label> <br/>
+				<textarea id="cajaTexto" name="cajaTexto" rows="5" cols="50"  placeholder="Escribete algo..."></textarea>
+			</p>
+
+			<p>
+				<label for="boton"> input button </label> <br/>
+				<input id="boton" name="boton" type="button"/> 
+			</p>
+	
+			<p>
+				<label for="borrar"> input reset </label> <br/>
+				<input id="borrar" name="borrar" type="reset"/> 
+			</p>
+	
+			<p>
+				<label for="enviar"> input submit </label> <br/>
+				<input id="enviar" name="enviar" type="submit"/>
+			</p>
+
+			<p>
+				<label for="sexo"> input radio (excluyente) </label> <br/>
+				<input type="radio" id="masculino" name="sexo" value="masculino" checked/> masculino <br/>
+				<input type="radio" id="femenino" name="sexo" value="femenino"/> femenino
+			</p>
+
+			<p>
+				<label for="dispositivos"> input checkbox (no excluyente) </label> <br/>
+				<input type="checkbox" id= "pc" name="pc" value="pc"/> pc <br/>
+				<input type="checkbox" id= "movil" name="movil" value="movil"/> movil <br/>
+				<input type="checkbox" id= "tablet" name="tablet" value="tablet"/> tablet
+			</p>
+
+			<p>
+				<label id="rango"> input range </label> <br/>
+				<input type="range" id="rango" name="rango"/>
+			</p>
+
+			<p>
+				<label id="colores"> input color  </label> <br/>
+				<input id="colores" name="colores" type="color"/>
+			</p>
+
+			<p>
+				<label id="fichero"> input file </label> <br/>
+				<input type="file" id="fichero" name="fichero"/>
+			</p>
+		
+		</fieldset>
+		</form>
+
+		<br/>
+		<hr/>
+		<h1> Ejemplo mezclando formulario, tablas y listas </h1>
+
+		<h2 style="text-align: center;"> HOJA DE INSCRIPCIÓN </h2>
+		<h2 style="text-align: center;"> EN LOS CICLOS FORMATIVOS DE GRADO SUPERIOR </h2>
+		<form>
+
+			<fieldset style="background-color: lightgray;"> 
+				<legend style="border: 1px solid black; background-color: white;"> Datos Personales </legend>
+				<table>
+					<tr>
+						<td> <label for="nombre"> Nombre: </label> </td>
+						<td> <label for="apellidos"> Apellidos: </label> </td>
+						<td> <label for="dni"> DNI </label> </td>
+					</tr>
+					<tr>
+						<td> <input id="nombre" name="nombre" type="text"/> </td>
+						<td> <input id="apellidos" name="apellidos" type="text"/> </td>
+						<td> <input id="dni" name="dni" type="text"/> </td>
+					</tr>
+					<tr>
+						<td> <label for="localidadNacimiento"> Localidad Nacimiento </label> </td>
+						<td> <label for="provincia"> Provincia </label> </td>
+						<td> <label for="fecha"> Fecha Nacimiento: </label> </td>
+					</tr>
+					<tr>
+						<td> <input id="localidadNacimiento" name="localidadNacimiento" type="text"/> </td>
+						<td> 
+							<select id="provincia" name="provincia">
+								<option value="" disabled selected hidden> - selecciona - </option>
+								<option value="cadiz"> Cádiz </option>
+								<option value="malaga"> Málaga </option>
+								<option value="sevilla"> Sevilla </option>
+								<option value="huelva"> Huelva </option>
+								<option value="cordoba"> Córdoba </option>
+								<option value="jaen"> Jaén </option>
+								<option value="almeria"> Almería </option>
+								<option value="granada"> Granada </option>
+							</select> 
+						</td>
+						<td> <input id="fecha" name="fecha" type="date"/> </td>
+					</tr>
+					<tr>
+						<td colspan="2"> <label for="direccion"> Dirección: </label> </td>
+						<td> <label for="cp"> Código Postal: </label> </td>
+					</tr>
+					<tr>
+						<td colspan="2"> <input id="direccion" name="direccion" type="text"/> </td>
+						<td> <input id="cp" name="cp" type="text"/> </td>
+					</tr>
+				</table>
+			</fieldset>
+
+			<fieldset style="background-color: lightyellow;"> 
+				<legend style="border: 1px solid black; background-color: white;"> Forma de Acceso </legend>
+				<ul style="list-style-type: none;">
+					<li>
+						<input type="radio" id="directo" name="tipo" value="direct"/> Directo
+						<ul style="list-style-type: none;">
+							<li> <input type="radio" id="bachLogse" name="subtipo" value="bachLogse"/> Bachillerato LOGSE. 
+								<label for="modalidad"> Modalidad: </label> <input id="modalidad" name="modalidad" type="text"/> </li>
+							<li> <input type="radio" id="bachExp" 	name="subtipo" value="bachExp"/> Bachillerato Experimental </li>
+							<li> <input type="radio" id="cou" 		name="subtipo" value="cou"/> COU. <label for="opcion"> Opcion: 
+								</label> <input id="opcion" name="opcion" type="text"/> </li>
+							<li> <input type="radio" id="fp2" 		name="subtipo" value="fp2"/> FP2 </li>
+							<li> <input type="radio" id="otros" 	name="subtipo" value="otros"/> Otros (especifique) 
+								<input id="especificar" name="especificar" type="text"/> </li>
+						</ul>
+
+					</li>
+					<li>
+						<input type="radio" id="pruebaLibre" name="tipo" value="pruebaLibre"/> Prueba Libre
+					</li>
+				</ul>
+			</fieldset>
+
+			<fieldset style="background-color: lightcoral;"> 
+				<legend style="border: 1px solid black; background-color: white;"> Documentos Adjuntados </legend>
+				<table>
+
+					<tr>
+						<td> <input type="checkbox" id="fotocopiaDNI" name="fotocopiaDNI" value="fotocopiaDNI"/> Fotocopia DNI </td>
+						<td> <input type="checkbox" id="certificadoAcademico" name="certificadoAcademico" value="certificadoAcademico"/> Certificado Académico </td>
+					</tr>
+					<tr>
+						<td colspan="2"> 
+							<input type="checkbox" id="otrosDocumentos" name="otrosDocumentos" value="otrosDocumentos"/> Otros documentos (especifique) 
+							<input id="especificar" name="especificar" type="text"/> 
+						</td>
+					</tr>
+
+				</table>
+				
+			</fieldset>
+
+			<br/>
+			<p>
+				<input id="enviar" name="enviar" type="submit" value="Enviar Solicitud"/>
+			</p>
+
+		</form>
+
+		<br/>
+		<hr/>
+		<h1> Más etiquetas </h1>
+
+		<h2> Multimedia </h2>
+		<audio controls>
+			<source src="../audio/mp3Audio.mp3" type="audio/mp3"/>
+			<source src="../audio/oggAudio.ogg" type="audio/ogg"/>
+			<source src="../audio/wavAudio.wav" type="audio/wav"/>
+		</audio>
+		<video width="320" height="240" autoplay loop>
+			<source src="../video/MP4Video.mp4" type="video/mp4"/>
+		</video>
+
+		<h2> Semánticas </h2>
+<!--
+		Hacen que la página web sea más accesible
+
+		<header> header </header>
+		<footer> footer </footer>
+		<main> main </main>
+		<section> section </section>
+		<article> article </article>
+		<aside> aside </aside>
+		<details> details </details>
+		<dialog> dialog </dialog>
+		<summary> summary </summary>
+		<nav> nav </nav>
+-->
+		<h2> Otras </h2>
+
+		<h3> iframe </h3>
+		<h4> web site </h4>
+		<iframe width="420" height="345" src="http://www.iesfernandoaguilar.es/"></iframe>
+		<h4> youtube video </h4>
+		<iframe width="420" height="345" src="https://www.youtube.com/embed/tgbNymZ7vqY" allowfullscreen></iframe>
+		
+		<div> div </div>
+		<span> span </span>
+
+		<h3> object </h3>
+		<object type="application/pdf" data="https://www.africau.edu/images/default/sample.pdf"> </object>
+
+		<h3> embed </h3>
+		<embed type="application/pdf" src="https://www.africau.edu/images/default/sample.pdf" />
+
+    </body>
+</html>
