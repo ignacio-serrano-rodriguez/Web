@@ -78,8 +78,6 @@ console.log(cadena.toLowerCase());
 console.log(cadena.toUpperCase());
 // replace()
 console.log(cadena.replace("o","X"));
-// replaceAll()
-console.log(cadena.replaceAll("o","X"));
 // slice/substring(inicio incluido, corte no incluido) 
 console.log(cadena.slice(0,4));
 console.log(cadena.substring(0,4));
