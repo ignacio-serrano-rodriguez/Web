@@ -14,6 +14,7 @@ function comprobar_extension_imagen(nombreImagenCompleto)
 {
     const extensionesValidas = [".png", ".jpg"];
     let extensionImagen = nombreImagenCompleto.slice(nombreImagenCompleto.indexOf("."));   
+    console.log(extensionImagen);
 
     if(extensionesValidas.includes(extensionImagen))
     {
@@ -21,9 +22,10 @@ function comprobar_extension_imagen(nombreImagenCompleto)
     }
     else
     {   
-        let nombreImagen = nombreImagenCompleto.slice(0, nombreImagenCompleto.indexOf("."),nombreImagenCompleto);
+        let nombreImagen = nombreImagenCompleto.slice(0, nombreImagenCompleto.indexOf("."));
+        console.log(nombreImagen);
         console.log("La extensión no es valida. Debe adjuntar un archivo llamado " 
-        + nombreImagen + ".png" + " o " + nombreImagen + ".jpg.");
+        + nombreImagen + extensionesValidas[0] + " o " + nombreImagen + extensionesValidas[1]);
     }
 }
 

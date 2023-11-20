@@ -13,8 +13,8 @@ la letra es "Z", se convierte en "C".
 5. ✅ La función debe devolver la cadena cifrada.
 */
 
-let desplazamiento = 3;
-let cadena = "hOlA 123345ñ6789 mUnDo ZyXw";
+let desplazamiento = 1;
+let cadena = "hOlAz   2342342ñññ";
 
 function cifrarCesar(cadena, desplazamiento) 
 {

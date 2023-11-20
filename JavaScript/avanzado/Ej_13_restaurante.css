@@ -1,0 +1,46 @@
+*
+{
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+table
+{
+	border-collapse: collapse;
+	margin-top: 50px;
+	margin-left: 50px;
+}
+
+td, th
+{
+	border: 1px solid grey;
+
+	padding-top: 10px;
+	padding-bottom: 10px;
+
+	padding-left: 50px;
+	padding-right: 50px;
+}
+
+th
+{
+	background-color: black;
+	color: white;
+}
+
+td
+{
+	padding-left: 10px;
+}
+
+#nombreRestaurante
+{
+	background-color: white;
+	color: black;
+}
+
+.reservada
+{
+	background-color: #FF0033;
+}
