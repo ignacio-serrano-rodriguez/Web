@@ -25,7 +25,7 @@ function dividirNumeros(numero1, numero2)
 
     else if (numero1 === undefined || numero2 === undefined)
     {
-        throw new ReferenceError("Ambos variables han de estar definidas. (ReferenceError)");
+        throw new ReferenceError("Ambas variables han de estar definidas. (ReferenceError)");
     }
 
     else if (isNaN(numero1) || isNaN(numero2))
@@ -41,13 +41,14 @@ function dividirNumeros(numero1, numero2)
     return resultado;
 }
     
-
+/* En el primer error, el flujo de ejecución se corta. 
+Por lo tanto hay que ir comentando cada console.log para ver cada error*/
 try 
-{
-    console.log(dividirNumeros(10, 2));         // 5
-    console.log(dividirNumeros(5, 0));          // RangeError.
-    console.log(dividirNumeros("cadena", 3));   // TypeError.
-    console.log(dividirNumeros(8));             // ReferenceError.
+{       
+    console.log(dividirNumeros(5, 0)); // RangeError. 
+    console.log(dividirNumeros("cadena", 3)); // TypeError. 
+    console.log(dividirNumeros(8)); // ReferenceError.
+    console.log(dividirNumeros(10, 2)); // "Realiza la división sin devolver errores"
 } 
 catch (error) 
 {

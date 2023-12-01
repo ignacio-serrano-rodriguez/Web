@@ -11,10 +11,10 @@ function calcularAreaCirculo(radio)
 {
     let cadenaResultado = "área del circulo: ";
 
-    if(radio > 0 && !isNaN(radio))
+    if(!isNaN(radio) && radio > 0)
     {
         let resultado = Math.PI * radio * radio;
-		resultado = resultado.toFixed(2);
+		resultado = resultado.toFixed(2); // toFixed redondea al número de decimales indicado
 		cadenaResultado += resultado;
     }
     else

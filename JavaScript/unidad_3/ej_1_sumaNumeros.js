@@ -28,8 +28,11 @@ function calcularSuma(num1, num2)
     return resultado;
 }
 
-console.log(calcularSuma(5,3));                 // 8
-console.log(calcularSuma(10,null));             // Uno de los números no es válido.
-console.log(calcularSuma(undefined,undefined)); // Ambos números son indefinidos.
-console.log(calcularSuma(null,null));           // Ambos números son nulos.
-
+// 8
+console.log(calcularSuma(5,3));
+// Uno de los números no es válido.               
+console.log(calcularSuma(10,null));
+// Ambos números son indefinidos.       
+console.log(calcularSuma(undefined,undefined));
+// Ambos números son nulos. 
+console.log(calcularSuma(null,null));

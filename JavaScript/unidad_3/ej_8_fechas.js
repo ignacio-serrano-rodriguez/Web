@@ -14,11 +14,11 @@ let fechaObjeto = new Date(fechaCadena);
 
 let fecha = new Date();
 let fechaCadena = fecha.toDateString();
-let fechaObjecto = new Date(fechaCadena);
+let fechaObjeto = new Date(fechaCadena);
 let fechaNacimiento = new Date("2000-03-24");
 
 console.log("1. Muestra la fecha y hora actual: " + fechaCadena + " " + fecha.getHours());
-console.log("2. Convierte el día de hoy en formato de cadena en un objeto de fecha: " + fechaObjecto);
+console.log("2. Convierte el día de hoy en formato de cadena en un objeto de fecha: " + fechaObjeto);
 console.log("3. Obtén el día de la semana de tu fecha de nacimiento y muéstralo: " + fechaNacimiento.getDay());
 console.log("4. Obtén el año actual y muéstralo: " + fecha.getFullYear());
 

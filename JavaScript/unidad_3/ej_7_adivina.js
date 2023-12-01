@@ -19,9 +19,6 @@ function advinaPalabraEscondida()
 {
     const palabrasSecretas = ["elefante","kebab","chocolate","ordenador","javascript","html","css","frontend","cliente","web"]; 
 	
-    let palabraUsuario = "";
-    let letraUsuario = "";
-	let letrasFalladas = "";
 	let tipoIntento = "";
 	let usuarioQuiereJugar = "";
     let letraEncontrada = false;
@@ -29,12 +26,19 @@ function advinaPalabraEscondida()
 	let jugarDeNuevo = false;
 	let numeroPartidas = 1;
 	let palabraAcertada;
-	let palabraUsuarioArray;
-	let palabraSecreta; 
-    let palabraSecretaArray;
 	let intentosFallidos;
+	
+	let letraUsuario = "";
+
+	let palabraUsuario = "";
+	let palabraUsuarioArray;
+
+	let letrasFalladas = "";
 	let letrasFalladasArray;
 
+	let palabraSecreta; 
+    let palabraSecretaArray;
+	
 	do 
 	{    
 		palabraSecreta = palabrasSecretas[numeroPartidas-1];
@@ -123,11 +127,11 @@ function advinaPalabraEscondida()
 			alert("¡Nos vemos!");
 		}
 
-		if(numeroPartidas >= 10 && jugarDeNuevo == true)
+		if(numeroPartidas > 10 && jugarDeNuevo == true)
 		{
 			alert("Búsquese una vida y deje de jugar a esto por favor.");
 		}
 
 	} 
-	while (jugarDeNuevo == true && numeroPartidas < 10);
+	while (jugarDeNuevo == true && numeroPartidas <= 10);
 }
