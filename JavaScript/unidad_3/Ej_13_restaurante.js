@@ -38,5 +38,4 @@ checkboxes.forEach(function(checkbox)
 			mesa.classList.remove('reservada')
 		}
 	});
-
 });
