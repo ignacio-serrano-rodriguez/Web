@@ -1,24 +1,12 @@
-// pregunta: Si tengo un equipo ganador, ¿Cómo puedo decir que todos sus integrantes ? 
-// solución: usar el atributo (length)
+// pregunta: Si tengo un equipo ganador, ¿Cómo puedo mostrar todos los jugadores que han ganado premio?
+// solución: usar el método (join)
 	
-// Comprueba si se ha alcanzado el límite de jugadores en un equipo
-function maximo_jugadores_equipo(equipo) 
+function han_ganado_premio(equipo) 
 {
-	let maximoJugadores;
-
-	if(equipo.length < 5)
-		maximoJugadores = `Al tener el equipo menos de 5 jugadores, se pueden añadir más jugadores`;		
-	else
-		maximoJugadores = `Al tener el equipo 5 jugadores, se ha alcanzado el máximo de jugadores`;
-
-	return (maximoJugadores);
+	let jugadores = equipo.join(", ");
+	return (`${jugadores} han ganado premios`);
 }
 
 let equipo_1 = ["carlos", "samu", "nacho", "lidia", "manuel"];
-let equipo_2 = ["diego", "ale", "alberto", "alban"];
 
-console.log(equipo_1);
-console.log(equipo_2);
-
-console.log(maximo_jugadores_equipo(equipo_1));
-console.log(maximo_jugadores_equipo(equipo_2));
+console.log(han_ganado_premio(equipo_1));

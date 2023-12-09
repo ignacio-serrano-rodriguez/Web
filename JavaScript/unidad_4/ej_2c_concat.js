@@ -1,7 +1,7 @@
-// pregunta: Si tengo dos equipos con pocos integrantes, ¿Cómo puedo hacer para tener uno nuevo formado por ambos?
+/* pregunta: Si tengo dos equipos con pocos integrantes, ¿Cómo puedo hacer para tener uno nuevo formado 
+por ambos? */
 // solución: usar el método (concat)
 
-// Comprueba si se ha alcanzado el límite de jugadores en un equipo
 function juntar_equipos(equipo_1, equipo_2) 
 {
 	let equipo_3 = equipo_1.concat(equipo_2);
