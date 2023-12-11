@@ -1,6 +1,6 @@
 /* pregunta: Necesito saber si 'x' jugador se encuentra en el equipo o no
 ¿Cómo lo podemos hacer? */
-// solución: usar el método (toString)
+// solución: usar el método (includes)
 	
 function jugador_en_equipo(equipo, jugador) 
 {
