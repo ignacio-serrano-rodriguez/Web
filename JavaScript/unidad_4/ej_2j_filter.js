@@ -17,4 +17,4 @@ function tiene_cadena(jugador)
 let equipo_1 = ["carlos", "samu", "nacho", "lidia", "manuel"];
 console.log(equipo_1);
 
-console.log(quien_tiene_esta_cadena(equipo_1, "m"));
+console.log(quien_tiene_esta_cadena(equipo_1));

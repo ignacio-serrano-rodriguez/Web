@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Ejercicio 5 - Alban (join)</title>
+	<script src="ej_5_alban_join.js"></script>
+</head>
+<body>
+
+	<label for="nombre">Nombre</label>
+	<input id="nombre" type="text"/>
+	<br/>
+
+	<label for="cantidad">Cantidad</label>
+	<input id="cantidad" type="text"/>
+	<br/>
+
+	<select name="unidades" id="unidades">
+		<option value="kg">kg</option>
+		<option value="litros">Litros</option>
+		<option value="unidades">Unidades</option>
+		<option value="envases">Envases</option>
+	</select> 
+	<br/><br/>
+
+	<input onclick="guardar()" value="Guardar" type="button"/>
+	<br/>
+	<input onclick="generar_lista()" value="Generar lista" type="button"/>
+	
+</body>
+</html>
