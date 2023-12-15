@@ -10,10 +10,19 @@
  		// meter los datos de la respuesta en un array
  		var cats = JSON.parse(this.response);				
 		// para cada elemento del array 
-		for(var i = 0; i < cats.length; i++){
+		for(var i = 0; i < cats.length; i++)
+		{
 			//se crea un elemento ul con el campo  nombre 
 			var elem = document.createElement("li");
-			elem.innerHTML = cats[i]["nombre"];
+
+			var enlace = document.createElement("a");
+			enlace.innerHTML = cats[i]["nombre"];
+			enlace.setAttribute("href","#");
+			enlace.setAttribute("onclick","return productos();");
+			
+			// se añade el enlace al elemento de la lista
+			elem.appendChild(enlace);
+
 			// se añade a la lista
 			lista.appendChild(elem);		
 		}
@@ -28,4 +37,9 @@
 	xhttp.send(); 
 	// para que no se siga el link que llama a esta función
 	return false;
+}
+
+function productos() 
+{
+	console.log("función productos");
 }
