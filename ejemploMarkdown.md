@@ -27,6 +27,7 @@ ejemplo de lista numerada
 
 **negrita**
 *cusirva*
+<span style="color:rgba(255, 0, 0, 1)">Texto con color</span>
 
 ~~~
 bloque de texto independiente
