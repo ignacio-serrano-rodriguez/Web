@@ -5,10 +5,10 @@
 ##### cabecera 5
 ###### cabecera 6
 
-Primera linea de párrafo.
+Primera linea de párrafo.\
 segunda linea de párrafo.
 
-> cita.
+> cita.\
 > — persona que lo dijo 
 
 ejemplo de lista no numerada
