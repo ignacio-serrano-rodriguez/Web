@@ -8,8 +8,8 @@
 Primera linea de párrafo.
 segunda linea de párrafo.
 
-> cita.\n
-— persona que lo dijo
+> cita.
+> — persona que lo dijo 
 
 ejemplo de lista no numerada
 * element 1
