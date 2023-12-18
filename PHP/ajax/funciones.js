@@ -68,10 +68,7 @@ function productos(codCat)
 				lista.appendChild(elem);		
 			}
 			var enlace = document.getElementById(codCat);
-			enlace.setAttribute("onclick",``);
-			enlace.removeAttribute("onclick"); 
-			// eliminar el contenido actual
-			//body.innerHTML = "";
+			enlace.removeAttribute("onclick");
 			enlace.after(lista);
 		}
 	};
