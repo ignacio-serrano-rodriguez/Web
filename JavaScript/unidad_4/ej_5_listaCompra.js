@@ -7,6 +7,15 @@ añadir producto también muestra ventana y actualiza la lista.
 let productos = ["Plátanos", "Servilletas", "Leche", "Huevos", "Detergente", "Aceitunas", "Zumo"];
 let precios = [1,2,3,4,5,6,7];
 
+function actualizar(producto) 
+{
+	let elemento = document.createElement("li");
+	elemento.innerHTML = producto;
+	document.getElementById("listaCompra").appendChild(elemento);
+}
+
+productos.forEach(actualizar);
+
 let listaCompra = document.getElementById("listaCompra").value;
 console.log(listaCompra);
 
@@ -14,6 +23,7 @@ function mostrar_precio()
 {
 	let producto = document.getElementById("producto").value;
 	let encontrado = false;
+	
 
 	for (let i = 0; i < productos.length; i++) 
 	{
@@ -52,5 +62,6 @@ function aniadir_producto()
 		console.log("los datos introducidos no son correctos");
 	}
 	
+	document.getElementById("listaCompra").innerHTML="";
 }
 		

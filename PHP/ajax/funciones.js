@@ -19,6 +19,7 @@
 				var enlace = document.createElement("a");
 				enlace.innerHTML = cats[i]["nombre"];
 				enlace.setAttribute("href","#");
+				enlace.setAttribute("id",`${cats[i]["codCat"]}`);
 				enlace.setAttribute("onclick",`return productos(${cats[i]["codCat"]});`);
 				
 				// se añade el enlace al elemento de la lista
@@ -28,8 +29,6 @@
 				lista.appendChild(elem);		
 			}
 			var body = document.getElementById("principal");
-			// eliminar el contenido actual
-			body.innerHTML = "";
 			body.appendChild(lista);
 		}
 	};
@@ -61,8 +60,6 @@ function productos(codCat)
 
 				var parrafo = document.createElement("p");
 				parrafo.innerHTML = cats[i]["nombre"];
-				//enlace.setAttribute("href","#");
-				//enlace.setAttribute("onclick","return productos();");
 				
 				// se añade el enlace al elemento de la lista
 				elem.appendChild(parrafo);
@@ -70,14 +67,16 @@ function productos(codCat)
 				// se añade a la lista
 				lista.appendChild(elem);		
 			}
-			var body = document.getElementById("principal");
+			var enlace = document.getElementById(codCat);
+			enlace.setAttribute("onclick",``);
+			enlace.removeAttribute("onclick"); 
 			// eliminar el contenido actual
-			body.innerHTML = "";
-			body.appendChild(lista);
+			//body.innerHTML = "";
+			enlace.after(lista);
 		}
 	};
 	xhttp.open("GET", `productos.php?codCat=${codCat}`, true);     
-	xhttp.send(codCat); 
+	xhttp.send(); 
 
 	// para que no se siga el link que llama a esta función
 	return false;
