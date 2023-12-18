@@ -1,5 +1,4 @@
 <?php	
-
 	try 
 	{
 		$conexion = 'mysql:dbname=pedidos;host=127.0.0.1:3306';
@@ -7,13 +6,13 @@
 		$claveBD = '';
 		$BD = new PDO($conexion, $usuarioBD, $claveBD);
 
-		$query = $BD->query("SELECT nombre FROM categorias");
+		$query = $BD->query("SELECT nombre, codCat FROM categorias");
 
 		$array = [];
 
 		foreach ($query as $elemento) 
 		{
-			$objeto = array("nombre" => $elemento['nombre']);
+			$objeto = array("nombre" => $elemento['nombre'], "codCat" => $elemento['codCat']);
 			array_push($array, $objeto);
 		}
 
@@ -24,5 +23,4 @@
 	{
 		echo 'Error con la base de datos: ' . $e->getMessage();
 	}
-
 ?>
