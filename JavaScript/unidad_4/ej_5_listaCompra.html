@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Ej 5 - Lista Compra</title>
+</head>
+<body>
+
+	<h1> Lista de la compra </h1>
+
+	<div id="listaCompra"></div>
+
+	<label for="producto">Producto: </label>
+	<input id="producto" type="text" placeholder="Introduce un producto"/>
+	<br/>
+
+	<input onclick="mostrar_precio()" type="button" value="Mostrar precio"/>
+
+	<h2>Añadir nuevo producto a la lista de la compra</h2>
+
+	<label for="nuevoProducto">Nuevo producto: </label>
+	<input id="nuevoProducto" type="text" placeholder="Nuevo producto"/>
+	<label for="precio">Precio: </label>
+	<input id="precio" type="number" placeholder="Precio"/>
+	<br/>
+
+	<input onclick="aniadir_producto()" type="button" value="Añadir producto"/>
+
+	<script src="ej_5_listaCompra.js"></script>
+</body>
+</html>
