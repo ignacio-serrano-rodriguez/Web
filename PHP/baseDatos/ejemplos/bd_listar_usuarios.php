@@ -27,7 +27,7 @@ try
 
 	// EJEMPLO CONSULTA PREPARADA (PARAMETRIZADA EN ORDEN)
 	/* consulta preparada, parametros por orden */	
-/*
+
 	$query = $empresaBD->prepare("select nombre from usuarios where rol = ?");	
 	$query->execute(array(0));
 	echo "-- Número de usuarios con rol 0: " .  $query->rowCount() . " --<br/>";
@@ -37,10 +37,10 @@ try
 		echo "Nombre : " . $usuario['nombre'] . "<br>";
 	}
 	echo "<br/>";
-*/
+
 	// EJEMPLO CONSULTA PREPARADA NOMBRE (PARAMETRIZADA SIN ORDEN)
 	/* consulta preparada, parametros por nombre */	
-/*
+
 	$query = $empresaBD->prepare("select nombre from usuarios where rol = :rol");
 	$query->execute(array(':rol' => 1));
 	echo "-- Número de usuarios con rol 1: " .  $query->rowCount() . " --<br>";
@@ -48,7 +48,7 @@ try
 	{
 		echo "Nombre : " . $usuario['nombre'] . "<br>";
 	}	
-*/
+
 } 
 catch (PDOException $e) 
 {
