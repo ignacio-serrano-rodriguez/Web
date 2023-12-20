@@ -20,7 +20,7 @@
 				enlace.innerHTML = cats[i]["nombre"];
 				enlace.setAttribute("href","#");
 				enlace.setAttribute("id",`${cats[i]["codCat"]}`);
-				enlace.setAttribute("onclick",`return productos(${cats[i]["codCat"]});`);
+				enlace.setAttribute("onclick",`return obtener_productos(${cats[i]["codCat"]});`);
 				
 				// se añade el enlace al elemento de la lista
 				elem.appendChild(enlace);
@@ -39,14 +39,15 @@
 	return false;
 }
 
-function productos(codCat) 
+function obtener_productos(codCat) 
 {
-	console.log(codCat);
 	var xhttp = new XMLHttpRequest();       
  	xhttp.onreadystatechange = function() 
 	{
 		if (this.readyState == 4 && this.status == 200) 
 		{  
+			let enlace = document.getElementById(codCat);
+
 			// crear lista
 			var lista = document.createElement("ul");
 			// meter los datos de la respuesta en un array
@@ -67,9 +68,8 @@ function productos(codCat)
 				// se añade a la lista
 				lista.appendChild(elem);		
 			}
-			var enlace = document.getElementById(codCat);
-			enlace.removeAttribute("onclick");
 			enlace.after(lista);
+			enlace.setAttribute("onclick",`return ocultar_productos(${codCat});`);
 		}
 	};
 	xhttp.open("GET", `productos.php?codCat=${codCat}`, true);     
@@ -77,4 +77,18 @@ function productos(codCat)
 
 	// para que no se siga el link que llama a esta función
 	return false;
+}
+
+function ocultar_productos(codCat) 
+{
+	let enlace = document.getElementById(codCat);
+	enlace.nextSibling.style.display = "none";
+	enlace.setAttribute("onclick",`return mostrar_productos(${codCat});`);
+}
+
+function mostrar_productos(codCat) 
+{
+	let enlace = document.getElementById(codCat);
+	enlace.nextSibling.style.display = "block";
+	enlace.setAttribute("onclick",`return ocultar_productos(${codCat});`);
 }
