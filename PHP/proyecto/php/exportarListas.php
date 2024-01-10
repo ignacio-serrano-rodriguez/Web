@@ -1,20 +1,29 @@
 <?php
-echo "fichero de exportar";
 
 $idLogin = $_POST["idLogin"] ?? null;
 $usuarioLogin = $_POST["usuarioLogin"] ?? null;
 $contraseniaLogin = $_POST["contraseniaLogin"] ?? null;
 
-$fichero = fopen("../exportaciones/fichero", "w");
-fwrite($fichero, "hola muxndo");
+$nombreFichero = "../exportaciones/listasExportadas.txt";
+unlink($nombreFichero);
+$fichero = fopen($nombreFichero, "w");
+$contenido = "";
+
+
+
+
+
+fwrite($fichero, $contenido);
 fclose($fichero);
-/*
+
+$rutaFichero = realpath($nombreFichero);
+
 echo 
 "
 	<form id=\"formularioConsola\" action=\"gestionarUsuario.php\" method=post>
 
 		<input type=\"hidden\" value=true name=\"consolaActivada\"/>
-		<input type=\"hidden\" value=\"listas exportadas\" name=\"mensajeConsola\"/>
+		<input type=\"hidden\" value=\"listas exportadas en el fichero ($rutaFichero)\" name=\"mensajeConsola\"/>
 
 		<input type=\"hidden\" value=\"$idLogin\" name=\"idLogin\"/>
 		<input type=\"hidden\" value=\"$usuarioLogin\" name=\"usuarioLogin\"/>
@@ -31,5 +40,5 @@ echo
 		}
 	</script>
 ";
-*/
+
 ?>
