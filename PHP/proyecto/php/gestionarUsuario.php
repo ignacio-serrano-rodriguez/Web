@@ -64,19 +64,29 @@ try
 			";
 
 			echo 
-			"
-				<form id=\"formularioConsola\" action=\"../html/inicio.php\" method=post>
-					<input type=\"hidden\" value=true name=\"consolaActivada\"/>
-					<input type=\"hidden\" value=\"sesión cerrada\" name=\"mensajeConsola\"/>
-					<input type=\"submit\" value=\"Cerrar sesión\">
-				</form>
-			";
-
+				"
+					<form id=\"formularioConsola\" action=\"../html/inicio.php\" method=post>
+						<input type=\"hidden\" value=true name=\"consolaActivada\"/>
+						<input type=\"hidden\" value=\"sesión cerrada\" name=\"mensajeConsola\"/>
+						<input type=\"submit\" value=\"Cerrar sesión\">
+					</form>
+				";
+			
 			echo "<hr/>";
 
 			if($rolLogin == 1)
 			{
 				echo "<h2> Tus listas </h2>";
+
+				echo 
+				"
+					<form id=\"formularioConsola\" action=\"exportarListas.php\" method=post>
+						<input type=\"hidden\" value=\"$idLogin\" name=\"idLogin\"/>
+						<input type=\"hidden\" value=\"$usuarioLogin\" name=\"usuarioLogin\"/>
+						<input type=\"hidden\" value=\"$contraseniaLogin\" name=\"contraseniaLogin\"/>
+						<input type=\"submit\" value=\"Exportar listas\">
+					</form>
+				";
 
 				echo 
 				"	
