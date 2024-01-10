@@ -1,16 +1,13 @@
 <?php
-
-echo "estas en exportarListas.php";
+echo "fichero de exportar";
 
 $idLogin = $_POST["idLogin"] ?? null;
 $usuarioLogin = $_POST["usuarioLogin"] ?? null;
 $contraseniaLogin = $_POST["contraseniaLogin"] ?? null;
 
-echo exec('whoami');
-$fichero = fopen("fichero", "w");
-fwrite($fichero, "hola mundo");
+$fichero = fopen("../exportaciones/fichero", "w");
+fwrite($fichero, "hola muxndo");
 fclose($fichero);
-
 /*
 echo 
 "
@@ -34,5 +31,5 @@ echo
 		}
 	</script>
 ";
-^*/
+*/
 ?>
