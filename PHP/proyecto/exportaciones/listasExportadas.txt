@@ -1,1 +1,10 @@
-aquí están todas las listas exportadas
+[videojuegos]
+
+    - the witcher 3
+        nota: 10/10
+        comentario: no está tan flama
+[series]
+
+    - the wire 
+        nota: 9/10
+        comentario: la mejores serie de la historia
