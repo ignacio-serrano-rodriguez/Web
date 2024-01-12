@@ -87,8 +87,7 @@ function sumar()
 	// Mostramos el resultado obtenido en una ventana nueva en el navegador
 	cadenaResultado += `)<br/><br/>es de ${resultado}`;
 
-	let ventana = window.open("about:blank", "_blank", "width=300px,height=300px");
-	ventana.document.write(cadenaResultado);
+	mostrar_ventana(cadenaResultado);
 }
 
 function multiplicar() 
@@ -115,8 +114,7 @@ function multiplicar()
 	// Mostramos el resultado obtenido en una ventana nueva en el navegador
 	cadenaResultado += `)<br/><br/>es de ${resultado}`;
 
-	let ventana = window.open("about:blank", "_blank", "width=300px,height=300px");
-	ventana.document.write(cadenaResultado);
+	mostrar_ventana(cadenaResultado);
 }
 
 function dividir() 
@@ -144,8 +142,7 @@ function dividir()
 		cadenaResultado = error;
 	}
 
-	let ventana = window.open("about:blank", "_blank", "width=300px,height=300px");
-	ventana.document.write(cadenaResultado);
+	mostrar_ventana(cadenaResultado);
 }
 
 function promedio() 
@@ -173,6 +170,11 @@ function promedio()
 	// Usaremos toFixed(2) para redondear al segundo decimal
 	cadenaResultado += `/${numerosArray.length})<br/><br/>es de ${(resultado/numerosArray.length).toFixed(2)}`;
 
+	mostrar_ventana(cadenaResultado);
+}
+
+function mostrar_ventana(cadenaResultado) 
+{
 	let ventana = window.open("about:blank", "_blank", "width=300px,height=300px");
-		ventana.document.write(cadenaResultado);
+	ventana.document.write(cadenaResultado);
 }
