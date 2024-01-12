@@ -1,6 +1,9 @@
 /*
 Elabora una página web en HTML que solicite, a través de un input, una cadena, que puede estar formada
-por números y letras. Si contiene otro tipo de caracteres, se ignorarán. Por ejemplo: g5ER3hY5dW32f07G9d4
+por números y letras. Si contiene otro tipo de caracteres, se ignorarán. Por ejemplo: 
+
+g5ER3hY5dW32f07G9d4
+
 Cuando se pulse el botón “Extraer números”, debe mostrar debajo los números encontrados, sin repetir
 ninguno, ordenados ascendentemente, separados por comas. Siguiendo el ejemplo anterior: 0,3,4,5,7,9
 Debajo, se mostrarán cuatro botones: “Sumar”, “Multiplicar”, “Dividir” y “Promedio”. Al pulsar cualquiera de
@@ -16,38 +19,42 @@ Debes controlar el error en el caso de que la división sea entre 0 lanzando la 
 imprimirá en la nueva ventana indicando que la división entre los número X e Y no es posible.
 */
 
-// creamos una variable global donde almacenaremos los números que serán utilizados en cada una de las operaciones
-var numerosArray = [];
+// Declaramos una variable global donde almacenaremos los números utilizados en las operaciones
+var numerosArray;
 
 function extraer_numeros() 
 {
-	// creamos una constante que almacena los valores enteros válidos
+	// Inicializamos el array a 0 en caso de que introduzca una nueva serie de caracteres
+	numerosArray = [];
+
+	// Creamos una constante que almacena un array con los valores enteros válidos
 	const numerosValidos = [0,1,2,3,4,5,6,7,8,9]
 
-	// transformamos en array la cadena recibida por el input
+	// Transformamos en array la cadena recibida por el input
 	let cadenaArray = document.getElementById("cadena").value.split("");
 	
-	// comprobamos para cada uno de los elementos del array si este se encuentra en los numeros validos, si es así lo añadiremos
-	// al array donde almacenamos los números para operar
+	/* Comprobamos para cada uno de los elementos del array si este se encuentra en los numeros validos, si es así lo añadiremos
+		al array donde almacenamos los números para operar */
 	for (let i = 0; i < cadenaArray.length; i++) 
 	{
-		// es necesario transforma a entero para comprobar con include
+		// Es necesario parsear a entero para comprobar con include si es un entero válido
 		if(numerosValidos.includes(parseInt(cadenaArray[i])))
 		{
-			// push simplemente añade al final del array el elemento pasado como parámetro
-			numerosArray.push(cadenaArray[i]);
+			// Posteriormente comprobamos que el número no se repite
+			if(!numerosArray.includes(cadenaArray[i]))
+				numerosArray.push(cadenaArray[i]);
 		}
 	}
 
-	// ordenamos los números del array de menor a mayor como indica el enunciado
+	// Ordenamos los números del array de forma ascendente (de menor a mayor)
 	numerosArray.sort();
-	// unimos todos los números del array en una cadena separada por el caracter , como indica el enunciado
+	// Transformamos el array en una cadena mediante el caracter (,) para mostrar por pantalla
 	numeros = numerosArray.join(",");
 
-	// agregamos los números obtenidos al html
+	// Agregamos los números obtenidos al html
 	document.getElementById("numerosEncontrados_y_cuatroBotones").innerHTML =`<p>${numeros}</p>`;
 
-	// generamos los botones y sus respectivas llamadas a funciones que usaremos posteriormente
+	// Generamos los botones y sus respectivas llamadas a funciones que usaremos posteriormente
 	document.getElementById("numerosEncontrados_y_cuatroBotones").innerHTML +=`
 		<input type="button" value="Sumar" onclick="sumar()"/>
 		<input type="button" value="Multiplicar" onclick="multiplicar()"/>
@@ -58,11 +65,11 @@ function extraer_numeros()
 
 function sumar() 
 {
-	// variables que utilizaremos para mostrar por pantalla el resultado
+	// Variables que utilizaremos para mostrar por pantalla el resultado
 	let resultado=0;
-	let cadenaResultado = "El resultado de realizar la suma\n\n(";
+	let cadenaResultado = "El resultado de realizar la suma<br/><br/>(";
 
-	// recorremos el array de numeros obtenidos y realizamos las operaciones pertinentes según el botón
+	// Recorremos el array de numeros obtenidos y realizamos las operaciones pertinentes según el botón
 	for (let i = 0; i < numerosArray.length; i++) 
 	{
 		resultado += parseInt(numerosArray[i]);
@@ -77,18 +84,20 @@ function sumar()
 		}
 	}
 
-	// mostramos el resultado obtenido en una ventana nueva en el navegador
-	cadenaResultado += `)\n\nes de ${resultado}`;
-	alert(cadenaResultado);
+	// Mostramos el resultado obtenido en una ventana nueva en el navegador
+	cadenaResultado += `)<br/><br/>es de ${resultado}`;
+
+	let ventana = window.open("about:blank", "ventana", "width=300px,height=300px");
+	ventana.document.write(cadenaResultado);
 }
 
 function multiplicar() 
 {
-	// variables que utilizaremos para mostrar por pantalla el resultado
+	// Variables que utilizaremos para mostrar por pantalla el resultado
 	let resultado=1;
-	let cadenaResultado = "El resultado de realizar la multiplicación\n\n(";
+	let cadenaResultado = "El resultado de realizar la multiplicación<br/><br/>(";
 
-	// recorremos el array de numeros obtenidos y realizamos las operaciones pertinentes según el botón
+	// Recorremos el array de numeros obtenidos y realizamos las operaciones pertinentes según el botón
 	for (let i = 0; i < numerosArray.length; i++) 
 	{
 		resultado *= parseInt(numerosArray[i]);
@@ -103,43 +112,49 @@ function multiplicar()
 		}
 	}
 
-	// mostramos el resultado obtenido en una ventana nueva en el navegador
-	cadenaResultado += `)\n\nes de ${resultado}`;
-	alert(cadenaResultado);
+	// Mostramos el resultado obtenido en una ventana nueva en el navegador
+	cadenaResultado += `)<br/><br/>es de ${resultado}`;
+
+	let ventana = window.open("about:blank", "ventana", "width=300px,height=300px");
+	ventana.document.write(cadenaResultado);
 }
 
 function dividir() 
 {
-	// variables que utilizaremos para mostrar por pantalla el resultado
+	// Variables que utilizaremos para mostrar por pantalla el resultado
 	let resultado=0;
-	// obtenemos directamente el numero mayor y menor del array, ya que están ordenados de menor a mayor por haber usado sort
+	let cadenaResultado;
+	// Obtenemos directamente el numero mayor y menor del array, ya que están ordenados de menor a mayor por haber usado sort
 	let numeroMasBajo = parseInt(numerosArray[0]);
 	let numeroMasAlto = parseInt(numerosArray[numerosArray.length-1]);
-	let cadenaResultado = `El resultado de realizar la división\n\n(${numeroMasAlto}/${numeroMasBajo})\n\n`;
 
-	// Comprobamos que los dos números son distintos de 0 para poder lanzar las excepción de que la operacion de división
-	// no es realizable si el divisor es 0
-	if(numeroMasAlto == 0 || numeroMasBajo == 0)
+	// Comprobamos que el divisor es distinto de 0 para lanzar la excepción o no
+	if(numeroMasBajo == 0)
 	{
-		// indicamos que la división no es posible realizarla directamente
-		alert(`La division entre ${numeroMasAlto} y ${numeroMasBajo} es imposible`)
+		// Indicamos que la división no es posible realizarla directamente
+		cadenaResultado = `La division entre ${numeroMasAlto} y ${numeroMasBajo} no es posible porque el divisor es nulo`;
+		
+		let ventana = window.open("about:blank", "ventana", "width=300px,height=300px");
+		ventana.document.write(cadenaResultado);
 	}
 	else
 	{
-		// calculamos la operación y la mostramos por pantalla
+		// Calculamos la operación y la mostramos por pantalla
 		resultado = numeroMasAlto / numeroMasBajo;
-		cadenaResultado += `es de ${resultado}`;
-		alert(cadenaResultado);
+		cadenaResultado = `El resultado de realizar la división (${numeroMasAlto}/${numeroMasBajo})<br/><br/>es de ${resultado}`;
+
+		let ventana = window.open("about:blank", "ventana", "width=300px,height=300px");
+		ventana.document.write(cadenaResultado);
 	}
 }
 
 function promedio() 
 {
-	// variables que utilizaremos para mostrar por pantalla el resultado
+	// Variables que utilizaremos para mostrar por pantalla el resultado
 	let resultado=0;
-	let cadenaResultado = "El resultado de realizar el promedio\n\n(";
+	let cadenaResultado = "El resultado de realizar el promedio<br/><br/>(";
 
-	// recorremos el array de numeros obtenidos y realizamos las operaciones pertinentes según el botón
+	// Recorremos el array de numeros obtenidos y realizamos las operaciones pertinentes según el botón
 	for (let i = 0; i < numerosArray.length; i++) 
 	{
 		resultado += parseInt(numerosArray[i]);
@@ -154,8 +169,10 @@ function promedio()
 		}
 	}
 
-	// mostramos el resultado obtenido en una ventana nueva en el navegador
-	// usaremos toFixed(2) para redondear al segundo decimal
-	cadenaResultado += `/${numerosArray.length})\n\nes de ${(resultado/numerosArray.length).toFixed(2)}`;
-	alert(cadenaResultado);
+	// Mostramos el resultado obtenido en una ventana nueva en el navegador
+	// Usaremos toFixed(2) para redondear al segundo decimal
+	cadenaResultado += `/${numerosArray.length})<br/><br/>es de ${(resultado/numerosArray.length).toFixed(2)}`;
+
+	let ventana = window.open("about:blank", "ventana", "width=300px,height=300px");
+		ventana.document.write(cadenaResultado);
 }
