@@ -128,24 +128,24 @@ function dividir()
 	let numeroMasBajo = parseInt(numerosArray[0]);
 	let numeroMasAlto = parseInt(numerosArray[numerosArray.length-1]);
 
-	// Comprobamos que el divisor es distinto de 0 para lanzar la excepción o no
-	if(numeroMasBajo == 0)
+	try 
 	{
-		// Indicamos que la división no es posible realizarla directamente
-		cadenaResultado = `La division entre ${numeroMasAlto} y ${numeroMasBajo} no es posible porque el divisor es nulo`;
-		
-		let ventana = window.open("about:blank", "_blank", "width=300px,height=300px");
-		ventana.document.write(cadenaResultado);
-	}
-	else
-	{
-		// Calculamos la operación y la mostramos por pantalla
-		resultado = numeroMasAlto / numeroMasBajo;
-		cadenaResultado = `El resultado de realizar la división (${numeroMasAlto}/${numeroMasBajo})<br/><br/>es de ${resultado}`;
+		if(numeroMasBajo == 0)
+			throw `La division entre ${numeroMasAlto} y ${numeroMasBajo} no es posible porque el divisor es nulo`;
 
-		let ventana = window.open("about:blank", "_blank", "width=300px,height=300px");
-		ventana.document.write(cadenaResultado);
+		else
+		{
+			resultado = numeroMasAlto / numeroMasBajo;
+			cadenaResultado = `El resultado de realizar la división (${numeroMasAlto}/${numeroMasBajo})<br/><br/>es de ${resultado}`;
+		}
+	} 
+	catch (error)
+	{
+		cadenaResultado = error;
 	}
+
+	let ventana = window.open("about:blank", "_blank", "width=300px,height=300px");
+	ventana.document.write(cadenaResultado);
 }
 
 function promedio() 
