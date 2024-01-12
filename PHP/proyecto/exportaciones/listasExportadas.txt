@@ -1,10 +1,6 @@
-[videojuegos]
 
-    - the witcher 3
-        nota: 10/10
-        comentario: no está tan flama
-[series]
+[manualidades]
 
-    - the wire 
+    - papiroflexia
         nota: 9/10
-        comentario: la mejores serie de la historia
+        comentario: me gusta

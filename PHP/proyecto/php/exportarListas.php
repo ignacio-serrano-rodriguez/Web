@@ -26,7 +26,7 @@ try
 			$nombreLista = $listaQuery['nombre'];
 
 			//echo "[$nombreLista]<br/>";
-			$contenido = $contenido . "[$nombreLista]\n";
+			$contenido = $contenido . "\n[$nombreLista]\n";
 
 			$query_2 = $BD->query("SELECT id, id_lista, nombre, nota, comentario FROM elementos");
 
@@ -38,7 +38,7 @@ try
 					$notaElemento = $elementoQuery['nota'];
 					$comentarioElemento = $elementoQuery['comentario'];
 					$idElemento = $elementoQuery['id'];
-					
+
 					/*
 					echo
 					"
