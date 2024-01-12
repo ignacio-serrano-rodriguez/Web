@@ -5,4 +5,8 @@ sobre un botón cuyo texto sea “Cambiar fondo", cambie el color de fondo de la
 
 // Simplemente obtenemos a partir del id, el color del fondo y este se lo introducimos como atributo al nodo que hace referencia al body
 
-function cambiar_fondo() {document.body.style = `background-color: ${document.getElementById("color").value}`;}
+function cambiar_fondo() 
+{
+	if(document.getElementById("color").value.trim() != "")
+		document.body.style = `background-color: ${document.getElementById("color").value}`;
+}
