@@ -87,7 +87,7 @@ function sumar()
 	// Mostramos el resultado obtenido en una ventana nueva en el navegador
 	cadenaResultado += `)<br/><br/>es de ${resultado}`;
 
-	let ventana = window.open("about:blank", "ventana", "width=300px,height=300px");
+	let ventana = window.open("about:blank", "_blank", "width=300px,height=300px");
 	ventana.document.write(cadenaResultado);
 }
 
@@ -115,7 +115,7 @@ function multiplicar()
 	// Mostramos el resultado obtenido en una ventana nueva en el navegador
 	cadenaResultado += `)<br/><br/>es de ${resultado}`;
 
-	let ventana = window.open("about:blank", "ventana", "width=300px,height=300px");
+	let ventana = window.open("about:blank", "_blank", "width=300px,height=300px");
 	ventana.document.write(cadenaResultado);
 }
 
@@ -134,7 +134,7 @@ function dividir()
 		// Indicamos que la división no es posible realizarla directamente
 		cadenaResultado = `La division entre ${numeroMasAlto} y ${numeroMasBajo} no es posible porque el divisor es nulo`;
 		
-		let ventana = window.open("about:blank", "ventana", "width=300px,height=300px");
+		let ventana = window.open("about:blank", "_blank", "width=300px,height=300px");
 		ventana.document.write(cadenaResultado);
 	}
 	else
@@ -143,7 +143,7 @@ function dividir()
 		resultado = numeroMasAlto / numeroMasBajo;
 		cadenaResultado = `El resultado de realizar la división (${numeroMasAlto}/${numeroMasBajo})<br/><br/>es de ${resultado}`;
 
-		let ventana = window.open("about:blank", "ventana", "width=300px,height=300px");
+		let ventana = window.open("about:blank", "_blank", "width=300px,height=300px");
 		ventana.document.write(cadenaResultado);
 	}
 }
@@ -173,6 +173,6 @@ function promedio()
 	// Usaremos toFixed(2) para redondear al segundo decimal
 	cadenaResultado += `/${numerosArray.length})<br/><br/>es de ${(resultado/numerosArray.length).toFixed(2)}`;
 
-	let ventana = window.open("about:blank", "ventana", "width=300px,height=300px");
+	let ventana = window.open("about:blank", "_blank", "width=300px,height=300px");
 		ventana.document.write(cadenaResultado);
 }
