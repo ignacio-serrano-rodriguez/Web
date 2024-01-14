@@ -52,7 +52,7 @@ function mostrar_en_ventana()
 		mensaje = `El color ${colorPreferido} es el preferido de ${nombrePersona}`;
 
 	// Creamos una ventana en una nueva instancia con las dimensiones anchura 400px y altura 400px.
-	let ventana = window.open('url: undefined','target:_blank','width: 400px, height: 400px');
+	let ventana = window.open('url: undefined','target:_blank','width= 400px, height= 400px');
 	// Introducimos en la ventana el mensaje a mostrar.
 	ventana.document.write(mensaje);
 }
