@@ -17,6 +17,9 @@ en el apartado anterior, en una nueva ventana del navegador, la cual deberá ten
 400px x 400px y deberá estar centrada en la pantalla.
 */
 
+// Declaramos una variable global para definir a la ventana.
+var ventana;
+
 function mostrar_en_html() 
 {
 	// Obtenemos los dos valores que se encuentran en el HTML eliminando espacios en blanco.
@@ -51,8 +54,22 @@ function mostrar_en_ventana()
 	else
 		mensaje = `El color ${colorPreferido} es el preferido de ${nombrePersona}`;
 
-	// Creamos una ventana en una nueva instancia con las dimensiones anchura 400px y altura 400px.
-	let ventana = window.open('url: undefined','target:_blank','width= 400px, height= 400px');
-	// Introducimos en la ventana el mensaje a mostrar.
+	// En el caso de que la ventana esté creada, se cierra y se indefine.
+	if(ventana != undefined)
+	{
+		ventana.close();
+		ventana = undefined;
+	}
+
+	// Definimos las dimensiones de anchura y altura de la ventana.
+	let width = 400;
+	let height = 400;
+	// Calculamos la posición izquierda y superior para centrar la ventana creada.
+	let left = (window.screen.width - width) / 2;
+	let top = (window.screen.height - height) / 2;
+	// Creamos la ventana con los parámetros indicados
+	ventana = window.open('', '_blank', `width=${width}px, height=${height}px, left=${left}px, top=${top}px`);
+
+	// Introducimos en la ventana el mensaje a mostrar.	
 	ventana.document.write(mensaje);
 }
