@@ -1,11 +1,16 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Emmet</title>
-</head>
-<body>
+<!-- PLANTILLA (!) -->
+	<!-- (!) -->
+	<!DOCTYPE html>
+	<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Document</title>
+	</head>
+	<body>
+		
+	</body>
+	</html>
 
 <!-- IDs (#) -->
 
@@ -45,7 +50,7 @@
 	<!-- a[href="#" title="Enlace" target="_blank"].cuadrado.cuadrado.fila#rojo{Contenido} -->
 	<a href="#" title="Enlace" target="_blank" class="cuadrado cuadrado fila" id="rojo">Contenido</a>
 
-<!-- ETIQUETAS SEGUIDAS (+) -->
+<!-- SEGUIDAS (+) -->
 
 	<!-- header+main -->
 	<header></header>
@@ -56,7 +61,7 @@
 	<main></main>
 	<footer></footer>
 
-<!-- ETIQUETAS ANIDADAS (>) -->
+<!-- ANIDADAS (>) -->
 
 	<!-- header>h1 -->
 	<header>
@@ -68,7 +73,7 @@
 		<h1><a href=""></a></h1>
 	</header>
 
-<!-- ETIQUETAS SEGUIDAS y ANIDADAS (+ >) -->
+<!-- SEGUIDAS y ANIDADAS (+ >) -->
 
 	<!-- header>h1+main -->
 	<header>
@@ -76,7 +81,7 @@
 		<main></main>
 	</header>
 
-<!-- ETIQUETAS AGRUPADAS () -->
+<!-- AGRUPADAS () -->
 
 	<!-- (header>h1)+main -->
 	<header>
@@ -97,7 +102,7 @@
 	</main>
 	<footer></footer>
 
-<!-- ETIQUETAS MULTIPLICADAS (*) -->
+<!-- MULTIPLICADAS (*) -->
 
 	<!-- ul>li*5 -->
 	<ul>
@@ -108,18 +113,29 @@
 		<li>asdasd</li>
 	</ul>
 
-<!-- ETIQUETAS NUMERADAS ($) -->
+<!-- NUMERADAS ($) -->
 
-	<!-- ul>li{$}*5 -->
+	<!-- ASCENDENTE -->
+	<!-- ul>li{elemento $}*5 -->
 	<ul>
-		<li>1</li>
-		<li>2</li>
-		<li>3</li>
-		<li>4</li>
-		<li>5</li>
+		<li>elemento 1</li>
+		<li>elemento 2</li>
+		<li>elemento 3</li>
+		<li>elemento 4</li>
+		<li>elemento 5</li>
+	</ul>
+	
+	<!-- DESCENDENTE -->
+	<!-- ul>li{elemento $@-}*5 -->
+	<ul>
+		<li>elemento 5</li>
+		<li>elemento 4</li>
+		<li>elemento 3</li>
+		<li>elemento 2</li>
+		<li>elemento 1</li>
 	</ul>
 
-<!-- ETIQUETAS SEGUIDAS, ANIDADAS, AGRUPADAS, MULTIPLICADAS y NUMERADAS -->
+<!-- SEGUIDAS, ANIDADAS, AGRUPADAS, MULTIPLICADAS y NUMERADAS -->
 
 	<!-- (header>(h1>a)>nav>ul>li*5{$})+main+footer -->
 	<header>
@@ -136,6 +152,31 @@
 	</header>
 	<main></main>
 	<footer></footer>
+
+<!-- SUBIR NIVEL (^) -->
+
+	<!-- h1>p>a{hola mundo}^p{hola mundo 2} -->
+	<h1>
+		<p><a href="">hola mundo</a></p>
+		<p>hola mundo 2</p>
+	</h1>
+
+<!-- TEXTO RELLENO (>lorem) -->
+
+	<!-- p*2>lorem -->
+	<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Maxime consequuntur fugit vitae, iste, distinctio voluptate nihil quod cumque nostrum sunt ad deleniti ea quas accusantium officiis, blanditiis aliquam deserunt adipisci.</p>
+	<p>Odit incidunt sed earum officia aspernatur quos quae, nihil similique quam, laudantium voluptate doloremque magnam corrupti? Molestiae, obcaecati nemo temporibus minima aut cupiditate quisquam asperiores possimus laborum nihil quis dolorum?</p>
+
+<!-- INPUTS y BOTONES -->
+
+	<!-- input:r -->
+	<input type="radio" name="" id="">
+
+	<!-- input:s -->
+	<input type="submit" value="">
+
+	<!-- btn:r -->
+	<button type="reset"></button>
 
 </body>
 </html>
