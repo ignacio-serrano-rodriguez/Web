@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Emmet</title>
+</head>
+<body>
+
+<!-- IDs (#) -->
+
+	<!-- div#rojo -->
+	<div id="rojo"></div>
+
+<!-- CLASES (.) -->
+
+	<!-- div.cuadrado -->
+	<div class="cuadrado"></div>
+
+	<!-- div.cuadrado.cuadrado-fila -->
+	<div class="cuadrado cuadrado_fila"></div>
+	
+<!-- IDs y CLASES (# .) -->
+
+	<!-- div.cuadrado.cuadrado-fila#rojo -->
+	<div class="cuadrado cuadrado-fila" id="rojo"></div>
+
+<!-- CONTENIDO {} -->	
+
+	<!-- div{Contenido} -->
+	<div>Contenido</div>
+
+<!-- IDs, CLASES y CONTENIDO (# . {}) -->
+
+	<!-- div.cuadrado.cuadrado-fila#rojo{Contenido} -->
+	<div class="cuadrado cuadrado-fila" id="rojo">Contenido</div>
+
+<!-- ATRIBUTOS [] -->
+
+	<!-- a[href="#" title="Enlace"] -->
+	<a href="#" title="Enlace"></a>
+
+<!-- IDs, CLASES, CONTENIDO y ATRIBUTOS (# . {} []) -->
+
+	<!-- a[href="#" title="Enlace" target="_blank"].cuadrado.cuadrado.fila#rojo{Contenido} -->
+	<a href="#" title="Enlace" target="_blank" class="cuadrado cuadrado fila" id="rojo">Contenido</a>
+
+<!-- ETIQUETAS SEGUIDAS (+) -->
+
+	<!-- header+main -->
+	<header></header>
+	<main></main>
+
+	<!-- header+main+footer -->
+	<header></header>
+	<main></main>
+	<footer></footer>
+
+<!-- ETIQUETAS ANIDADAS (>) -->
+
+	<!-- header>h1 -->
+	<header>
+		<h1></h1>
+	</header>
+
+	<!-- header>h1>a -->
+	<header>
+		<h1><a href=""></a></h1>
+	</header>
+
+<!-- ETIQUETAS SEGUIDAS y ANIDADAS (+ >) -->
+
+	<!-- header>h1+main -->
+	<header>
+		<h1></h1>
+		<main></main>
+	</header>
+
+<!-- ETIQUETAS AGRUPADAS () -->
+
+	<!-- (header>h1)+main -->
+	<header>
+		<h1></h1>
+	</header>
+	<main></main>
+
+	<!-- (header>h1+nav)+(main>section>h2+p)+footer -->
+	<header>
+		<h1></h1>
+		<nav></nav>
+	</header>
+	<main>
+		<section>
+			<h2></h2>
+			<p></p>
+		</section>
+	</main>
+	<footer></footer>
+
+<!-- ETIQUETAS MULTIPLICADAS (*) -->
+
+	<!-- ul>li*5 -->
+	<ul>
+		<li>sasdasd</li>
+		<li>fsfdsf</li>
+		<li>sdfsdf</li>
+		<li>sd</li>
+		<li>asdasd</li>
+	</ul>
+
+<!-- ETIQUETAS NUMERADAS ($) -->
+
+	<!-- ul>li{$}*5 -->
+	<ul>
+		<li>1</li>
+		<li>2</li>
+		<li>3</li>
+		<li>4</li>
+		<li>5</li>
+	</ul>
+
+<!-- ETIQUETAS SEGUIDAS, ANIDADAS, AGRUPADAS, MULTIPLICADAS y NUMERADAS -->
+
+	<!-- (header>(h1>a)>nav>ul>li*5{$})+main+footer -->
+	<header>
+		<h1><a href=""></a></h1>
+		<nav>
+			<ul>
+				<li>1</li>
+				<li>2</li>
+				<li>3</li>
+				<li>4</li>
+				<li>5</li>
+			</ul>
+		</nav>
+	</header>
+	<main></main>
+	<footer></footer>
+
+</body>
+</html>
