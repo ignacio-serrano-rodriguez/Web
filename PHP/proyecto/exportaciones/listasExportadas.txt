@@ -1,6 +1,16 @@
 
-[manualidades]
+[videojuegos]
 
-    - papiroflexia
+    - the witcher 3
+        nota: 10/10
+        comentario: no esta flama
+
+    - the finals
+        nota: 10/10
+        comentario: de los mejores comepetitivos
+
+[series]
+
+    - the wire 
         nota: 9/10
-        comentario: me gusta
+        comentario: la mejor serie de la historia en realidad
