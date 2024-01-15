@@ -1,16 +1,12 @@
 
-[videojuegos]
+[libros]
 
-    - the witcher 3
-        nota: 10/10
-        comentario: no esta flama
-
-    - the finals
-        nota: 10/10
-        comentario: de los mejores comepetitivos
-
-[series]
-
-    - the wire 
+    - el señor de los anillos 1
         nota: 9/10
-        comentario: la mejor serie de la historia en realidad
+        comentario: el mejor libro
+
+[peliculas]
+
+    - los juegos del hambre
+        nota: 9/10
+        comentario: buena peli
