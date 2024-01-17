@@ -12,7 +12,7 @@
 							"Hora en el servidor:" + this.response;
 					}
 				};
-				xhttp.open("GET", "hora_servidor.php", true);
+				xhttp.open("GET", "A_hora_servidor.php", true);
 				xhttp.send();
 				return false;
 			}
