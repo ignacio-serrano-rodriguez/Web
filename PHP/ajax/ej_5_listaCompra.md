@@ -1,1 +1,0 @@
-![imagen resultado](https://i.ibb.co/jysY6DR/Captura-desde-2023-12-18-17-05-34.png)
