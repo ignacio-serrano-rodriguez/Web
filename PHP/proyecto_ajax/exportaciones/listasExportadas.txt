@@ -1,0 +1,12 @@
+
+[libros]
+
+    - el señor de los anillos 1
+        nota: 9/10
+        comentario: el mejor libro
+
+[peliculas]
+
+    - los juegos del hambre
+        nota: 9/10
+        comentario: buena peli
