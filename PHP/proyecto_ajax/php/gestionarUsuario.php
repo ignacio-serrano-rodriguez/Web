@@ -14,9 +14,13 @@ try
 	$conexion = 'mysql:dbname=proyecto_php;host=127.0.0.1:3306';
 	$usuarioBD = 'root';
 	$claveBD = '';
-	$empresaBD = new PDO($conexion, $usuarioBD, $claveBD);
+	$BD = new PDO($conexion, $usuarioBD, $claveBD);
 
-	$query = $empresaBD->query("SELECT id, nombre, apellidos, edad, mail, usuario, contrasenia, rol  FROM usuarios");
+	// AGREGAR CONSULTAS PREPARE
+	// $query = $empresaBD->prepare("select nombre from usuarios where rol = ?");	
+	// $query->execute(array(0));
+
+	$query = $BD->query("SELECT id, nombre, apellidos, edad, mail, usuario, contrasenia, rol  FROM usuarios");
 
 	foreach ($query as $usuarioQuery) 
 	{
@@ -102,7 +106,7 @@ try
 					</form>
 				";
 
-				$query = $empresaBD->query("SELECT id, nombre, id_usuario FROM listas");
+				$query = $BD->query("SELECT id, nombre, id_usuario FROM listas");
 
 				foreach ($query as $listaQuery) 
 				{

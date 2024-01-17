@@ -1,12 +1,16 @@
 
-[libros]
+[videojuegos]
 
-    - el señor de los anillos 1
+    - the witcher 3
+        nota: 10/10
+        comentario: no está tan flama
+
+    - minecraft
+        nota: 10/10
+        comentario: super creativo
+
+[series]
+
+    - the wire 
         nota: 9/10
-        comentario: el mejor libro
-
-[peliculas]
-
-    - los juegos del hambre
-        nota: 9/10
-        comentario: buena peli
+        comentario: la mejor serie de la historia en realidad
