@@ -23,4 +23,3 @@
 	{
 		echo 'Error con la base de datos: ' . $e->getMessage();
 	}
-?>
