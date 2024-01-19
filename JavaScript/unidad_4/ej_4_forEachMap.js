@@ -11,7 +11,7 @@ frutas.forEach((element) => console.log(element));
 console.log(Math.max(...enteros));
 console.log(Math.min(...enteros));
 
-// 5.2 MAP
+// 4.3 MAP
 let longitudes = frutas.map(function (fruta) 
 {
 	return fruta.length;
