@@ -18,6 +18,9 @@ try
 
 	$query = $empresaBD->query("SELECT id, nombre, apellidos, edad, mail, usuario, contrasenia, rol  FROM usuarios");
 
+	// $query = $BD->prepare("SELECT id, nombre, apellidos, edad, mail, usuario, contrasenia, rol  FROM usuarios");
+	// $query->execute();
+
 	foreach ($query as $usuarioQuery) 
 	{
 		if($usuarioQuery['usuario'] == $usuarioLogin && $usuarioQuery['contrasenia'] == $contraseniaLogin)
