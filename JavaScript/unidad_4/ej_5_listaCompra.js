@@ -4,20 +4,11 @@ mostrar precio en una ventana. Si no existe, también
 añadir producto también muestra ventana y actualiza la lista.
 */
 
-let productos = ["Plátanos", "Servilletas", "Leche", "Huevos", "Detergente", "Aceitunas", "Zumo"];
-let precios = [1,2,3,4,5,6,7];
+var productos = ["Plátanos", "Servilletas", "Leche", "Huevos", "Detergente", "Aceitunas", "Zumo"];
+var precios = [1,2,3,4,5,6,7];
 
-function actualizar(producto) 
-{
-	let elemento = document.createElement("li");
-	elemento.innerHTML = producto;
-	document.getElementById("listaCompra").appendChild(elemento);
-}
-
-productos.forEach(actualizar);
-
-let listaCompra = document.getElementById("listaCompra").value;
-console.log(listaCompra);
+for (let i = 0; i < productos.length; i++) 
+	document.getElementById("listaCompra").innerHTML += `<li>${productos[i]}</li>`
 
 function mostrar_precio() 
 {
@@ -29,7 +20,7 @@ function mostrar_precio()
 	{
 		if (producto == productos[i]) 
 		{
-			console.log(producto + " precio: " + precios[i]);
+			alert(`${producto} = ${precios[i]} €`);
 			encontrado = true;
 			break;
 		}
@@ -37,31 +28,31 @@ function mostrar_precio()
 
 	if (!encontrado) 
 	{
-		console.log("ese producto no existe");
+		alert("Ese producto no existe.");
 	}
 }
 
 function aniadir_producto() 
 {
-	let nuevoProducto = document.getElementById("nuevoProducto").value;
-	let precio = document.getElementById("precio").value;
+	let nuevoProducto = document.getElementById("nuevoProducto").value.trim();
+	let precio = document.getElementById("precio").value.trim();
 
 	if(nuevoProducto != "" && precio != "")
 	{
 		if (productos.includes(nuevoProducto)) 
-		{
-			console.log("El producto introducido ya se encuentra en la lista");
-		}
+			alert("El producto introducido ya se encuentra en la lista.");
 		else
 		{
-			console.log("producto: " + nuevoProducto + " precio: " + precio);
+			productos.push(nuevoProducto);
+			precios.push(precio);
+			document.getElementById("listaCompra").innerHTML += `<li>${nuevoProducto}</li>`;
 		}
 	}
 	else
 	{
-		console.log("los datos introducidos no son correctos");
+		alert("Los datos introducidos no son correctos");
 	}
 	
-	document.getElementById("listaCompra").innerHTML="";
+	
 }
 		
