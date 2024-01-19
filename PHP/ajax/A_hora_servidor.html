@@ -5,36 +5,31 @@
 	xhttp.onreadystatechange = function() 
 	{
 		// Información (1XX)
-		if (this.readyState == 4 && this.status >= 100 && this.status < 200)
-		{  
+		if (this.readyState == 4 && this.status >= 100 && this.status < 200) 
 			alert("Información (100)");
-		}
+
 		// Exito (2XX)
 		else if (this.readyState == 4 && this.status >= 200 && this.status < 300)
-		{
 			alert("Exito (200)\n" + this.response);
-		}
+
 		// Redirección (3XX)
 		else if (this.readyState == 4 && this.status >= 300 && this.status < 400)
-		{
-			alert("Redirección (400)");
-		}
+			alert("Redirección (300)");
+
 		// Error cliente (4XX)
 		else if (this.readyState == 4 && this.status >= 400 && this.status < 500)
-		{
-			alert("Error cliente (500)");
-		}
+			alert("Error cliente (400)");
+	
 		// Error servidor (5XX)
 		else if (this.readyState == 4 && this.status >= 500)
-		{
 			alert("Error servidor (500)");
-		}
 	};
 	
 	xhttp.open("GET", "A_hora_servidor.php", true);
 
-	// Descomentar para generar "error cliente" (400)
-		//xhttp.open("GET", "fichero_desconocido.php", true);
+	// Descomentar siguiente línea para generar "error cliente" (400)
+		// Prepap
+	// xhttp.open("GET", "fichero_desconocido.php", true);
 
 	xhttp.send(); 
 

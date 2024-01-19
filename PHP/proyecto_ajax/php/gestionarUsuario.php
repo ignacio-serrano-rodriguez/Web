@@ -16,11 +16,10 @@ try
 	$claveBD = '';
 	$BD = new PDO($conexion, $usuarioBD, $claveBD);
 
-	// AGREGAR CONSULTAS PREPARE
-	// $query = $empresaBD->prepare("select nombre from usuarios where rol = ?");	
-	// $query->execute(array(0));
-
 	$query = $BD->query("SELECT id, nombre, apellidos, edad, mail, usuario, contrasenia, rol  FROM usuarios");
+
+	// $query = $BD->prepare("SELECT id, nombre, apellidos, edad, mail, usuario, contrasenia, rol  FROM usuarios");
+	// $query->execute();
 
 	foreach ($query as $usuarioQuery) 
 	{
