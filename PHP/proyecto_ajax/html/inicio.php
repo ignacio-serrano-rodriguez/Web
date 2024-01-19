@@ -1,8 +1,3 @@
-<?php 
-	$consolaActivada = $_POST["consolaActivada"] ?? null;
-	$mensajeConsola = $_POST["mensajeConsola"] ?? null;
-?>
-
 <!DOCTYPE html>
 <html lang="es">
 
@@ -15,68 +10,64 @@
 		<meta name="keywords" content="listas,gustos,series,peliculas,videojuegos,libros,manga,anime"/>
 		<meta name="author" content="Ignacio Serrano Rodríguez"/>
 
-		<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+		<script type = "text/javascript" src = "../js/funciones.js"></script>		
 
-		<title> Listas de gustos </title>
+		<title> Listas de gustos (AJAX)</title>
 
 	</head>
 
 	<body>
 
-		<?php
+		<p id="consola"></p>
 
-			if ($consolaActivada == "true") 
-			{
-				echo $mensajeConsola;
-				$consolaActivada = false;
-				$mensajeConsola = "";
-			}				
-		?>
+		<div id="contenido">
 
-		<h1> Listas de gustos </h1>
+			<h1> Listas de gustos (AJAX) </h1>
 
-		<h2> Inicio de sesión </h2>
+			<h2> Inicio de sesión </h2>
 
-		<form action="../php/gestionarUsuario.php" method=post>
+			<form >
 
-			<label for=usuarioLogin> usuario </label>
-			<input type=text id=usuarioLogin name=usuarioLogin> <br/>
-	
-			<label for="contraseniaLogin"> contraseña </label>
-			<input type="password" id="contraseniaLogin" name="contraseniaLogin"> <br/><br/>
-	
-			<input type="submit" value="iniciar">
-	
-		</form>
+				<label for=usuarioLogin> usuario </label>
+				<input type=text id=usuarioLogin name=usuarioLogin> <br/>
+		
+				<label for="contraseniaLogin"> contraseña </label>
+				<input type="password" id="contraseniaLogin" name="contraseniaLogin"> <br/><br/>
+		
+				<input type="button" value="iniciar" onclick="gestionarUsuario()">
+		
+			</form>
 
-		<h2> Registro de usuario </h2>
+			<h2> Registro de usuario </h2>
 
-		<form action="../php/crearUsuario.php" method="post">
+			<form action="../php/crearUsuario.php" method="post">
 
-			<label for="nombreRegistro"> nombre </label>
-			<input type="text" id="nombreRegistro" name="nombreRegistro"> <br/>
+				<label for="nombreRegistro"> nombre </label>
+				<input type="text" id="nombreRegistro" name="nombreRegistro"> <br/>
 
-			<label for="apellidosRegistro"> apellidos </label>
-			<input type="text" id="apellidosRegistro" name=apellidosRegistro> <br/>
+				<label for="apellidosRegistro"> apellidos </label>
+				<input type="text" id="apellidosRegistro" name=apellidosRegistro> <br/>
 
-			<label for="edadRegistro"> edad </label>
-			<input type="text" id="edadRegistro" name="edadRegistro"> <br/>
+				<label for="edadRegistro"> edad </label>
+				<input type="text" id="edadRegistro" name="edadRegistro"> <br/>
 
-			<label for="mailRegistro"> correo electrónico </label>
-			<input type="text" id="mailRegistro" name="mailRegistro"> <br/>
+				<label for="mailRegistro"> correo electrónico </label>
+				<input type="text" id="mailRegistro" name="mailRegistro"> <br/>
 
-			<label for="usuarioRegistro"> usuario </label>
-			<input type="text" id="usuarioRegistro" name="usuarioRegistro"> <br/>
-	
-			<label for="contraseniaRegistro_1"> contraseña </label>
-			<input type="password" id="contraseniaRegistro_1" name="contraseniaRegistro_1"> <br/>
+				<label for="usuarioRegistro"> usuario </label>
+				<input type="text" id="usuarioRegistro" name="usuarioRegistro"> <br/>
+		
+				<label for="contraseniaRegistro_1"> contraseña </label>
+				<input type="password" id="contraseniaRegistro_1" name="contraseniaRegistro_1"> <br/>
 
-			<label for="contraseniaRegistro_2"> repite la contraseña </label>
-			<input type="password" id="contraseniaRegistro_2" name="contraseniaRegistro_2"> <br/><br/>
-	
-			<input type="submit" value="registrarse">
-	
-		</form>
+				<label for="contraseniaRegistro_2"> repite la contraseña </label>
+				<input type="password" id="contraseniaRegistro_2" name="contraseniaRegistro_2"> <br/><br/>
+		
+				<input type="submit" value="registrarse">
+		
+			</form>
+
+		</div>
 
 	</body>
 
