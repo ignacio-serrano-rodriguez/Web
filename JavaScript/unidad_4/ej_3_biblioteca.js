@@ -29,6 +29,8 @@ limpia la pantalla y muéstrale el menú de nuevo. Si quiere salir, muestra el m
 */
 
 var libros = [];
+var titulos = [];
+
 libros.push(["Canción de la Noche", "Carlos Ruiz"]);
 libros.push(["Susurros en la Niebla", "Elena Martínez"]);
 libros.push(["Reflejos Perdidos", "Javier Sánchez"]);
@@ -49,21 +51,26 @@ function donde_libro()
 {
 	let libro = prompt("Introduce el nombre de un libro para obtener su posición.");
 	
-	let encontrado = false;
-	let posicion;
+	if(libro != null)
+	{
+		let encontrado = false;
+		let posicion;
 
-	for (let i = 0; i < libros.length; i++) 
-		if (libros[i][0] == libro)
-		{
-			encontrado = true;
-			posicion = i+1;
-			break;
-		}
+		for (let i = 0; i < libros.length; i++) 
+			if (libros[i][0] == libro)
+			{
+				encontrado = true;
+				posicion = i+1;
+				break;
+			}
 
-	if (encontrado) 
-		document.getElementById("consola").innerHTML = `El libro (${libros[posicion-1][0]}) se encuentra en la posición (${posicion}).`;
+		if (encontrado) 
+			document.getElementById("consola").innerHTML = `El libro con el título (${libros[posicion-1][0]}) se encuentra en la posición (${posicion}).`;
+		else
+			document.getElementById("consola").innerHTML = `No existe ningún libro con dicho título.`;
+	}
 	else
-		document.getElementById("consola").innerHTML = `Ese libro no existe.`;
+		document.getElementById("consola").innerHTML = `No se ha introducido la posición de ninǵun de libro.`;
 }
 
 function sacar_libro() 
@@ -75,13 +82,95 @@ function sacar_libro()
 
 	let posicion = prompt(cadena);
 
-	document.getElementById("consola").innerHTML = `Ha sacado el libro (${libros[posicion-1][0]} - ${libros[posicion-1][1]})<br/><br/>`;
-	libros.splice(posicion-1,1);
+	if(posicion != null)
+	{
+		document.getElementById("consola").innerHTML = `Ha sacado el libro con el título (${libros[posicion-1][0]})<br/><br/>`;
+		libros.splice(posicion-1,1);
+		
+		cadena = '';
+
+		for (let i = 0; i < libros.length; i++) 
+			cadena += `${libros[i][0]} - ${libros[i][1]}<br/>`;
+
+		document.getElementById("consola").innerHTML += `Los siguientes libros siguen disponibles.<br/><br/>${cadena}\n`;
+
+	}
+	else
+		document.getElementById("consola").innerHTML = `No se ha introducido la posición de ningún libro`;
+}
+
+function agregar_libro() 
+{
+	let libro = prompt("Introduce el título de un libro para comprobar si es agregable.");
 	
-	cadena = '';
+	if(libro != null)
+	{
+		let encontrado = false;
+		let posicion;
+
+		for (let i = 0; i < libros.length; i++) 
+			if (libros[i][0] == libro)
+			{
+				encontrado = true;
+				posicion = i+1;
+				break;
+			}
+
+		if (encontrado) 
+			document.getElementById("consola").innerHTML = `El libro con el título (${libros[posicion-1][0]}) se encuentra en la posición (${posicion}).`;
+		else
+		{
+			let autor = prompt("El libro con dicho título no existe todavía.\nEscribe su autor para agregarlo.");
+
+			if(autor != null)
+			{
+				libros.push([libro, autor]);
+				let cadena = '';
+
+				for (let i = 0; i < libros.length; i++) 
+					cadena += `${libros[i][0]} - ${libros[i][1]}<br/>`;
+
+				document.getElementById("consola").innerHTML = `Se ha agregado un nuevo libro.<br/><br/>${cadena}\n`;
+			}
+				
+			else
+			document.getElementById("consola").innerHTML = `No se ha introducido un nombre de autor válido.`;
+		}
+	}
+	else
+		document.getElementById("consola").innerHTML = `No se ha introducido el título de ningún libro.`;
+}
+
+function titulos_libros() 
+{
+	titulos = [];
+	let cadena = '';
 
 	for (let i = 0; i < libros.length; i++) 
-		cadena += `${libros[i][0]} - ${libros[i][1]}<br/>`;
+		titulos.push(libros[i][0]);		
 
-		document.getElementById("consola").innerHTML += `Los siguientes libros están disponibles.<br/><br/>${cadena}\n`;
+	titulos.sort().reverse();
+	cadena = titulos.join(",<br/>");
+
+	document.getElementById("consola").innerHTML = cadena;
+}
+
+function recomendados() 
+{
+
+	titulos = [];
+	let recomendados = [];
+	let cadena = '';
+
+	for (let i = 0; i < libros.length; i++) 
+		titulos.push(libros[i][0]);		
+
+	titulos.sort().reverse();
+
+	for (let i = 0; i < titulos.length && i < 3; i++) 	
+		recomendados.push(titulos[i])
+
+	cadena = recomendados.join(",<br/>");
+
+	document.getElementById("consola").innerHTML = cadena;
 }
