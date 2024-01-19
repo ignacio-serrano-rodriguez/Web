@@ -42,12 +42,13 @@ libros.push(["Mariposas en el Jardín", "Elena Martínez"]);
 
 function cuantos_libros() 
 {
-	document.getElementById("consola").innerHTML = `Hay ${libros.length} libros`;
+	document.getElementById("consola").innerHTML = `Hay ${libros.length} libros.`;
 }
 
 function donde_libro() 
 {
-	let libro = prompt("Introduce el nombre de un libro para obtener su posición");
+	let libro = prompt("Introduce el nombre de un libro para obtener su posición.");
+	
 	let encontrado = false;
 	let posicion;
 
@@ -60,7 +61,27 @@ function donde_libro()
 		}
 
 	if (encontrado) 
-		document.getElementById("consola").innerHTML = `El libro (${libros[posicion-1][0]}) se encuentra en la posición (${posicion})`;
+		document.getElementById("consola").innerHTML = `El libro (${libros[posicion-1][0]}) se encuentra en la posición (${posicion}).`;
 	else
-		document.getElementById("consola").innerHTML = `Ese libro no existe`;
+		document.getElementById("consola").innerHTML = `Ese libro no existe.`;
+}
+
+function sacar_libro() 
+{
+	let cadena = '';
+
+	for (let i = 0; i < libros.length; i++) 
+		cadena += `(${i+1}) ${libros[i][0]} - ${libros[i][1]}\n`;
+
+	let posicion = prompt(cadena);
+
+	document.getElementById("consola").innerHTML = `Ha sacado el libro (${libros[posicion-1][0]} - ${libros[posicion-1][1]})<br/><br/>`;
+	libros.splice(posicion-1,1);
+	
+	cadena = '';
+
+	for (let i = 0; i < libros.length; i++) 
+		cadena += `${libros[i][0]} - ${libros[i][1]}<br/>`;
+
+		document.getElementById("consola").innerHTML += `Los siguientes libros están disponibles.<br/><br/>${cadena}\n`;
 }
