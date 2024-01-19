@@ -11,12 +11,14 @@ function comprobar_contrasenia(contrasenia)
 	comprobacionLongitud = false;
 	contraseniaArray = contrasenia.split("");
 
+	// COMPROBACIÓN LONGITUD
 	if(contrasenia.length >= 8)
 		comprobacionLongitud = true;
 
 	const numeros = ['0','1','2','3','4','5','6','7','8','9'];
 	const abecedario = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
 	
+	// COMPROBACIÓN NÚMERO
 	for (let i = 0; i < contraseniaArray.length; i++) 
 		if (numeros.includes(contraseniaArray[i])) 
 		{
@@ -24,6 +26,7 @@ function comprobar_contrasenia(contrasenia)
 			break;	
 		}
 
+	// COMPROBACIÓN LETRA
 	for (let i = 0; i < contraseniaArray.length; i++) 
 		if (abecedario.includes(contraseniaArray[i].toUpperCase())) 
 		{
@@ -32,6 +35,7 @@ function comprobar_contrasenia(contrasenia)
 		}
 	
 
+	// COMPROBACIÓN MAYÚSCULA
 	for (let i = 0; i < contraseniaArray.length; i++) 
 	if (numeros.includes(contraseniaArray[i])) 
 	{
@@ -56,7 +60,6 @@ function comprobar_contrasenia(contrasenia)
 		return true;
 	else
 		return false;
-	
 }
 console.log(comprobar_contrasenia("1234567A"));
 
@@ -64,9 +67,9 @@ console.log(comprobar_contrasenia("1234567A"));
 Implementa una función que reciba una cadena de texto como entrada y cuente la cantidad de palabras que contiene. */
 function cantidad_palabras(cadena) 
 {
-	
-	return cantidad;
+	return cadena.split(" ").length;
 }
+console.log(cantidad_palabras("hola me llamo Nacho"));
 
 /* 7.3
 Crea una función que genere una contraseña aleatoria de una longitud dada, utilizando únicamente letras y números. */
