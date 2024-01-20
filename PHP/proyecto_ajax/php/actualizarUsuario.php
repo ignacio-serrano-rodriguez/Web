@@ -1,143 +1,84 @@
 <?php
-
-$idLogin = $_POST["idLogin"] ?? null;
-$usuarioLogin = $_POST["usuarioLogin"] ?? null;
-$contraseniaLogin = $_POST["contraseniaLogin"] ?? null;
-
-$nombreActualizacion = $_POST["nombreActualizacion"];
-$apellidosActualizacion = $_POST["apellidosActualizacion"];
-$edadActualizacion = $_POST["edadActualizacion"];
-$mailActualizacion = $_POST["mailActualizacion"];
-$usuarioActualizacion = $_POST["usuarioActualizacion"];
-$contraseniaActualizacion_1 = $_POST["contraseniaActualizacion_1"];
-$contraseniaActualizacion_2 = $_POST["contraseniaActualizacion_2"];
-
-try
+try 
 {
+	$idLogin = $_POST["idLogin"] ?? null;
+	$usuarioLogin = $_POST["usuarioLogin"] ?? null;
+	$mailLogin = $_POST["mailLogin"] ?? null;
+	$usuarioActualizacion = $_POST["usuarioActualizacion"] ?? null;
+	$mailActualizacion = $_POST["mailActualizacion"] ?? null;
+	$nombreActualizacion = $_POST["nombreActualizacion"] ?? null;
+	$apellidosActualizacion = $_POST["apellidosActualizacion"] ?? null;
+	$edadActualizacion = $_POST["edadActualizacion"] ?? null;
+	$contraseniaActualizacion_1 = $_POST["contraseniaActualizacion_1"] ?? null;
+	$contraseniaActualizacion_2 = $_POST["contraseniaActualizacion_2"] ?? null;
+
 	$conexion = 'mysql:dbname=proyecto_php;host=127.0.0.1:3306';
 	$usuarioBD = 'root';
 	$claveBD = '';
-	$empresaBD = new PDO($conexion, $usuarioBD, $claveBD);
-	$informacionExistente = false;
-	$mensajeConsola = "";
-	$usuarioActualizado = false;
+	$BD = new PDO($conexion, $usuarioBD, $claveBD);
 
-	$query = $empresaBD->query("SELECT id, nombre, apellidos, edad, mail, usuario, contrasenia, rol  FROM usuarios");
+	$query = $BD->prepare("SELECT id, nombre, apellidos, edad, mail, usuario, contrasenia, rol  FROM usuarios");
+	$query->execute();
 
-	foreach ($query as $usuarioQuery) 
+	$array = [];
+	$usuarioMailEnUso = false;
+
+	if($contraseniaActualizacion_1 == $contraseniaActualizacion_2 && $contraseniaActualizacion_1 != "" && $contraseniaActualizacion_2 != "")
 	{
-		if($usuarioQuery['id'] != $idLogin)
+		foreach ($query as $usuario) 
 		{
-			if($usuarioQuery['usuario'] == $usuarioActualizacion || $usuarioQuery['mail'] == $mailActualizacion)
+			if (($usuario['usuario'] == $usuarioActualizacion && $usuario['usuario'] != $usuarioLogin) || ($usuario['mail'] == $mailActualizacion && $usuario['mail'] != $mailLogin)) 
 			{
-
-				if($usuarioQuery['usuario'] == $usuarioActualizacion)
-					$mensajeConsola = "usuario ya existente";
-				else
-					$mensajeConsola = "correo ya existente";
-
-				$informacionExistente = true;
+				$objeto = array("respuesta" => "Ese nombre de usuario o mail ya está en uso");
+				array_push($array, $objeto);
+				$usuarioMailEnUso = true;
 				break;
 			}
 		}
-	}
 
-	if($informacionExistente == false)
+		if($usuarioMailEnUso == false)
+		{
+			$query = $BD->prepare("UPDATE usuarios SET nombre='$nombreActualizacion' WHERE id=$idLogin");
+			$query->execute();
+			$query = $BD->prepare("UPDATE usuarios SET apellidos='$apellidosActualizacion' WHERE id=$idLogin");
+			$query->execute();
+			$query = $BD->prepare("UPDATE usuarios SET edad='$edadActualizacion' WHERE id=$idLogin");
+			$query->execute();
+			$query = $BD->prepare("UPDATE usuarios SET mail='$mailActualizacion' WHERE id=$idLogin");
+			$query->execute();
+			$query = $BD->prepare("UPDATE usuarios SET usuario='$usuarioActualizacion' WHERE id=$idLogin");
+			$query->execute();
+			$query = $BD->prepare("UPDATE usuarios SET contrasenia='$contraseniaActualizacion_1' WHERE id=$idLogin");
+			$query->execute();
+
+			$objeto = array("respuesta" => "correcto");
+			array_push($array, $objeto);
+			$objeto = array("id" => $idLogin);
+			array_push($array, $objeto);
+			$objeto = array("nombre" => $nombreActualizacion);
+			array_push($array, $objeto);
+			$objeto = array("apellidos" => $apellidosActualizacion);
+			array_push($array, $objeto);
+			$objeto = array("edad" => $edadActualizacion);
+			array_push($array, $objeto);
+			$objeto = array("mail" => $mailActualizacion);
+			array_push($array, $objeto);
+			$objeto = array("usuario" => $usuarioActualizacion);
+			array_push($array, $objeto);
+			$objeto = array("contrasenia" => "");
+			array_push($array, $objeto);
+		}
+	}
+	else
 	{
-		if($nombreActualizacion == "")
-		{
-			$mensajeConsola = "nombre no válido";
-		}
-		else if($apellidosActualizacion == "")
-		{
-			$mensajeConsola = "apellidos no válidos";
-		}
-		else if($mailActualizacion == "")
-		{
-			$mensajeConsola = "correo no válido";
-		}
-		else if($usuarioActualizacion == "")
-		{
-			$mensajeConsola = "usuario no válido";
-		}
-		else if($contraseniaActualizacion_1 == "")
-		{
-			$mensajeConsola = "contraseña no válida";
-		}
-		else if($contraseniaActualizacion_1 != $contraseniaActualizacion_2)
-		{
-			$mensajeConsola = "las contraseñas no coinciden";
-		}
-		else if(filter_var($edadActualizacion, FILTER_VALIDATE_INT) === false)
-		{
-			$mensajeConsola = "edad introducida no válida";
-		}
-		else if($edadActualizacion < 18)
-		{
-			$mensajeConsola = "has de ser mayor de edad";
-		}
-		else if($edadActualizacion > 120)
-		{
-			$mensajeConsola = "edad introducida incorrecta";
-		}
-		else
-		{
-			$empresaBD->query("UPDATE usuarios SET nombre='$nombreActualizacion' WHERE id=$idLogin");
-			$empresaBD->query("UPDATE usuarios SET apellidos='$apellidosActualizacion' WHERE id=$idLogin");
-			$empresaBD->query("UPDATE usuarios SET edad='$edadActualizacion' WHERE id=$idLogin");
-			$empresaBD->query("UPDATE usuarios SET mail='$mailActualizacion' WHERE id=$idLogin");
-			$empresaBD->query("UPDATE usuarios SET usuario='$usuarioActualizacion' WHERE id=$idLogin");
-			$empresaBD->query("UPDATE usuarios SET contrasenia='$contraseniaActualizacion_1' WHERE id=$idLogin");
-			
-			$usuarioActualizado = true;
-			$mensajeConsola = "usuario actualizado. Inicie sesión";
-
-			echo 
-			"
-				<form id=\"formularioConsola\" action=\"../html/inicio.php\" method=post>
-					<input type=\"hidden\" value=true name=\"consolaActivada\"/>
-					<input type=\"hidden\" value=\"$mensajeConsola\" name=\"mensajeConsola\"/>
-				</form>
-
-				<script type=\"text/javascript\">
-					window.onload = function () 
-					{
-						document.getElementById(\"formularioConsola\").submit();
-					}
-				</script>
-			";
-		}
+		$objeto = array("respuesta" => "La contraseña no coincide o está vacía");
+		array_push($array, $objeto);
 	}
 
-	if ($usuarioActualizado == false)
-	{
-		echo 
-		"
-			<form id=\"formularioConsola\" action=\"gestionarUsuario.php\" method=post>
-
-				<input type=\"hidden\" value=true name=\"consolaActivada\"/>
-				<input type=\"hidden\" value=\"$mensajeConsola\" name=\"mensajeConsola\"/>
-
-				<input type=\"hidden\" value=\"$idLogin\" name=\"idLogin\"/>
-				<input type=\"hidden\" value=\"$usuarioLogin\" name=\"usuarioLogin\"/>
-				<input type=\"hidden\" value=\"$contraseniaLogin\" name=\"contraseniaLogin\"/>
-
-				<input type=\"hidden\" value=true name=\"usuarioEnBaseDatos\"/>
-
-			</form>
-
-			<script type=\"text/javascript\">
-				window.onload = function () 
-				{
-					document.getElementById(\"formularioConsola\").submit();
-				}
-			</script>
-		";
-	}
-}
-
+	$json = json_encode($array);	
+	echo $json;
+} 
 catch (PDOException $e) 
 {
 	echo 'Error con la base de datos: ' . $e->getMessage();
-} 
-
+}

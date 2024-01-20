@@ -13,27 +13,31 @@ function gestionarUsuario()
 			if(respuesta[0]["respuesta"] == "correcto")
 			{
 				document.getElementById("consola").innerHTML="";
-				document.getElementById("contenido").innerHTML="";
-				console.log(respuesta);
+
+				// Usuario cualquiera
+				document.getElementById("contenido").innerHTML=`
+					<h1>${usuarioLogin}</h1>
+					<h2>Tu información</h2>
+					<form>
+						<input type="hidden" value="${respuesta[1]["id"]}" id="idLogin" />
+						<input type="hidden" value="${respuesta[6]["usuario"]}" id="usuarioLogin" />
+						<input type="hidden" value="${respuesta[5]["mail"]}" id="mailLogin" />
+						usuario: <input type="text" value="${respuesta[6]["usuario"]}"  id="usuarioActualizacion"/><br/>
+						mail: <input type="text" value="${respuesta[5]["mail"]}"  id="mailActualizacion"/> <br/>
+						nombre: <input type="text" value="${respuesta[2]["nombre"]}" id="nombreActualizacion"/> <br/>
+						apellidos: <input type="text" value="${respuesta[3]["apellidos"]}" id="apellidosActualizacion"/> <br/>
+						edad: <input type="text" value="${respuesta[4]["edad"]}" id="edadActualizacion"/> <br/>
+						contraseña: <input type="password" value="" id="contraseniaActualizacion_1"/> <br/>
+						repite la contraseña: <input type="password" value="" id="contraseniaActualizacion_2"/> <br/><br/>
+						<input type="button" onclick="actualizarUsuario()" value="Actualizar información"><br/><br/>
+						<input type="button" onclick="cerrarSesion()" value="Cerrar sesión"><br/>
+					</form>
+				`
 
 				// Usuario normal
 				if(respuesta[8]["rol"] == 1)
 				{
-					document.getElementById("consola").innerHTML=`
-						<h1>${usuarioLogin}</h1>
-						<h2>Tu información</h2>
-						<form>
-							usuario: <input type=\"text\" value=\"$usuarioLogin\"  name=\"usuarioActualizacion\"/><br/>
-							mail: <input type=\"text\" value=\"$mailLogin\"  name=\"mailActualizacion\"/> <br/>
-							nombre: <input type=\"text\" value=\"$nombreLogin\" name=\"nombreActualizacion\"/> <br/>
-							apellidos: <input type=\"text\" value=\"$apellidosLogin\" name=\"apellidosActualizacion\"/> <br/>
-							edad: <input type=\"text\" value=\"$edadLogin\" name=\"edadActualizacion\"/> <br/>
-							contraseña: <input type=\"password\" value=\"\" name=\"contraseniaActualizacion_1\"/> <br/>
-							repite la contraseña: <input type=\"password\" value=\"\" name=\"contraseniaActualizacion_2\"/> <br/><br/>
-							<input type="button" onclick="actualizarUsuario()" value="Actualizar información"><br/>
-						</form>
-
-					`
+					document.getElementById("consola").innerHTML="eres usuario normal";
 				}
 				// Usuario admin
 				else if(respuesta[8]["rol"] == 0)
@@ -50,7 +54,122 @@ function gestionarUsuario()
 	xhttp.send(`usuarioLogin=${usuarioLogin}&contraseniaLogin=${contraseniaLogin}`);
 }
 
+function cerrarSesion() 
+{
+	document.getElementById("consola").innerHTML = "Sesión del usuario cerrada.";
+	document.getElementById("contenido").innerHTML = `
+		<h1> Listas de gustos (AJAX) </h1>
+		<h2> Inicio de sesión </h2>
+		<form>
+			<label for=usuarioLogin> usuario </label>
+			<input type=text id=usuarioLogin> <br/>
+			<label for="contraseniaLogin"> contraseña </label>
+			<input type="password" id="contraseniaLogin"> <br/><br/>
+			<input type="button" value="iniciar" onclick="gestionarUsuario()">
+		</form>
+		<h2> Registro de usuario </h2>
+		<form>
+
+			<label for="nombreRegistro"> nombre </label>
+			<input type="text" id="nombreRegistro"> <br/>
+			<label for="apellidosRegistro"> apellidos </label>
+			<input type="text" id="apellidosRegistro"> <br/>
+			<label for="edadRegistro"> edad </label>
+			<input type="text" id="edadRegistro"> <br/>
+			<label for="mailRegistro"> correo electrónico </label>
+			<input type="text" id="mailRegistro"> <br/>
+			<label for="usuarioRegistro"> usuario </label>
+			<input type="text" id="usuarioRegistro"> <br/>
+			<label for="contraseniaRegistro_1"> contraseña </label>
+			<input type="password" id="contraseniaRegistro_1"> <br/>
+			<label for="contraseniaRegistro_2"> repite la contraseña </label>
+			<input type="password" id="contraseniaRegistro_2"> <br/><br/>
+			<input type="button" value="registrarse" onclick="crearUsuario()">
+		</form>
+	`;
+}
+
 function actualizarUsuario() 
 {
-	console.log("actualizar usuario");
+	let idLogin = document.getElementById("idLogin").value.trim();
+	let usuarioLogin = document.getElementById("usuarioLogin").value.trim();
+	let mailLogin = document.getElementById("mailLogin").value.trim();
+	let usuarioActualizacion = document.getElementById("usuarioActualizacion").value.trim();
+	let mailActualizacion = document.getElementById("mailActualizacion").value.trim();
+	let nombreActualizacion = document.getElementById("nombreActualizacion").value.trim();
+	let apellidosActualizacion = document.getElementById("apellidosActualizacion").value.trim();
+	let edadActualizacion = document.getElementById("edadActualizacion").value.trim();
+	let contraseniaActualizacion_1 = document.getElementById("contraseniaActualizacion_1").value.trim();
+	let contraseniaActualizacion_2 = document.getElementById("contraseniaActualizacion_2").value.trim();
+
+	var xhttp = new XMLHttpRequest();       
+ 	xhttp.onreadystatechange = function() 
+	{
+		if (this.readyState == 4 && this.status == 200) 
+		{  
+			var respuesta = JSON.parse(this.response);	
+
+			if(respuesta[0]["respuesta"] == "correcto")
+			{
+				document.getElementById("consola").innerHTML = "usuario actualizado";
+				document.getElementById("contenido").innerHTML=`
+					<h1>${respuesta[6]["usuario"]}</h1>
+					<h2>Tu información</h2>
+					<form>
+						<input type="hidden" value="${respuesta[1]["id"]}" id="idLogin" />
+						<input type="hidden" value="${respuesta[6]["usuario"]}" id="usuarioLogin" />
+						<input type="hidden" value="${respuesta[5]["mail"]}" id="mailLogin" />
+						usuario: <input type="text" value="${respuesta[6]["usuario"]}"  id="usuarioActualizacion"/><br/>
+						mail: <input type="text" value="${respuesta[5]["mail"]}"  id="mailActualizacion"/> <br/>
+						nombre: <input type="text" value="${respuesta[2]["nombre"]}" id="nombreActualizacion"/> <br/>
+						apellidos: <input type="text" value="${respuesta[3]["apellidos"]}" id="apellidosActualizacion"/> <br/>
+						edad: <input type="text" value="${respuesta[4]["edad"]}" id="edadActualizacion"/> <br/>
+						contraseña: <input type="password" value="" id="contraseniaActualizacion_1"/> <br/>
+						repite la contraseña: <input type="password" value="" id="contraseniaActualizacion_2"/> <br/><br/>
+						<input type="button" onclick="actualizarUsuario()" value="Actualizar información"><br/><br/>
+						<input type="button" onclick="cerrarSesion()" value="Cerrar sesión"><br/>
+					</form>
+				`
+			}
+			else
+			{
+				document.getElementById("consola").innerHTML = respuesta[0]["respuesta"];
+			}
+		}
+	};
+	xhttp.open("POST", "../php/actualizarUsuario.php", true);
+	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xhttp.send(`idLogin=${idLogin}&usuarioLogin=${usuarioLogin}&mailLogin=${mailLogin}&usuarioActualizacion=${usuarioActualizacion}&mailActualizacion=${mailActualizacion}&nombreActualizacion=${nombreActualizacion}&apellidosActualizacion=${apellidosActualizacion}&edadActualizacion=${edadActualizacion}&contraseniaActualizacion_1=${contraseniaActualizacion_1}&contraseniaActualizacion_2=${contraseniaActualizacion_2}`);
+}
+
+function crearUsuario() 
+{
+	let nombreRegistro = document.getElementById("nombreRegistro").value.trim();
+	let apellidosRegistro = document.getElementById("apellidosRegistro").value.trim();
+	let edadRegistro = document.getElementById("edadRegistro").value.trim();
+	let mailRegistro = document.getElementById("mailRegistro").value.trim();
+	let usuarioRegistro = document.getElementById("usuarioRegistro").value.trim();
+	let contraseniaRegistro_1 = document.getElementById("contraseniaRegistro_1").value.trim();
+	let contraseniaRegistro_2 = document.getElementById("contraseniaRegistro_2").value.trim();
+
+	var xhttp = new XMLHttpRequest();       
+ 	xhttp.onreadystatechange = function() 
+	{
+		if (this.readyState == 4 && this.status == 200) 
+		{  
+			var respuesta = JSON.parse(this.response);	
+
+			if(respuesta[0]["respuesta"] == "correcto")
+			{
+				document.getElementById("consola").innerHTML = "usuario creado";
+			}
+			else
+			{
+				document.getElementById("consola").innerHTML = respuesta[0]["respuesta"];
+			}
+		}
+	};
+	xhttp.open("POST", "../php/actualizarUsuario.php", true);
+	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xhttp.send(`idLogin=${idLogin}&usuarioLogin=${usuarioLogin}&mailLogin=${mailLogin}&usuarioActualizacion=${usuarioActualizacion}&mailActualizacion=${mailActualizacion}&nombreActualizacion=${nombreActualizacion}&apellidosActualizacion=${apellidosActualizacion}&edadActualizacion=${edadActualizacion}&contraseniaActualizacion_1=${contraseniaActualizacion_1}&contraseniaActualizacion_2=${contraseniaActualizacion_2}`);
 }
