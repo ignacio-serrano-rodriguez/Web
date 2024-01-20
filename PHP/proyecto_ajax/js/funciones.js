@@ -162,14 +162,16 @@ function crearUsuario()
 			if(respuesta[0]["respuesta"] == "correcto")
 			{
 				document.getElementById("consola").innerHTML = "usuario creado";
+				console.log(respuesta);
 			}
 			else
 			{
 				document.getElementById("consola").innerHTML = respuesta[0]["respuesta"];
+				console.log(respuesta);
 			}
 		}
 	};
-	xhttp.open("POST", "../php/actualizarUsuario.php", true);
+	xhttp.open("POST", "../php/crearUsuario.php", true);
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	xhttp.send(`idLogin=${idLogin}&usuarioLogin=${usuarioLogin}&mailLogin=${mailLogin}&usuarioActualizacion=${usuarioActualizacion}&mailActualizacion=${mailActualizacion}&nombreActualizacion=${nombreActualizacion}&apellidosActualizacion=${apellidosActualizacion}&edadActualizacion=${edadActualizacion}&contraseniaActualizacion_1=${contraseniaActualizacion_1}&contraseniaActualizacion_2=${contraseniaActualizacion_2}`);
+	xhttp.send(`nombreRegistro=${nombreRegistro}&apellidosRegistro=${apellidosRegistro}&edadRegistro=${edadRegistro}&mailRegistro=${mailRegistro}&usuarioRegistro=${usuarioRegistro}&contraseniaRegistro_1=${contraseniaRegistro_1}&contraseniaRegistro_2=${contraseniaRegistro_2}`);
 }

@@ -1,101 +1,54 @@
 <?php
-
-$nombreRegistro = $_POST["nombreRegistro"];
-$apellidosRegistro = $_POST["apellidosRegistro"];
-$edadRegistro = $_POST["edadRegistro"];
-$mailRegistro = $_POST["mailRegistro"];
-$usuarioRegistro = $_POST["usuarioRegistro"];
-$contraseniaRegistro_1 = $_POST["contraseniaRegistro_1"];
-$contraseniaRegistro_2 = $_POST["contraseniaRegistro_2"];
-
-try
+try 
 {
+	$nombreRegistro = $_POST["nombreRegistro"] ?? null;
+	$apellidosRegistro = $_POST["apellidosRegistro"] ?? null;
+	$edadRegistro = $_POST["edadRegistro"] ?? null;
+	$mailRegistro = $_POST["mailRegistro"] ?? null;
+	$usuarioRegistro = $_POST["usuarioRegistro"] ?? null;
+	$contraseniaRegistro_1 = $_POST["contraseniaRegistro_1"] ?? null;
+	$contraseniaRegistro_2 = $_POST["contraseniaRegistro_2"] ?? null;
+
 	$conexion = 'mysql:dbname=proyecto_php;host=127.0.0.1:3306';
 	$usuarioBD = 'root';
 	$claveBD = '';
-	$empresaBD = new PDO($conexion, $usuarioBD, $claveBD);
-	$informacionExistente = false;
-	$mensajeConsola = "";
+	$BD = new PDO($conexion, $usuarioBD, $claveBD);
 
-	$query = $empresaBD->query("SELECT id, nombre, apellidos, edad, mail, usuario, contrasenia, rol  FROM usuarios");
+	$query = $BD->prepare("SELECT id, nombre, apellidos, edad, mail, usuario, contrasenia, rol  FROM usuarios");
+	$query->execute();
 
-	foreach ($query as $usuarioQuery) 
+	$array = [];
+
+	$usuarioRepetido = false;
+
+	foreach ($query as $usuario) 
 	{
-		if($usuarioQuery['usuario'] == $usuarioRegistro || $usuarioQuery['mail'] == $mailRegistro)
+		if ($usuario['usuario'] == $usuarioRegistro || $usuario['mail'] == $mailRegistro) 
 		{
+			$usuarioRepetido = true;
+			$objeto = array("respuesta" => "nombre de usuario o mail ya en uso");
+			array_push($array, $objeto);
 
-			if($usuarioQuery['usuario'] == $usuarioRegistro)
-				$mensajeConsola = "usuario ya existente";
-			else
-				$mensajeConsola = "correo ya existente";
+			$objeto = array("usuario" => $usuarioRegistro);
+			array_push($array, $objeto);
 
-			$informacionExistente = true;
+			$objeto = array("mail" => $mailRegistro);
+			array_push($array, $objeto);
+
 			break;
 		}
 	}
 
-	if($informacionExistente == false)
+	if($usuarioRepetido == false)
 	{
-		if($nombreRegistro == "")
-		{
-			$mensajeConsola = "nombre no válido";
-		}
-		else if($apellidosRegistro == "")
-		{
-			$mensajeConsola = "apellidos no válidos";
-		}
-		else if($mailRegistro == "")
-		{
-			$mensajeConsola = "correo no válido";
-		}
-		else if($usuarioRegistro == "")
-		{
-			$mensajeConsola = "usuario no válido";
-		}
-		else if($contraseniaRegistro_1 == "")
-		{
-			$mensajeConsola = "contraseña no válida";
-		}
-		else if($contraseniaRegistro_1 != $contraseniaRegistro_2)
-		{
-			$mensajeConsola = "las contraseñas no coinciden";
-		}
-		else if(filter_var($edadRegistro, FILTER_VALIDATE_INT) === false)
-		{
-			$mensajeConsola = "edad introducida no válida";
-		}
-		else if($edadRegistro < 18)
-		{
-			$mensajeConsola = "has de ser mayor de edad";
-		}
-		else if($edadRegistro > 120)
-		{
-			$mensajeConsola = "edad introducida incorrecta";
-		}
-		else
-		{
-			$query = $empresaBD->query("insert into usuarios(nombre, apellidos, edad, mail, usuario, contrasenia, rol) values('$nombreRegistro', '$apellidosRegistro', '$edadRegistro', '$mailRegistro', '$usuarioRegistro', '$contraseniaRegistro_1', '1')");
-			$mensajeConsola = "usuario creado. Inicie sesión";
-		}
+		$objeto = array("respuesta" => "correcto");
+		array_push($array, $objeto);
 	}
 
-	echo 
-	"
-		<form id=\"formularioConsola\" action=\"../html/inicio.php\" method=post>
-			<input type=\"hidden\" value=true name=\"consolaActivada\"/>
-			<input type=\"hidden\" value=\"$mensajeConsola\" name=\"mensajeConsola\"/>
-		</form>
-
-		<script type=\"text/javascript\">
-			window.onload = function () 
-			{
-				document.getElementById(\"formularioConsola\").submit();
-			}
-		</script>
-	";
-}
-
+	$json = json_encode($array);	
+	echo $json;
+} 
 catch (PDOException $e) 
 {
 	echo 'Error con la base de datos: ' . $e->getMessage();
-} 
+}
