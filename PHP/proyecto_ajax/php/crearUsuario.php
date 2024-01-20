@@ -19,30 +19,49 @@ try
 
 	$array = [];
 
+	// $objeto = array("respuesta" => $nombreRegistro);
+	// array_push($array, $objeto);
+	// $objeto = array("respuesta" => $apellidosRegistro);
+	// array_push($array, $objeto);
+	// $objeto = array("respuesta" => $edadRegistro);
+	// array_push($array, $objeto);
+	// $objeto = array("respuesta" => $mailRegistro);
+	// array_push($array, $objeto);
+	// $objeto = array("respuesta" => $usuarioRegistro);
+	// array_push($array, $objeto);
+	// $objeto = array("respuesta" => $contraseniaRegistro_1);
+	// array_push($array, $objeto);
+	// $objeto = array("respuesta" => $contraseniaRegistro_2);
+	// array_push($array, $objeto);
+
 	$usuarioRepetido = false;
 
-	foreach ($query as $usuario) 
+	if($contraseniaRegistro_1 != $contraseniaRegistro_2 || $contraseniaRegistro_1 == "" || $contraseniaRegistro_2 == "")
 	{
-		if ($usuario['usuario'] == $usuarioRegistro || $usuario['mail'] == $mailRegistro) 
-		{
-			$usuarioRepetido = true;
-			$objeto = array("respuesta" => "nombre de usuario o mail ya en uso");
-			array_push($array, $objeto);
-
-			$objeto = array("usuario" => $usuarioRegistro);
-			array_push($array, $objeto);
-
-			$objeto = array("mail" => $mailRegistro);
-			array_push($array, $objeto);
-
-			break;
-		}
+		$objeto = array("respuesta" => "Ambas contraseñas han de coincidir y no estar vacías.");
+		array_push($array, $objeto);
 	}
 
-	if($usuarioRepetido == false)
+	else
 	{
-		$objeto = array("respuesta" => "correcto");
-		array_push($array, $objeto);
+		foreach ($query as $usuario) 
+		{
+			if ($usuario['usuario'] == $usuarioRegistro || $usuario['mail'] == $mailRegistro) 
+			{
+				$usuarioRepetido = true;
+				$objeto = array("respuesta" => "nombre de usuario o mail ya en uso");
+				array_push($array, $objeto);
+				break;
+			}
+		}
+
+		if($usuarioRepetido == false)
+		{
+			$objeto = array("respuesta" => "correcto");
+			array_push($array, $objeto);
+			$query = $BD->prepare("insert into usuarios(nombre, apellidos, edad, mail, usuario, contrasenia, rol) values('$nombreRegistro', '$apellidosRegistro', '$edadRegistro', '$mailRegistro', '$usuarioRegistro', '$contraseniaRegistro_1', '1')");
+			$query->execute();
+		}
 	}
 
 	$json = json_encode($array);	

@@ -162,12 +162,10 @@ function crearUsuario()
 			if(respuesta[0]["respuesta"] == "correcto")
 			{
 				document.getElementById("consola").innerHTML = "usuario creado";
-				console.log(respuesta);
 			}
 			else
 			{
 				document.getElementById("consola").innerHTML = respuesta[0]["respuesta"];
-				console.log(respuesta);
 			}
 		}
 	};
