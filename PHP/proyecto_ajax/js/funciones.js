@@ -22,6 +22,7 @@ function gestionarUsuario()
 						<input type="hidden" value="${respuesta[1]["id"]}" id="idLogin" />
 						<input type="hidden" value="${respuesta[6]["usuario"]}" id="usuarioLogin" />
 						<input type="hidden" value="${respuesta[5]["mail"]}" id="mailLogin" />
+						<input type="hidden" value="${respuesta[8]["rol"]}" id="rolLogin" />
 						usuario: <input type="text" value="${respuesta[6]["usuario"]}"  id="usuarioActualizacion"/><br/>
 						mail: <input type="text" value="${respuesta[5]["mail"]}"  id="mailActualizacion"/> <br/>
 						nombre: <input type="text" value="${respuesta[2]["nombre"]}" id="nombreActualizacion"/> <br/>
@@ -32,6 +33,8 @@ function gestionarUsuario()
 						<input type="button" onclick="actualizarUsuario()" value="Actualizar información"><br/><br/>
 						<input type="button" onclick="cerrarSesion()" value="Cerrar sesión"><br/>
 					</form>
+					<br/>
+					<hr/>
 				`
 
 				// Usuario normal
@@ -42,7 +45,33 @@ function gestionarUsuario()
 				// Usuario admin
 				else if(respuesta[8]["rol"] == 0)
 				{
-					document.getElementById("consola").innerHTML="eres admin";
+					document.getElementById("contenido").innerHTML+=`<h2>Eliminar usuario</h2>`;
+
+					var xhttp = new XMLHttpRequest();       
+					xhttp.onreadystatechange = function() 
+					{
+						if (this.readyState == 4 && this.status == 200) 
+						{  
+							var respuesta = JSON.parse(this.response);	
+							
+							for (let i = 0; i < respuesta.length; i++) 
+							{
+								document.getElementById("contenido").innerHTML+=`${respuesta[i]["nombreUsuario"]}<br/>`;
+							}
+
+							document.getElementById("contenido").innerHTML+=`
+
+								<form>
+									<input type="hidden" value="$usuarioLogin"/><br/>
+									<input type="text" value="" name="usuario"/>
+									<input type="button" onclick="eliminarUsuario()" value="Eliminar este usuario"/>
+								</form>	
+							`;
+						}
+					};
+					xhttp.open("POST", "../php/mostrarUsuarios.php", true);
+					xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+					xhttp.send(`rolLogin=${rolLogin.value}`);
 				}
 			}
 			else
@@ -161,7 +190,7 @@ function crearUsuario()
 
 			if(respuesta[0]["respuesta"] == "correcto")
 			{
-				document.getElementById("consola").innerHTML = "usuario creado";
+				document.getElementById("consola").innerHTML = "Usuario creado. Inicie sesión.";
 			}
 			else
 			{
@@ -172,4 +201,9 @@ function crearUsuario()
 	xhttp.open("POST", "../php/crearUsuario.php", true);
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xhttp.send(`nombreRegistro=${nombreRegistro}&apellidosRegistro=${apellidosRegistro}&edadRegistro=${edadRegistro}&mailRegistro=${mailRegistro}&usuarioRegistro=${usuarioRegistro}&contraseniaRegistro_1=${contraseniaRegistro_1}&contraseniaRegistro_2=${contraseniaRegistro_2}`);
+}
+
+function eliminarUsuario() 
+{
+	console.log("eliminarUsuario()");	
 }

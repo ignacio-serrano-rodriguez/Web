@@ -19,21 +19,6 @@ try
 
 	$array = [];
 
-	// $objeto = array("respuesta" => $nombreRegistro);
-	// array_push($array, $objeto);
-	// $objeto = array("respuesta" => $apellidosRegistro);
-	// array_push($array, $objeto);
-	// $objeto = array("respuesta" => $edadRegistro);
-	// array_push($array, $objeto);
-	// $objeto = array("respuesta" => $mailRegistro);
-	// array_push($array, $objeto);
-	// $objeto = array("respuesta" => $usuarioRegistro);
-	// array_push($array, $objeto);
-	// $objeto = array("respuesta" => $contraseniaRegistro_1);
-	// array_push($array, $objeto);
-	// $objeto = array("respuesta" => $contraseniaRegistro_2);
-	// array_push($array, $objeto);
-
 	$usuarioRepetido = false;
 
 	if($contraseniaRegistro_1 != $contraseniaRegistro_2 || $contraseniaRegistro_1 == "" || $contraseniaRegistro_2 == "")
