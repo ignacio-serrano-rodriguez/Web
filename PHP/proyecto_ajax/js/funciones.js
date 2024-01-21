@@ -140,7 +140,7 @@ function actualizarUsuario()
 
 			if(respuesta[0]["respuesta"] == "correcto")
 			{
-				document.getElementById("consola").innerHTML = "usuario actualizado";
+				document.getElementById("consola").innerHTML = "Información del usuario actualizada.";
 				document.getElementById("contenido").innerHTML=`
 					<h1>${respuesta[6]["usuario"]}</h1>
 					<h2>Tu información</h2>
