@@ -62,8 +62,8 @@ function gestionarUsuario()
 							document.getElementById("contenido").innerHTML+=`
 
 								<form>
-									<input type="hidden" value="$usuarioLogin"/><br/>
-									<input type="text" value="" name="usuario"/>
+									<br/>
+									<input type="text" id="usuarioIntroducido"/>
 									<input type="button" onclick="eliminarUsuario()" value="Eliminar este usuario"/>
 								</form>	
 							`;
@@ -205,5 +205,24 @@ function crearUsuario()
 
 function eliminarUsuario() 
 {
-	console.log("eliminarUsuario()");	
+	var xhttp = new XMLHttpRequest();       
+	xhttp.onreadystatechange = function() 
+	{
+		if (this.readyState == 4 && this.status == 200) 
+		{  
+			var respuesta = JSON.parse(this.response);	
+			
+			if(respuesta[0]["respuesta"] == "correcto")
+			{
+				document.getElementById("consola").innerHTML = `Se ha eliminado al usuario (${respuesta[1]["usuarioEliminado"]})`;
+			}
+			else
+			{
+				document.getElementById("consola").innerHTML = `${respuesta[0]["respuesta"]}`;
+			}
+		}
+	};
+	xhttp.open("POST", "../php/eliminarUsuario.php", true);
+	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xhttp.send(`usuarioIntroducido=${document.getElementById("usuarioIntroducido").value}`);
 }

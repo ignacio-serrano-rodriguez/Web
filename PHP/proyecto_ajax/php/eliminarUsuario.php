@@ -1,123 +1,46 @@
 <?php
-
-$idLogin = $_POST["idLogin"] ?? null;
-$usuarioLogin = $_POST["usuarioLogin"] ?? null;
-$contraseniaLogin = $_POST["contraseniaLogin"] ?? null;
-
-$usuario = $_POST["usuario"];
-
-if($usuario != "admin")
+try 
 {
-	try 
+	$usuarioIntroducido = $_POST["usuarioIntroducido"] ?? null;
+
+	$conexion = 'mysql:dbname=proyecto_php;host=127.0.0.1:3306';
+	$usuarioBD = 'root';
+	$claveBD = '';
+	$BD = new PDO($conexion, $usuarioBD, $claveBD);
+
+	$query = $BD->prepare("SELECT id, nombre, apellidos, edad, mail, usuario, contrasenia, rol  FROM usuarios");
+	$query->execute();
+
+	$array = [];
+	$usuarioEliminado = false;
+
+	foreach ($query as $usuario) 
 	{
-		$conexion = 'mysql:dbname=proyecto_php;host=127.0.0.1:3306';
-		$usuarioBD = 'root';
-		$claveBD = '';
-		$empresaBD = new PDO($conexion, $usuarioBD, $claveBD);
-		$usuarioEncontrado = false;
-
-		$query = $empresaBD->query("SELECT usuario FROM usuarios");
-
-		foreach ($query as $usuarioQuery) 
+		if ($usuario['usuario'] == $usuarioIntroducido && $usuario['rol'] != 0) 
 		{
-			if($usuarioQuery['usuario'] == $usuario)
-			{
-				$usuarioEncontrado = true;
-				break;
-			}
+			$objeto = array("respuesta" => "correcto");
+			array_push($array, $objeto);
+			$objeto = array("usuarioEliminado" => $usuario['usuario']);
+			array_push($array, $objeto);
+			$usuarioEliminado = true;
+
+			$query = $BD->prepare("DELETE FROM usuarios WHERE usuario = '$usuarioIntroducido'");
+			$query->execute();
+
+			break;
 		}
+	}
 
-		if($usuarioEncontrado == true)
-		{
-
-			try 
-			{
-				$empresaBD->beginTransaction();	
-				$empresaBD->query("delete from usuarios where usuario = '$usuario'");		
-				$empresaBD->commit();
-			} 
-			catch (PDOException $e) 
-			{
-				echo $e->getMessage();
-				$empresaBD->rollback();
-			} 
-
-			echo 
-			"
-				<form id=\"formularioConsola\" action=\"gestionarUsuario.php\" method=post>
-
-					<input type=\"hidden\" value=true name=\"consolaActivada\"/>
-					<input type=\"hidden\" value=\"$usuario eliminado\" name=\"mensajeConsola\"/>
-		
-					<input type=\"hidden\" value=\"$idLogin\" name=\"idLogin\"/>
-					<input type=\"hidden\" value=\"$usuarioLogin\" name=\"usuarioLogin\"/>
-					<input type=\"hidden\" value=\"$contraseniaLogin\" name=\"contraseniaLogin\"/>
-		
-					<input type=\"hidden\" value=true name=\"usuarioEnBaseDatos\"/>
-
-				</form>
-
-				<script type=\"text/javascript\">
-					window.onload = function () 
-					{
-						document.getElementById(\"formularioConsola\").submit();
-					}
-				</script>
-			";
-		}
-		else
-		{
-			echo 
-			"
-				<form id=\"formularioConsola\" action=\"gestionarUsuario.php\" method=post>
-
-					<input type=\"hidden\" value=true name=\"consolaActivada\"/>
-					<input type=\"hidden\" value=\"usuario inexistente\" name=\"mensajeConsola\"/>
-
-					<input type=\"hidden\" value=\"$idLogin\" name=\"idLogin\"/>
-					<input type=\"hidden\" value=\"$usuarioLogin\" name=\"usuarioLogin\"/>
-					<input type=\"hidden\" value=\"$contraseniaLogin\" name=\"contraseniaLogin\"/>
-
-					<input type=\"hidden\" value=true name=\"usuarioEnBaseDatos\"/>
-
-				</form>
-
-				<script type=\"text/javascript\">
-					window.onload = function () 
-					{
-						document.getElementById(\"formularioConsola\").submit();
-					}
-				</script>
-			";
-		}
-	} 
-	catch (PDOException $e) 
+	if($usuarioEliminado == false)
 	{
-		echo 'Error con la base de datos: ' . $e->getMessage();
-	} 
-}
-else
+		$objeto = array("respuesta" => "No se ha eliminado ningún usuario.");
+		array_push($array, $objeto);
+	}
+
+	$json = json_encode($array);	
+	echo $json;
+} 
+catch (PDOException $e) 
 {
-	echo 
-	"
-		<form id=\"formularioConsola\" action=\"gestionarUsuario.php\" method=post>
-
-			<input type=\"hidden\" value=true name=\"consolaActivada\"/>
-			<input type=\"hidden\" value=\"no puedes borrar al admin\" name=\"mensajeConsola\"/>
-
-			<input type=\"hidden\" value=\"$idLogin\" name=\"idLogin\"/>
-			<input type=\"hidden\" value=\"$usuarioLogin\" name=\"usuarioLogin\"/>
-			<input type=\"hidden\" value=\"$contraseniaLogin\" name=\"contraseniaLogin\"/>
-
-			<input type=\"hidden\" value=true name=\"usuarioEnBaseDatos\"/>
-
-		</form>
-
-		<script type=\"text/javascript\">
-			window.onload = function () 
-			{
-				document.getElementById(\"formularioConsola\").submit();
-			}
-		</script>
-	";
+	echo 'Error con la base de datos: ' . $e->getMessage();
 }
