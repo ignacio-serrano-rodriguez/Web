@@ -218,8 +218,35 @@ function eliminarUsuario()
 			if(respuesta[0]["respuesta"] == "correcto")
 			{
 				document.getElementById("consola").innerHTML = `Se ha eliminado al usuario (${respuesta[1]["usuarioEliminado"]})`;
-				document.getElementById("contenidoEspecifico").innerHTML= "pa ti mi cola";
-				
+				document.getElementById("contenidoEspecifico").innerHTML="";
+				document.getElementById("contenidoEspecifico").innerHTML+=`<h2>Eliminar usuario</h2>`;
+
+				var xhttp = new XMLHttpRequest();       
+				xhttp.onreadystatechange = function() 
+				{
+					if (this.readyState == 4 && this.status == 200) 
+					{  
+						var respuesta = JSON.parse(this.response);	
+
+						for (let i = 0; i < respuesta.length; i++) 
+						{
+							document.getElementById("contenidoEspecifico").innerHTML+=`${respuesta[i]["nombreUsuario"]}<br/>`;
+						}
+
+						document.getElementById("contenidoEspecifico").innerHTML+=`
+
+							<form>
+								<br/>
+								<input type="text" id="usuarioIntroducido"/>
+								<input type="button" onclick="eliminarUsuario()" value="Eliminar este usuario"/>
+							</form>	
+						`;
+					}
+				};
+				xhttp.open("POST", "../php/mostrarUsuarios.php", true);
+				xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+				xhttp.send(`rolLogin=${rolLogin.value}`);
+			
 			}
 			else
 			{
