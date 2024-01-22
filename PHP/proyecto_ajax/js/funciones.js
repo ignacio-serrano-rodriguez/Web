@@ -58,7 +58,7 @@ function gestionarUsuario()
 
 							for (let i = 0; i < respuesta.length; i++) 
 							{
-								document.getElementById("contenidoEspecifico").innerHTML+=`<input onclick="gestionarLista()" type="button" value="${respuesta[i]["nombreLista"]}"/><br/>`;
+								document.getElementById("contenidoEspecifico").innerHTML+=`<input onclick="gestionarLista(this)" type="button" value="${respuesta[i]["nombreLista"]}"/><br/>`;
 							}
 						}
 					};
@@ -333,6 +333,7 @@ function crearLista()
 	xhttp.send(`idLogin=${idLogin.value}&nombreLista=${document.getElementById("nombreLista").value.trim()}`);
 }
 
-function gestionarLista()
+function gestionarLista(nombreLista)
 {
+	console.log(nombreLista.value);
 }
