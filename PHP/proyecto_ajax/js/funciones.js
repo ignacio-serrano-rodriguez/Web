@@ -361,7 +361,7 @@ function gestionarLista(nombreLista)
 			document.getElementById("contenidoEspecifico").innerHTML="";
 			document.getElementById("contenido").innerHTML+=`
 				<h1>${usuarioLogin}</h1>
-				nombre de la lista: <input type="text" value="${nombreLista.value}"/> <input type="button" value="actualizar nombre"/><br/><br/>
+				nombre de la lista: <input type="text" id="nombreLista" value="${nombreLista.value}"/> <input type="button" value="actualizar nombre" onclick="actualizarLista()"/><br/><br/>
 				<input type="button" value="Volver al perfil" onclick="volverPerfil('${usuarioLogin}','${contraseniaLogin}')"/>
 				<br/><br/>
 				<hr/>
@@ -545,4 +545,22 @@ function eliminarTuUsuario()
 		</form>
 	`;
 	document.getElementById("eliminacion").innerHTML="";
+}
+
+function actualizarLista() 
+{
+	console.log(document.getElementById("nombreLista").value);
+
+	var xhttp = new XMLHttpRequest();       
+	xhttp.onreadystatechange = function() 
+	{
+		if (this.readyState == 4 && this.status == 200) 
+		{  
+			var respuesta = JSON.parse(this.response);	
+			console.log(respuesta);
+		}
+	};
+	xhttp.open("POST", "../php/actualizarLista.php", true);
+	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xhttp.send(`nombreLista=${document.getElementById("nombreLista").value}`);
 }
