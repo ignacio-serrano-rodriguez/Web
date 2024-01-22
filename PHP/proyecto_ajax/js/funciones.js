@@ -40,8 +40,31 @@ function gestionarUsuario()
 				// Usuario normal
 				if(respuesta[8]["rol"] == 1)
 				{
-					document.getElementById("consola").innerHTML="eres usuario normal";
 					document.getElementById("contenidoEspecifico").innerHTML="";
+					document.getElementById("contenidoEspecifico").innerHTML+=`
+						<h2>Tus listas</h2>
+						<form>
+							nombre de la lista: <input type="text" value="" id="nombreLista"/>
+							<input type="button" onclick="crearLista()" value="Crear">
+						</form>
+						<br/>
+					`
+					var xhttp = new XMLHttpRequest();       
+					xhttp.onreadystatechange = function() 
+					{
+						if (this.readyState == 4 && this.status == 200) 
+						{  
+							var respuesta = JSON.parse(this.response);	
+
+							for (let i = 0; i < respuesta.length; i++) 
+							{
+								document.getElementById("contenidoEspecifico").innerHTML+=`${respuesta[i]["nombreLista"]}<br/>`;
+							}
+						}
+					};
+					xhttp.open("POST", "../php/mostrarListas.php", true);
+					xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+					xhttp.send(`idLogin=${idLogin.value}`);
 				}
 				// Usuario admin
 				else if(respuesta[8]["rol"] == 0)
@@ -259,4 +282,22 @@ function eliminarUsuario()
 	xhttp.open("POST", "../php/eliminarUsuario.php", true);
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xhttp.send(`usuarioIntroducido=${document.getElementById("usuarioIntroducido").value}`);
+}
+
+function crearLista() 
+{
+	console.log(document.getElementById("nombreLista").value.trim());
+
+	var xhttp = new XMLHttpRequest();       
+	xhttp.onreadystatechange = function() 
+	{
+		if (this.readyState == 4 && this.status == 200) 
+		{  
+			var respuesta = JSON.parse(this.response);	
+			console.log(respuesta);
+		}
+	};
+	xhttp.open("POST", "../php/crearLista.php", true);
+	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xhttp.send(`rolLogin=${rolLogin.value}`);
 }
