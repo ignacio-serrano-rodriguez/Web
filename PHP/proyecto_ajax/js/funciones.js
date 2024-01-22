@@ -58,7 +58,7 @@ function gestionarUsuario()
 
 							for (let i = 0; i < respuesta.length; i++) 
 							{
-								document.getElementById("contenidoEspecifico").innerHTML+=`${respuesta[i]["nombreLista"]}<br/>`;
+								document.getElementById("contenidoEspecifico").innerHTML+=`<input onclick="gestionarLista()" type="button" value="${respuesta[i]["nombreLista"]}"/><br/>`;
 							}
 						}
 					};
@@ -314,7 +314,7 @@ function crearLista()
 
 							for (let i = 0; i < respuesta.length; i++) 
 							{
-								document.getElementById("contenidoEspecifico").innerHTML+=`${respuesta[i]["nombreLista"]}<br/>`;
+								document.getElementById("contenidoEspecifico").innerHTML+=`<input onclick="gestionarLista()" type="button" value="${respuesta[i]["nombreLista"]}"/><br/>`;
 							}
 						}
 					};
@@ -331,4 +331,8 @@ function crearLista()
 	xhttp.open("POST", "../php/crearLista.php", true);
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xhttp.send(`idLogin=${idLogin.value}&nombreLista=${document.getElementById("nombreLista").value.trim()}`);
+}
+
+function gestionarLista()
+{
 }
