@@ -53,11 +53,13 @@ function gestionarUsuario()
 						if (this.readyState == 4 && this.status == 200) 
 						{  
 							var respuesta = JSON.parse(this.response);	
-							
+
+							document.getElementById("contenido").innerHTML+=`<div id="mostrarUsuarios">`
 							for (let i = 0; i < respuesta.length; i++) 
 							{
 								document.getElementById("contenido").innerHTML+=`${respuesta[i]["nombreUsuario"]}<br/>`;
 							}
+							document.getElementById("contenido").innerHTML+=`</div>`
 
 							document.getElementById("contenido").innerHTML+=`
 

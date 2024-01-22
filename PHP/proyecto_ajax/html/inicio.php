@@ -23,7 +23,6 @@
 			</form>
 			<h2> Registro de usuario </h2>
 			<form>
-
 				<label for="nombreRegistro"> nombre </label>
 				<input type="text" id="nombreRegistro"> <br/>
 				<label for="apellidosRegistro"> apellidos </label>
