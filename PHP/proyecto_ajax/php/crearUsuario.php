@@ -26,7 +26,11 @@ try
 		$objeto = array("respuesta" => "Ambas contraseñas han de coincidir y no estar vacías.");
 		array_push($array, $objeto);
 	}
-
+	else if($edadRegistro < 18)
+	{
+		$objeto = array("respuesta" => "No se admiten usuarios menores de edad.");
+		array_push($array, $objeto);
+	}
 	else
 	{
 		foreach ($query as $usuario) 

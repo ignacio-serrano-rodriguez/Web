@@ -41,5 +41,6 @@
 			</form>
 		</div>
 		<div id="contenidoEspecifico"></div>
+		<div id="eliminacion"></div>
 	</body>
 </html>

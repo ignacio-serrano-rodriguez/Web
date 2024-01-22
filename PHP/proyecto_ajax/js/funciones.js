@@ -23,6 +23,7 @@ function gestionarUsuario()
 						<input type="hidden" value="${respuesta[6]["usuario"]}" id="usuarioLogin" />
 						<input type="hidden" value="${respuesta[5]["mail"]}" id="mailLogin" />
 						<input type="hidden" value="${respuesta[8]["rol"]}" id="rolLogin" />
+						<input type="hidden" value="${respuesta[7]["contrasenia"]}" id="contraseniaLogin" />
 						usuario: <input type="text" value="${respuesta[6]["usuario"]}"  id="usuarioActualizacion"/><br/>
 						mail: <input type="text" value="${respuesta[5]["mail"]}"  id="mailActualizacion"/> <br/>
 						nombre: <input type="text" value="${respuesta[2]["nombre"]}" id="nombreActualizacion"/> <br/>
@@ -65,12 +66,20 @@ function gestionarUsuario()
 					xhttp.open("POST", "../php/mostrarListas.php", true);
 					xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 					xhttp.send(`idLogin=${idLogin.value}`);
+
+					document.getElementById("eliminacion").innerHTML=`
+						<br/>
+						<hr/>
+						<br/>
+						<input type="button" onclick="eliminarTuUsuario()" value="Eliminar tu usuario">
+					`
 				}
 				// Usuario admin
 				else if(respuesta[8]["rol"] == 0)
 				{
 					document.getElementById("contenidoEspecifico").innerHTML="";
 					document.getElementById("contenidoEspecifico").innerHTML+=`<h2>Eliminar usuario</h2>`;
+					document.getElementById("eliminacion").innerHTML="";
 
 					var xhttp = new XMLHttpRequest();       
 					xhttp.onreadystatechange = function() 
@@ -142,6 +151,7 @@ function cerrarSesion()
 			<input type="button" value="registrarse" onclick="crearUsuario()">
 		</form>
 	`;
+	document.getElementById("eliminacion").innerHTML="";
 }
 
 function actualizarUsuario() 
@@ -228,7 +238,7 @@ function crearUsuario()
 	};
 	xhttp.open("POST", "../php/crearUsuario.php", true);
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	xhttp.send(`nombreRegistro=${nombreRegistro}&apellidosRegistro=${apellidosRegistro}&edadRegistro=${edadRegistro}&mailRegistro=${mailRegistro}&usuarioRegistro=${usuarioRegistro}&contraseniaRegistro_1=${contraseniaRegistro_1}&contraseniaRegistro_2=${contraseniaRegistro_2}`);
+	xhttp.send(`nombreRegistro=${nombreRegistro}&apellidosRegistro=${apellidosRegistro}&edadRegistro=${parseInt(edadRegistro)}&mailRegistro=${mailRegistro}&usuarioRegistro=${usuarioRegistro}&contraseniaRegistro_1=${contraseniaRegistro_1}&contraseniaRegistro_2=${contraseniaRegistro_2}`);
 }
 
 function eliminarUsuario() 
@@ -314,7 +324,7 @@ function crearLista()
 
 							for (let i = 0; i < respuesta.length; i++) 
 							{
-								document.getElementById("contenidoEspecifico").innerHTML+=`<input onclick="gestionarLista()" type="button" value="${respuesta[i]["nombreLista"]}"/><br/>`;
+								document.getElementById("contenidoEspecifico").innerHTML+=`<input onclick="gestionarLista(this)" type="button" value="${respuesta[i]["nombreLista"]}"/><br/>`;
 							}
 						}
 					};
@@ -335,5 +345,204 @@ function crearLista()
 
 function gestionarLista(nombreLista)
 {
-	console.log(nombreLista.value);
+	document.getElementById("eliminacion").innerHTML="";
+	let usuarioLogin = document.getElementById("usuarioLogin").value;
+	let contraseniaLogin = document.getElementById("contraseniaLogin").value;
+
+	var xhttp = new XMLHttpRequest();       
+	xhttp.onreadystatechange = function() 
+	{
+		if (this.readyState == 4 && this.status == 200) 
+		{  
+			var respuesta = JSON.parse(this.response);	
+
+			document.getElementById("consola").innerHTML="";
+			document.getElementById("contenido").innerHTML="";
+			document.getElementById("contenidoEspecifico").innerHTML="";
+			document.getElementById("contenido").innerHTML+=`
+				<h1>${usuarioLogin}</h1>
+				nombre de la lista: <input type="text" value="${nombreLista.value}"/> <input type="button" value="actualizar nombre"/><br/><br/>
+				<input type="button" value="Volver al perfil" onclick="volverPerfil('${usuarioLogin}','${contraseniaLogin}')"/>
+				<br/><br/>
+				<hr/>
+				<h2>Elementos de (${nombreLista.value})</h2>
+			`
+			for (let i = 0; i < respuesta.length; i+=3) 
+			{	
+				document.getElementById("contenido").innerHTML+=`
+					nombre <input type="text" value="${respuesta[i]['elemento']}"/>
+					nota <input type="text" value="${respuesta[i+1]['elemento']}"/>
+					comentario <input type="text" value="${respuesta[i+2]['elemento']}"/>
+					<br/>
+				`
+			}
+		}
+	};
+	xhttp.open("POST", "../php/gestionarLista.php", true);
+	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xhttp.send(`idLogin=${idLogin.value}&nombreLista=${nombreLista.value}`);
+}
+
+function volverPerfil(usuarioLogin, contraseniaLogin) 
+{
+	document.getElementById("eliminacion").innerHTML=`
+	<br/>
+	<hr/>
+	<br/>
+	<input type="button" onclick="eliminarTuUsuario()" value="Eliminar tu usuario">`;
+	document.getElementById("consola").innerHTML="Se ha vuelto al perfil.";
+	var xhttp = new XMLHttpRequest();       
+ 	xhttp.onreadystatechange = function() 
+	{
+		if (this.readyState == 4 && this.status == 200) 
+		{  
+			var respuesta = JSON.parse(this.response);	
+
+			if(respuesta[0]["respuesta"] == "correcto")
+			{
+
+				// Usuario cualquiera
+				document.getElementById("contenido").innerHTML=`
+					<h1>${usuarioLogin}</h1>
+					<h2>Tu información</h2>
+					<form>
+						<input type="hidden" value="${respuesta[1]["id"]}" id="idLogin" />
+						<input type="hidden" value="${respuesta[6]["usuario"]}" id="usuarioLogin" />
+						<input type="hidden" value="${respuesta[5]["mail"]}" id="mailLogin" />
+						<input type="hidden" value="${respuesta[8]["rol"]}" id="rolLogin" />
+						<input type="hidden" value="${respuesta[7]["contrasenia"]}" id="contraseniaLogin" />
+						usuario: <input type="text" value="${respuesta[6]["usuario"]}"  id="usuarioActualizacion"/><br/>
+						mail: <input type="text" value="${respuesta[5]["mail"]}"  id="mailActualizacion"/> <br/>
+						nombre: <input type="text" value="${respuesta[2]["nombre"]}" id="nombreActualizacion"/> <br/>
+						apellidos: <input type="text" value="${respuesta[3]["apellidos"]}" id="apellidosActualizacion"/> <br/>
+						edad: <input type="text" value="${respuesta[4]["edad"]}" id="edadActualizacion"/> <br/>
+						contraseña: <input type="password" value="" id="contraseniaActualizacion_1"/> <br/>
+						repite la contraseña: <input type="password" value="" id="contraseniaActualizacion_2"/> <br/><br/>
+						<input type="button" onclick="actualizarUsuario()" value="Actualizar información"><br/><br/>
+						<input type="button" onclick="cerrarSesion()" value="Cerrar sesión"><br/>
+					</form>
+					<br/>
+					<hr/>
+				`
+
+				// Usuario normal
+				if(respuesta[8]["rol"] == 1)
+				{
+					document.getElementById("contenidoEspecifico").innerHTML="";
+					document.getElementById("contenidoEspecifico").innerHTML+=`
+						<h2>Tus listas</h2>
+						<form>
+							nombre de la lista: <input type="text" value="" id="nombreLista"/>
+							<input type="button" onclick="crearLista()" value="Crear">
+						</form>
+						<br/>
+					`
+					var xhttp = new XMLHttpRequest();       
+					xhttp.onreadystatechange = function() 
+					{
+						if (this.readyState == 4 && this.status == 200) 
+						{  
+							var respuesta = JSON.parse(this.response);	
+
+							for (let i = 0; i < respuesta.length; i++) 
+							{
+								document.getElementById("contenidoEspecifico").innerHTML+=`<input onclick="gestionarLista(this)" type="button" value="${respuesta[i]["nombreLista"]}"/><br/>`;
+							}
+						}
+					};
+					xhttp.open("POST", "../php/mostrarListas.php", true);
+					xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+					xhttp.send(`idLogin=${idLogin.value}`);
+				}
+				// Usuario admin
+				else if(respuesta[8]["rol"] == 0)
+				{
+					document.getElementById("contenidoEspecifico").innerHTML="";
+					document.getElementById("contenidoEspecifico").innerHTML+=`<h2>Eliminar usuario</h2>`;
+
+					var xhttp = new XMLHttpRequest();       
+					xhttp.onreadystatechange = function() 
+					{
+						if (this.readyState == 4 && this.status == 200) 
+						{  
+							var respuesta = JSON.parse(this.response);	
+
+							for (let i = 0; i < respuesta.length; i++) 
+							{
+								document.getElementById("contenidoEspecifico").innerHTML+=`${respuesta[i]["nombreUsuario"]}<br/>`;
+							}
+
+							document.getElementById("contenidoEspecifico").innerHTML+=`
+
+								<form>
+									<br/>
+									<input type="text" id="usuarioIntroducido"/>
+									<input type="button" onclick="eliminarUsuario()" value="Eliminar este usuario"/>
+								</form>	
+							`;
+						}
+					};
+					xhttp.open("POST", "../php/mostrarUsuarios.php", true);
+					xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+					xhttp.send(`rolLogin=${rolLogin.value}`);
+				}
+			}
+			else
+				document.getElementById("consola").innerHTML = respuesta[0]["respuesta"];
+		}
+	};
+	xhttp.open("POST", "../php/gestionarUsuario.php", true);
+	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xhttp.send(`usuarioLogin=${usuarioLogin}&contraseniaLogin=${contraseniaLogin}`);
+}
+
+function eliminarTuUsuario() 
+{
+	let usuarioLogin = document.getElementById("usuarioLogin").value;
+	console.log(usuarioLogin);
+	var xhttp = new XMLHttpRequest();       
+	xhttp.onreadystatechange = function() 
+	{
+		if (this.readyState == 4 && this.status == 200) 
+		{  
+			var respuesta = JSON.parse(this.response);	
+			document.getElementById("consola").innerHTML=`${respuesta[0]['respuesta']}`;
+		}
+	};
+	xhttp.open("POST", "../php/eliminarTuUsuario.php", true);
+	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xhttp.send(`usuarioLogin=${usuarioLogin}`);
+
+	document.getElementById("contenidoEspecifico").innerHTML = "";
+	document.getElementById("contenido").innerHTML = `
+		<h1> Listas de gustos (AJAX) </h1>
+		<h2> Inicio de sesión </h2>
+		<form>
+			<label for=usuarioLogin> usuario </label>
+			<input type=text id=usuarioLogin> <br/>
+			<label for="contraseniaLogin"> contraseña </label>
+			<input type="password" id="contraseniaLogin"> <br/><br/>
+			<input type="button" value="iniciar" onclick="gestionarUsuario()">
+		</form>
+		<h2> Registro de usuario </h2>
+		<form>
+
+			<label for="nombreRegistro"> nombre </label>
+			<input type="text" id="nombreRegistro"> <br/>
+			<label for="apellidosRegistro"> apellidos </label>
+			<input type="text" id="apellidosRegistro"> <br/>
+			<label for="edadRegistro"> edad </label>
+			<input type="text" id="edadRegistro"> <br/>
+			<label for="mailRegistro"> correo electrónico </label>
+			<input type="text" id="mailRegistro"> <br/>
+			<label for="usuarioRegistro"> usuario </label>
+			<input type="text" id="usuarioRegistro"> <br/>
+			<label for="contraseniaRegistro_1"> contraseña </label>
+			<input type="password" id="contraseniaRegistro_1"> <br/>
+			<label for="contraseniaRegistro_2"> repite la contraseña </label>
+			<input type="password" id="contraseniaRegistro_2"> <br/><br/>
+			<input type="button" value="registrarse" onclick="crearUsuario()">
+		</form>
+	`;
+	document.getElementById("eliminacion").innerHTML="";
 }
