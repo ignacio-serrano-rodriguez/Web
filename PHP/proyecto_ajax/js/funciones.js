@@ -161,6 +161,8 @@ function actualizarUsuario()
 						<input type="button" onclick="actualizarUsuario()" value="Actualizar información"><br/><br/>
 						<input type="button" onclick="cerrarSesion()" value="Cerrar sesión"><br/>
 					</form>
+					<br/>
+					<hr/>
 				`
 			}
 			else
