@@ -40,5 +40,6 @@
 				<input type="button" value="registrarse" onclick="crearUsuario()">
 			</form>
 		</div>
+		<div id="contenidoEspecifico"></div>
 	</body>
 </html>

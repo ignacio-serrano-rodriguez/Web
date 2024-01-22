@@ -41,11 +41,13 @@ function gestionarUsuario()
 				if(respuesta[8]["rol"] == 1)
 				{
 					document.getElementById("consola").innerHTML="eres usuario normal";
+					document.getElementById("contenidoEspecifico").innerHTML="";
 				}
 				// Usuario admin
 				else if(respuesta[8]["rol"] == 0)
 				{
-					document.getElementById("contenido").innerHTML+=`<h2>Eliminar usuario</h2>`;
+					document.getElementById("contenidoEspecifico").innerHTML="";
+					document.getElementById("contenidoEspecifico").innerHTML+=`<h2>Eliminar usuario</h2>`;
 
 					var xhttp = new XMLHttpRequest();       
 					xhttp.onreadystatechange = function() 
@@ -54,14 +56,12 @@ function gestionarUsuario()
 						{  
 							var respuesta = JSON.parse(this.response);	
 
-							document.getElementById("contenido").innerHTML+=`<div id="mostrarUsuarios">`
 							for (let i = 0; i < respuesta.length; i++) 
 							{
-								document.getElementById("contenido").innerHTML+=`${respuesta[i]["nombreUsuario"]}<br/>`;
+								document.getElementById("contenidoEspecifico").innerHTML+=`${respuesta[i]["nombreUsuario"]}<br/>`;
 							}
-							document.getElementById("contenido").innerHTML+=`</div>`
 
-							document.getElementById("contenido").innerHTML+=`
+							document.getElementById("contenidoEspecifico").innerHTML+=`
 
 								<form>
 									<br/>
@@ -88,6 +88,7 @@ function gestionarUsuario()
 function cerrarSesion() 
 {
 	document.getElementById("consola").innerHTML = "Sesión del usuario cerrada.";
+	document.getElementById("contenidoEspecifico").innerHTML = "";
 	document.getElementById("contenido").innerHTML = `
 		<h1> Listas de gustos (AJAX) </h1>
 		<h2> Inicio de sesión </h2>
@@ -217,6 +218,8 @@ function eliminarUsuario()
 			if(respuesta[0]["respuesta"] == "correcto")
 			{
 				document.getElementById("consola").innerHTML = `Se ha eliminado al usuario (${respuesta[1]["usuarioEliminado"]})`;
+				document.getElementById("contenidoEspecifico").innerHTML= "pa ti mi cola";
+				
 			}
 			else
 			{
