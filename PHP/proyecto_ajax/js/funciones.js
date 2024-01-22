@@ -286,18 +286,49 @@ function eliminarUsuario()
 
 function crearLista() 
 {
-	console.log(document.getElementById("nombreLista").value.trim());
-
 	var xhttp = new XMLHttpRequest();       
 	xhttp.onreadystatechange = function() 
 	{
 		if (this.readyState == 4 && this.status == 200) 
 		{  
-			var respuesta = JSON.parse(this.response);	
-			console.log(respuesta);
+			var respuesta = JSON.parse(this.response);
+
+			if(respuesta[0]["respuesta"] == "correcto")
+			{
+				document.getElementById("consola").innerHTML=`Se ha creado la lista (${respuesta[1]["nombreLista"]})`;
+				document.getElementById("contenidoEspecifico").innerHTML="";
+					document.getElementById("contenidoEspecifico").innerHTML+=`
+						<h2>Tus listas</h2>
+						<form>
+							nombre de la lista: <input type="text" value="" id="nombreLista"/>
+							<input type="button" onclick="crearLista()" value="Crear">
+						</form>
+						<br/>
+					`
+					var xhttp = new XMLHttpRequest();       
+					xhttp.onreadystatechange = function() 
+					{
+						if (this.readyState == 4 && this.status == 200) 
+						{  
+							var respuesta = JSON.parse(this.response);	
+
+							for (let i = 0; i < respuesta.length; i++) 
+							{
+								document.getElementById("contenidoEspecifico").innerHTML+=`${respuesta[i]["nombreLista"]}<br/>`;
+							}
+						}
+					};
+					xhttp.open("POST", "../php/mostrarListas.php", true);
+					xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+					xhttp.send(`idLogin=${idLogin.value}`);
+			}
+			else
+			{
+				document.getElementById("consola").innerHTML=respuesta[0]["respuesta"];
+			}
 		}
 	};
 	xhttp.open("POST", "../php/crearLista.php", true);
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	xhttp.send(`rolLogin=${rolLogin.value}`);
+	xhttp.send(`idLogin=${idLogin.value}&nombreLista=${document.getElementById("nombreLista").value.trim()}`);
 }
