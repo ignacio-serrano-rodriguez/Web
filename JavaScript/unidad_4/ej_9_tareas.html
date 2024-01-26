@@ -6,7 +6,14 @@
 	<title>ej_9_tareas</title>
 </head>
 <body>
+	<p id="consola">Bienvenido al programa de gestión de tareas.</p>
 	<h1>Tareas</h1>
-	
+	<input id="entrada" type="text" placeholder="Introduce una tarea"/>
+	<input type="button" onclick="crearTarea()" value="Crear"/>
+	<br/>
+	<input id="entrada_2" type="text" placeholder="Introduce un ID"/>
+	<input type="button" onclick="buscarTarea()" value="Buscar"/>
+	<ul id="tareas"></ul>
+	<script src="ej_9_tareas.js"></script>
 </body>
 </html>
