@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>ej_10_usuarios</title>
+</head>
+<body>
+	<p id="consola">Bienvenido al programa de gestión de usuarios.</p>
+	<h1>Usuarios</h1>
+
+	<h2>Buscar usuario</h2>
+	<input id="busqueda" type="text" placeholder="Introduce un ID de usuario"/><br/><br/>
+	<input type="button" onclick="buscarUsuario()" value="Buscar"/>
+	<p id="consolaBusqueda"></p>
+	<ul id="usuario"></ul>
+
+	<h2>Crear usuario</h2>
+	<input id="nombre" type="text" placeholder="Nombre"/><br/>
+	<input id="mail" type="text" placeholder="Mail"/><br/>
+	<input id="edad" type="number" placeholder="Edad"/><br/>
+	<input id="color" type="text" placeholder="Color"/><br/>
+	<select id="mascota">
+		<option value="no" selected="selected">No tengo mascota</option>
+		<option value="si">Tengo mascota</option>
+	</select> <br/>
+	<label for="ciudad">Ciudad de origen</label>
+	<select id="ciudad">
+		<option value="cadiz" selected="selected">Cádiz</option>
+		<option value="jerez">Jerez</option>
+		<option value="pr">Puerto Real</option>
+		<option value="sf">San Fernando</option>
+		<option value="puerto">El puerto</option>
+	</select><br/>
+	<select id="nivel">
+		<option value="normal" selected="selected">Soy usuario normal</option>
+		<option value="administrador">Soy administrador</option>
+	</select><br/>
+	<br/>
+	<input type="button" onclick="crearUsuario()" value="Crear"/>
+	
+	<script src="ej_10_usuarios.js"></script>
+</body>
+</html>
