@@ -37,15 +37,6 @@ function crearUsuario()
 	
 	contador++;
 
-	console.log(IDs);
-	console.log(nombres);
-	console.log(mails);
-	console.log(edades);
-	console.log(colores);
-	console.log(mascotas);
-	console.log(ciudades);
-	console.log(niveles);
-
 	document.getElementById("nombre").value = "";
 	document.getElementById("mail").value = "";
 	document.getElementById("edad").value = "";
