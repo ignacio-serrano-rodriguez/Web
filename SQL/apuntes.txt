@@ -1,0 +1,51 @@
+SQL (Structured Query Language)
+- Usado en BD relacionales
+- Es case insensitive
+
+DDL (Data Definition Language) - Definición de datos
+- CREATE: crear objetos/tablas
+- ALTER: modifcar tablas
+- DROP: eliminar tablas
+
+DCL (Data Control Language) - Control de datos
+"A que tablas y como pueden acceder los usuarios"
+- GRANT: otorga permisos a usuarios
+- REVOKE: quita permisos a usuarios
+
+DML (Data Manipulation Language) - Manipulación de datos
+- SELECT: obtener datos de tablas
+- INSERT: introducir datos en tablas
+- UPDATE: actualizar datos de tablas
+- DELETE: eliminar datos de tablas
+
+TCL (Transaction Control Language) - Control de transacciones
+"Las transacciones es cuando se cumplen todas las consultas"
+- BEGIN: empezar transacción
+- COMMIT: completa transacción
+- ROLLBACK: deshacer transacción
+
+COMANDOS
+- SELECT: seleccionar columnas
+- INSERT: insertar datos en una tabla
+
+CLÁUSULAS
+- FROM: seleccionar tabla
+- WHERE: condición true (operadores lógicos)
+- WHERE NOT: condición false (operadores lógicos)
+- WHERE LIKE (% "cualquier caracter")
+- AS: agregar alias a las columnas (usar en SELECT)
+
+OPERADORES
+- DISTINCT: sólo muestra valores únicos
+- LIKE
+
+OPERADORES LÓGICOS
+= 	Igual
+<> 	Distinto
+> 	Mayor que	
+< 	Menor que	
+>= 	Mayor o igual que 	
+<= 	Menor o igual que  	
+
+COMENTARIOS
+/* Esto es un comentario en SQL */
