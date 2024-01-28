@@ -49,3 +49,6 @@ OPERADORES LÓGICOS
 
 COMENTARIOS
 /* Esto es un comentario en SQL */
+
+UNION
+- Consolida los datos en una sóla salida en forma de tabla
