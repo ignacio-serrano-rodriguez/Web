@@ -73,8 +73,11 @@ SELECT DISTINCT curso
 FROM alumnos a;
 
 -- 14. Obtén los datos de los alumnos que no tengan 10 faltas en 1º de E.S.O
-SELECT DISTINCT nombre
-FROM alumnos a;
+SELECT nombre, nivel, curso, faltas
+FROM alumnos a
+WHERE nivel = 'ESO'
+AND curso = 1
+AND faltas <> 10;
 
 -- 15. Muestra los datos de aquellos alumnos cuyo nombre empiece por la letra 'B'.
 SELECT nombre
@@ -90,3 +93,99 @@ and nombre LIKE '%o';
 
 /* 17. Muestra los datos de todos aquellos alumnos que están en 1º curso de E.S.O. Y tienen
 una letra 'U' en la segunda posición del nombre. */
+SELECT nombre, curso, nivel
+FROM alumnos a 
+WHERE curso = 1
+and nivel = 'ESO'
+AND nombre LIKE '_u%';
+
+-- 18. Obtén los datos de los alumnos cuya columna “Faltas” es 0.
+SELECT nombre, faltas
+FROM alumnos a 
+WHERE faltas = 0;
+
+/* 19. Muestra los datos de aquellos alumnos que tienen entre 10 y 20 faltas. Ordena el
+resultado por nombre. */
+SELECT nombre, faltas
+FROM alumnos a 
+WHERE faltas BETWEEN 10 AND 20
+ORDER BY nombre;
+
+/* 20. Muestra los datos de los alumnos que tienen entre 10 y 20 faltas y además son de
+Murcia. */
+SELECT nombre, faltas, localidad 
+FROM alumnos a 
+WHERE faltas BETWEEN 10 AND 20
+and localidad = 'murcia';
+
+/* 21. Muestra los datos de los alumnos que tienen entre 10 y 20 faltas, son de Murcia y
+están matriculados en 1º de E.S.O. */
+SELECT nombre, localidad, nivel, curso, faltas
+FROM alumnos a 
+WHERE faltas BETWEEN 10 AND 20
+and localidad = 'murcia'
+and nivel = 'ESO'
+and curso = 1;
+
+/* 22. Con una consulta muestra los datos de los alumnos cuyas faltas sean menores que 10
+y mayores que 20 */
+SELECT nombre, faltas
+FROM alumnos a 
+WHERE faltas < 10
+OR faltas > 10;
+
+/* 23. Muestra los datos de los alumnos cuya fecha de nacimiento comprenda los años 1993
+y 1994. Ordena el resultado por nombre.*/
+SELECT nombre, fecha_nac 
+FROM alumnos a 
+WHERE fecha_nac BETWEEN '1993-01-01' AND '1994-01-01'
+ORDER BY nombre;
+
+/* 24. Muestra los datos de los alumnos que sean de primer o segundo curso (no importa que
+sean de E.S.O. O Bachiller). */
+SELECT nombre, curso, nivel 
+FROM alumnos a
+WHERE curso IN (1, 2);
+
+/* 25. Obtén los datos de aquellos alumnos que sean de tercer o cuarto curso y sean de
+Murcia */
+SELECT nombre, curso, localidad 
+FROM alumnos a
+WHERE curso IN (3, 4)
+AND localidad = 'murcia';
+
+/* 26. Muestra los datos de los alumnos que no sean de E.S.O, ordenados por curso y por
+nombre descendentemente. */
+SELECT nombre, curso, nivel 
+FROM alumnos a
+WHERE nivel <> 'ESO'
+ORDER BY curso, nombre DESC;
+
+/* 27. Obtén los datos de los alumnos cuyo nombre empiece por la letra 'J', que tengan más
+de 10 faltas y no sean de Bachiller. Ordena el resultado por curso, y dentro de cada
+curso, por nombre */
+SELECT nombre, nivel, curso, faltas
+FROM alumnos a
+WHERE nombre LIKE 'j%'
+AND faltas > 10
+AND nivel <> 'bachiller'
+ORDER BY curso, nombre;
+
+/* 28. Con una consulta obtén el expediente, nombre, curso y nivel de todos los alumnos
+ordenado por curso, nivel ascendentemente y nombre descendentemente cuyo nivel
+no sea 'BACHILLER'. */
+SELECT expediente, nombre, curso, nivel
+FROM alumnos a
+WHERE nivel <> 'bachiller'
+ORDER BY curso, nivel ASC, nombre DESC;
+
+/* 29. Muestra el nombre de cada alumno en mayúscula y la localidad a la que pertenecen en
+minúscula, ordenados por localidad. */
+SELECT UPPER(nombre), LOWER(localidad) 
+FROM alumnos a
+ORDER BY localidad;
+
+/* 30. Con una consulta muestra el nombre y edad que cumple este año de cada uno de los
+alumnos (la edad se calcula restando el año de nacimiento a 2023) */
+SELECT nombre ,(YEAR(CURDATE()) - YEAR(fecha_nac)) AS edad 
+FROM alumnos a;
