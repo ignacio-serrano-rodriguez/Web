@@ -158,17 +158,40 @@ WHERE p.nombre = 'windows';
 
 -- 29. Genera un listado de los programas y cantidades que se han distribuido a El Corte
 -- Inglés de Madrid.
-SELECT c.nombre, c.ciudad, p.nombre, COUNT(*) as 'cantidad'
+SELECT c.nombre, c.ciudad, p.nombre, d.cantidad
 from comercio c
 INNER JOIN distribuye d ON c.CIF = d.CIF
 INNER JOIN programa p ON d.código = p.código
-WHERE c.nombre = 'comercio1'
-AND c.ciudad = 'sevilla';
+WHERE c.nombre = 'el corte ingles'
+AND c.ciudad = 'madrid';
 
 -- 30. ¿Qué fabricante ha desarrollado Freddy Hardest?
+SELECT p.nombre, f.nombre
+FROM programa p
+INNER JOIN fabricante f ON p.id_fab = f.id_fab
+WHERE f.nombre = 'freddy hardest';
+
 -- 31. Selecciona el nombre de los programas que se registran por Internet.
+	
+	-- inner join
+	SELECT p.nombre, r.medio
+	FROM programa p
+	INNER JOIN registra r ON p.código  = r.código 
+	WHERE r.medio  = 'internet';
+
+	-- subconsulta
+	SELECT p.nombre, r.medio 
+	FROM programa p, registra r
+	WHERE p.código IN
+		(SELECT r.código 
+		FROM registra r
+		WHERE medio="internet");
+
 -- 32. Selecciona el nombre de las personas que se registran por Internet.
--- Empezar desde aquí
+	
+
+
+
 -- 33. ¿Qué medios ha utilizado para registrarse Pepe Pérez?
 -- 34. ¿Qué usuarios han optado por Internet como medio de registro? (es igual que la 32)
 -- 35. ¿Qué programas han recibido registros por tarjeta postal?
