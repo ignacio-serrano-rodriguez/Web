@@ -188,10 +188,6 @@ WHERE f.nombre = 'freddy hardest';
 		WHERE medio="internet");
 
 -- 32. Selecciona el nombre de las personas que se registran por Internet.
-	
-
-
-
 -- 33. ¿Qué medios ha utilizado para registrarse Pepe Pérez?
 -- 34. ¿Qué usuarios han optado por Internet como medio de registro? (es igual que la 32)
 -- 35. ¿Qué programas han recibido registros por tarjeta postal?
