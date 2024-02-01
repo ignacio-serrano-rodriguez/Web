@@ -38,34 +38,21 @@ try
 
 		if($usuarioMailEnUso == false)
 		{
-			$query = $BD->prepare("UPDATE usuarios SET nombre='$nombreActualizacion' WHERE id=$idLogin");
-			$query->execute();
-			$query = $BD->prepare("UPDATE usuarios SET apellidos='$apellidosActualizacion' WHERE id=$idLogin");
-			$query->execute();
-			$query = $BD->prepare("UPDATE usuarios SET edad='$edadActualizacion' WHERE id=$idLogin");
-			$query->execute();
-			$query = $BD->prepare("UPDATE usuarios SET mail='$mailActualizacion' WHERE id=$idLogin");
-			$query->execute();
-			$query = $BD->prepare("UPDATE usuarios SET usuario='$usuarioActualizacion' WHERE id=$idLogin");
-			$query->execute();
-			$query = $BD->prepare("UPDATE usuarios SET contrasenia='$contraseniaActualizacion_1' WHERE id=$idLogin");
+			$query = $BD->prepare("UPDATE usuarios SET nombre='$nombreActualizacion', apellidos='$apellidosActualizacion', edad='$edadActualizacion', mail='$mailActualizacion', usuario='$usuarioActualizacion', contrasenia='$contraseniaActualizacion_1' WHERE id=$idLogin");
 			$query->execute();
 
-			$objeto = array("respuesta" => "correcto");
-			array_push($array, $objeto);
-			$objeto = array("id" => $idLogin);
-			array_push($array, $objeto);
-			$objeto = array("nombre" => $nombreActualizacion);
-			array_push($array, $objeto);
-			$objeto = array("apellidos" => $apellidosActualizacion);
-			array_push($array, $objeto);
-			$objeto = array("edad" => $edadActualizacion);
-			array_push($array, $objeto);
-			$objeto = array("mail" => $mailActualizacion);
-			array_push($array, $objeto);
-			$objeto = array("usuario" => $usuarioActualizacion);
-			array_push($array, $objeto);
-			$objeto = array("contrasenia" => "");
+			$objeto = 
+			[
+				"respuesta" 	=> "correcto", 
+				"id" 			=> $idLogin, 
+				"nombre" 		=> $nombreActualizacion, 
+				"apellidos" 	=> $apellidosActualizacion, 
+				"edad" 			=> $edadActualizacion,
+				"mail" 			=> $mailActualizacion, 
+				"usuario" 		=> $usuarioActualizacion, 
+				"contrasenia" 	=> ""
+			];
+
 			array_push($array, $objeto);
 		}
 	}
