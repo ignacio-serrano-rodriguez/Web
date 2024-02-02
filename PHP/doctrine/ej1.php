@@ -3,6 +3,7 @@
 Ejercicio 1: Crea una aplicación que reciba el código de un equipo y muestre todos sus datos. 
 Si el equipo no existe mostrar un mensaje apropiado para el usuario.
 */
+
 require_once "bootstrap.php";
 require_once './src/Equipo.php';
 
@@ -27,7 +28,7 @@ echo
 "
 	<form action='ej1.php' method=post>
 		<p id='consola'></p>
-		<input id='idEquipo' name='idEquipo' type='text' placeholder='Introduce ID equipo'/>
+		<input id='idEquipo' name='idEquipo' value='' type='text' placeholder='Introduce ID equipo'/>
 		<input type='submit' value='Obtener su información'/>
 	</form>
 ";
