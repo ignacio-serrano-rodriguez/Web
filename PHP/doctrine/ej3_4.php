@@ -2,22 +2,38 @@
 /*
 Ejercicio 3: Crea una pequeña aplicación que muestre los datos de todos los equipos ubicados en 
 una ciudad (ingresada por el usuario).
+
+Ejercicio 4: Escribe un script que devuelva los nombres de los equipos con más de 10.000 socios. 
+Intégralo con la aplicación anterior.
 */
 
 require_once "bootstrap.php";
 require_once './src/Equipo.php';
 
 $ciudadIntroducida = $_POST["ciudadIntroducida"] ?? null;
+$obtenerSocios = $_POST["obtenerSocios"] ?? null;
+
+echo $obtenerSocios;
+
 
 if($ciudadIntroducida != null)
 	$equipos = $entityManager->getRepository('Equipo')->findBy(array('ciudad' => $ciudadIntroducida));	
 
 echo
 "
-	<form action='ej3.php' method=post>
+	<form action='ej3_4.php' method=post>
 		<p id='consola'></p>
+		<input id='obtenerSocios' name='obtenerSocios' type='hidden' value='false'/>
 		<input id='ciudadIntroducida' name='ciudadIntroducida' value='' type='text' placeholder='Introduce una ciudad'/>
 		<input type='submit' value='Obtener equipos'/>
+	</form>
+";
+
+echo
+"
+	<form action='ej3_4.php' method=post>
+		<input id='obtenerSocios' name='obtenerSocios' type='hidden' value='true'/>
+		<input type='submit' value='Obtener equipos con más de 10K socios'/>
 	</form>
 ";
 
