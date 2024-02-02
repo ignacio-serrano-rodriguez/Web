@@ -16,47 +16,7 @@ require_once './src/EquipoBidireccional.php';
 require_once './src/JugadorBidireccional.php';
 
 $ciudadIntroducida = $_POST["ciudadIntroducida"] ?? null;
-$opcion = $_POST["opcion"] ?? null;
-
-if($ciudadIntroducida != null && $opcion == 0)
-
-	$equipos = $entityManager->getRepository('Equipo')->findBy(array('ciudad' => $ciudadIntroducida));
-
-else if($opcion == 1)
-{
-	$cantidadSocios = 10000;
-
-	$queryBuilder = $entityManager->getRepository('Equipo')->createQueryBuilder('e');
-
-	$query = $queryBuilder
-		->where('e.socios > :cantidadSocios')
-		->setParameter('cantidadSocios', $cantidadSocios)
-		->getQuery();
-	
-	$equipos = $query->getResult();
-}
-
-else if($opcion == 2)
-{
-	$id = 2;
-	$equipo = $entityManager->find("EquipoBidireccional", $id);
-
-	if(!$equipo)
-	{
-		echo "Equipo no encontrado";
-	}
-	else
-	{
-		echo "Nombre del equipo: ". $equipo->getNombre()."<br>";
-		$jugadores = $equipo->getJugadores();
-		echo "Lista de jugadores"."<br>";
-
-		foreach($jugadores as $jugador)
-		{
-			echo "Nombre: ". $jugador->getNombre()."<br>";
-		}
-	}
-}
+$opcion = $_POST["opcion"] ?? null;	
 
 echo
 "
@@ -78,8 +38,10 @@ echo
 	</form>
 ";
 
-if($opcion == 0)
+if($ciudadIntroducida != null && $opcion == 0)
 {
+	$equipos = $entityManager->getRepository('Equipo')->findBy(array('ciudad' => $ciudadIntroducida));
+
 	if($equipos == null)
 	{
 		echo 
@@ -124,6 +86,17 @@ if($opcion == 0)
 }
 else if($opcion == 1)
 {
+	$cantidadSocios = 10000;
+
+	$queryBuilder = $entityManager->getRepository('Equipo')->createQueryBuilder('e');
+
+	$query = $queryBuilder
+		->where('e.socios > :cantidadSocios')
+		->setParameter('cantidadSocios', $cantidadSocios)
+		->getQuery();
+	
+	$equipos = $query->getResult();
+
 	echo 
 	"
 		<script>
@@ -155,5 +128,32 @@ else if($opcion == 1)
 }
 else if($opcion == 2)
 {
-	echo "opcion 2 resultado";
+	echo 
+	"
+		<script>
+			document.getElementById('consola').innerHTML=`	
+				Jugadores de los equipos que son de Madrid<br/><br/>
+			`;
+		</script>
+	";
+
+	$equipos = $entityManager->getRepository('Equipo')->findBy(array('ciudad' => 'madrid'));
+	
+	foreach($equipos as $equipo)
+	{
+		$eb = $entityManager->find("EquipoBidireccional", $equipo->getId());
+
+		foreach($eb->getJugadores() as $jugador)
+		{
+			$nombreJugador = $jugador->getNombre();
+			echo 
+			"
+				<script>
+					document.getElementById('consola').innerHTML+=`	
+						$nombreJugador<br/>
+					`;
+				</script>
+			";
+		}
+	}
 }
