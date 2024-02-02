@@ -13,17 +13,27 @@ require_once './src/Equipo.php';
 $ciudadIntroducida = $_POST["ciudadIntroducida"] ?? null;
 $obtenerSocios = $_POST["obtenerSocios"] ?? null;
 
-echo $obtenerSocios;
+if($ciudadIntroducida != null && $obtenerSocios == 0)
+	$equipos = $entityManager->getRepository('Equipo')->findBy(array('ciudad' => $ciudadIntroducida));
+else if($obtenerSocios == 1)
+{
+	$cantidadSocios = 10000;
 
+	$queryBuilder = $entityManager->getRepository('Equipo')->createQueryBuilder('e');
 
-if($ciudadIntroducida != null)
-	$equipos = $entityManager->getRepository('Equipo')->findBy(array('ciudad' => $ciudadIntroducida));	
+	$query = $queryBuilder
+		->where('e.socios > :socios')
+		->setParameter('socios', $cantidadSocios)
+		->getQuery();
+	
+	$equipos = $query->getResult();
+}
 
 echo
 "
 	<form action='ej3_4.php' method=post>
 		<p id='consola'></p>
-		<input id='obtenerSocios' name='obtenerSocios' type='hidden' value='false'/>
+		<input id='obtenerSocios' name='obtenerSocios' type='hidden' value='0'/>
 		<input id='ciudadIntroducida' name='ciudadIntroducida' value='' type='text' placeholder='Introduce una ciudad'/>
 		<input type='submit' value='Obtener equipos'/>
 	</form>
@@ -32,30 +42,63 @@ echo
 echo
 "
 	<form action='ej3_4.php' method=post>
-		<input id='obtenerSocios' name='obtenerSocios' type='hidden' value='true'/>
+		<input id='obtenerSocios' name='obtenerSocios' type='hidden' value='1'/>
 		<input type='submit' value='Obtener equipos con más de 10K socios'/>
 	</form>
 ";
-
-if($equipos == null)
+if($obtenerSocios == 0)
 {
-	echo 
-	"
-		<script>
-			document.getElementById('consola').innerHTML=`Introduce un nombre de ciudad válido.`;
-		</script>
-	";
+	if($equipos == null)
+	{
+		echo 
+		"
+			<script>
+				document.getElementById('consola').innerHTML=`Introduce un nombre de ciudad válido.`;
+			</script>
+		";
+	}
+	else
+	{
+		echo 
+		"
+			<script>
+				document.getElementById('consola').innerHTML=`	
+					Equipos de la ciudad de ($ciudadIntroducida)<br/><br/>
+				`;
+			</script>
+			
+		";
+
+		foreach($equipos as $equipo)
+		{
+			$nombreEquipo = $equipo->getNombre();
+			$fundacionEquipo = $equipo->getFundacion();
+			$sociosEquipo = $equipo->getSocios();
+			$ciudadEquipo = $equipo->getCiudad();
+
+			echo 
+			"
+				<script>
+					document.getElementById('consola').innerHTML+=`	
+						Nombre ($nombreEquipo)<br/>
+						Fundación ($fundacionEquipo)<br/>
+						Socios ($sociosEquipo)<br/>
+						Ciudad ($ciudadEquipo)<br/><br/>
+					`;
+				</script>
+			";
+		}
+	}
 }
-else
+else if($obtenerSocios == 1)
 {
 	echo 
 	"
 		<script>
 			document.getElementById('consola').innerHTML=`	
-				Equipos de la ciudad de ($ciudadIntroducida)<br/><br/>
+				Equipos con la cantidad introducida<br/><br/>
 			`;
 		</script>
-		
 	";
 
 	foreach($equipos as $equipo)
