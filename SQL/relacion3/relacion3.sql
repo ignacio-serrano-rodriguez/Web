@@ -188,6 +188,21 @@ WHERE f.nombre = 'freddy hardest';
 		WHERE medio="internet");
 
 -- 32. Selecciona el nombre de las personas que se registran por Internet.
+
+	-- inner join
+	SELECT c.nombre, r.medio
+	FROM cliente c
+	INNER JOIN registra r ON c.dni  = r.dni 
+	WHERE r.medio  = 'online';
+
+	-- subconsulta
+	SELECT c.nombre, r.medio 
+	FROM cliente c , registra r
+	WHERE c.dni IN
+		(SELECT r.dni 
+		FROM registra r
+		WHERE medio="online");
+
 -- 33. ¿Qué medios ha utilizado para registrarse Pepe Pérez?
 -- 34. ¿Qué usuarios han optado por Internet como medio de registro? (es igual que la 32)
 -- 35. ¿Qué programas han recibido registros por tarjeta postal?
