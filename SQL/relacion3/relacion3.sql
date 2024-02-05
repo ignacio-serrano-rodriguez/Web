@@ -187,7 +187,7 @@ WHERE f.nombre = 'freddy hardest';
 		FROM registra r
 		WHERE medio="internet");
 
--- 32. Selecciona el nombre de las personas que se registran por Internet.
+-- 32 y 34. Selecciona el nombre de las personas que se registran por Internet.
 
 	-- inner join
 	SELECT c.nombre, r.medio
@@ -196,16 +196,46 @@ WHERE f.nombre = 'freddy hardest';
 	WHERE r.medio  = 'online';
 
 	-- subconsulta
-	SELECT c.nombre, r.medio 
+	SELECT DISTINCT c.nombre, r.medio 
 	FROM cliente c , registra r
 	WHERE c.dni IN
 		(SELECT r.dni 
 		FROM registra r
-		WHERE medio="online");
+		WHERE r.medio="online");
 
 -- 33. ¿Qué medios ha utilizado para registrarse Pepe Pérez?
--- 34. ¿Qué usuarios han optado por Internet como medio de registro? (es igual que la 32)
+
+	-- inner join
+	SELECT c.nombre, r.medio
+	FROM cliente c
+	INNER JOIN registra r ON c.dni  = r.dni 
+	WHERE r.medio  = 'online' && c.nombre = 'Pepe Pérez';
+
+	-- subconsulta
+	SELECT DISTINCT c.nombre, r.medio 
+	FROM cliente c , registra r
+	WHERE c.dni IN
+		(SELECT r.dni 
+		FROM registra r
+		WHERE r.medio="online") && c.nombre='Pepe Pérez';
+	
 -- 35. ¿Qué programas han recibido registros por tarjeta postal?
+
+	-- inner join
+	SELECT p.nombre, r.medio
+	FROM programa p
+	INNER JOIN registra r ON p.código  = r.código 
+	WHERE r.medio  = 'cp';
+
+	-- subconsulta
+	SELECT DISTINCT c.nombre, r.medio 
+	FROM cliente c , registra r
+	WHERE c.dni IN
+		(SELECT r.dni 
+		FROM registra r
+		WHERE r.medio="cp");
+
+
 -- 36. ¿En qué ciudades se han vendido productos que se han registrado por Internet?
 -- 37. Obtén un listado de los nombres de las personas que se han registrado por Internet,
 -- junto al nombre de los programas para los que ha efectuado el registro. 37 b) Además

@@ -21,7 +21,7 @@ $opcion = $_POST["opcion"] ?? null;
 echo
 "
 	<form action='ej3_4_5.php' method=post>
-		<p id='consola'></p>
+		<p id='consola'>Introduce un nombre de ciudad válido.</p>
 		<input id='opcion' name='opcion' type='hidden' value='0'/>
 		<input id='ciudadIntroducida' name='ciudadIntroducida' value='' type='text' placeholder='Introduce una ciudad'/>
 		<input type='submit' value='Obtener equipos'/>
@@ -137,13 +137,11 @@ else if($opcion == 2)
 		</script>
 	";
 
-	$equipos = $entityManager->getRepository('Equipo')->findBy(array('ciudad' => 'madrid'));
+	$equipos = $entityManager->getRepository('EquipoBidireccional')->findBy(array('ciudad' => 'madrid'));
 	
 	foreach($equipos as $equipo)
 	{
-		$eb = $entityManager->find("EquipoBidireccional", $equipo->getId());
-
-		foreach($eb->getJugadores() as $jugador)
+		foreach($equipo->getJugadores() as $jugador)
 		{
 			$nombreJugador = $jugador->getNombre();
 			echo 
