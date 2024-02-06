@@ -235,11 +235,26 @@ WHERE f.nombre = 'freddy hardest';
 		FROM registra r
 		WHERE r.medio="cp");
 
-
 -- 36. ¿En qué ciudades se han vendido productos que se han registrado por Internet?
--- 37. Obtén un listado de los nombres de las personas que se han registrado por Internet,
--- junto al nombre de los programas para los que ha efectuado el registro. 37 b) Además
--- el nombre del fabricante debe ser microsoft.
+SELECT DISTINCT c.ciudad, r.medio 
+FROM comercio c, registra r 
+WHERE c.CIF IN 
+	(SELECT d.CIF
+	FROM distribuye d 
+	WHERE c.CIF = d.CIF && d.código IN 
+		(SELECT r.código
+		FROM registra r
+		WHERE r.medio='internet'));
+
+/* 37. Obtén un listado de los nombres de las personas que se han registrado por Internet,
+junto al nombre de los programas para los que ha efectuado el registro. */
+
+
+-- 37 b) Además el nombre del fabricante debe ser microsoft.
+
+
+
+
 -- 38. Genera un listado en el que aparezca cada cliente junto al programa que ha registrado,
 -- el medio con el que lo ha hecho y el comercio en el que lo ha adquirido.
 -- 39. Genera un listado con las ciudades en las que se pueden obtener los productos de
