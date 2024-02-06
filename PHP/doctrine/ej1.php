@@ -8,6 +8,7 @@ require_once "bootstrap.php";
 require_once './src/Equipo.php';
 
 $idEquipo = $_POST["idEquipo"] ?? null;
+
 $existenciaEquipo = true;
 
 if($idEquipo == null)
