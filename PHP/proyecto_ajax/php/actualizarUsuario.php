@@ -12,54 +12,63 @@ try
 	$contraseniaActualizacion_1 = $_POST["contraseniaActualizacion_1"] ?? null;
 	$contraseniaActualizacion_2 = $_POST["contraseniaActualizacion_2"] ?? null;
 
-	$conexion = 'mysql:dbname=proyecto_php;host=127.0.0.1:3306';
-	$usuarioBD = 'root';
-	$claveBD = '';
-	$BD = new PDO($conexion, $usuarioBD, $claveBD);
-
-	$query = $BD->prepare("SELECT id, nombre, apellidos, edad, mail, usuario, contrasenia, rol  FROM usuarios");
-	$query->execute();
-
-	$array = [];
-	$usuarioMailEnUso = false;
-
-	if($contraseniaActualizacion_1 == $contraseniaActualizacion_2 && $contraseniaActualizacion_1 != "" && $contraseniaActualizacion_2 != "")
+	if (! is_int((int)$edadActualizacion))
 	{
-		foreach ($query as $usuario) 
-		{
-			if (($usuario['usuario'] == $usuarioActualizacion && $usuario['usuario'] != $usuarioLogin) || ($usuario['mail'] == $mailActualizacion && $usuario['mail'] != $mailLogin)) 
-			{
-				$objeto = array("respuesta" => "Ese nombre de usuario o mail ya está en uso");
-				array_push($array, $objeto);
-				$usuarioMailEnUso = true;
-				break;
-			}
-		}
-
-		if($usuarioMailEnUso == false)
-		{
-			$query = $BD->prepare("UPDATE usuarios SET nombre='$nombreActualizacion', apellidos='$apellidosActualizacion', edad='$edadActualizacion', mail='$mailActualizacion', usuario='$usuarioActualizacion', contrasenia='$contraseniaActualizacion_1' WHERE id=$idLogin");
-			$query->execute();
-
-			$objeto = 
-			[
-				"respuesta" 	=> "correcto", 
-				"id" 			=> $idLogin, 
-				"nombre" 		=> $nombreActualizacion, 
-				"apellidos" 	=> $apellidosActualizacion, 
-				"edad" 			=> $edadActualizacion,
-				"mail" 			=> $mailActualizacion, 
-				"usuario" 		=> $usuarioActualizacion, 
-				"contrasenia" 	=> ""
-			];
-
-			array_push($array, $objeto);
-		}
+		$objeto =["respuesta" => "La edad ha de ser un entero."];
+		array_push($array, $objeto);
 	}
 	else
 	{
-		$objeto = array("respuesta" => "La contraseña no coincide o está vacía");
-		array_push($array, $objeto);
+		$conexion = 'mysql:dbname=proyecto_php;host=127.0.0.1:3306';
+		$usuarioBD = 'root';
+		$claveBD = '';
+		$BD = new PDO($conexion, $usuarioBD, $claveBD);
+
+		$query = $BD->prepare("SELECT id, nombre, apellidos, edad, mail, usuario, contrasenia, rol  FROM usuarios");
+		$query->execute();
+
+		$array = [];
+		$usuarioMailEnUso = false;
+
+		if($contraseniaActualizacion_1 == $contraseniaActualizacion_2 && $contraseniaActualizacion_1 != "" && $contraseniaActualizacion_2 != "")
+		{
+			foreach ($query as $usuario) 
+			{
+				if (($usuario['usuario'] == $usuarioActualizacion && $usuario['usuario'] != $usuarioLogin) || ($usuario['mail'] == $mailActualizacion && $usuario['mail'] != $mailLogin)) 
+				{
+					$objeto = array("respuesta" => "Ese nombre de usuario o mail ya está en uso");
+					array_push($array, $objeto);
+					$usuarioMailEnUso = true;
+					break;
+				}
+			}
+
+			if($usuarioMailEnUso == false)
+			{
+				$query = $BD->prepare("UPDATE usuarios SET nombre='$nombreActualizacion', apellidos='$apellidosActualizacion', edad='$edadActualizacion', mail='$mailActualizacion', usuario='$usuarioActualizacion', contrasenia='$contraseniaActualizacion_1' WHERE id=$idLogin");
+				$query->execute();
+
+				$objeto = 
+				[
+					"respuesta" 	=> "correcto", 
+					"id" 			=> $idLogin, 
+					"nombre" 		=> $nombreActualizacion, 
+					"apellidos" 	=> $apellidosActualizacion, 
+					"edad" 			=> $edadActualizacion,
+					"mail" 			=> $mailActualizacion, 
+					"usuario" 		=> $usuarioActualizacion, 
+					"contrasenia" 	=> ""
+				];
+
+				array_push($array, $objeto);
+			}
+		}
+		else
+		{
+			$objeto = array("respuesta" => "La contraseña no coincide o está vacía");
+			array_push($array, $objeto);
+		}
+
 	}
 
 	$json = json_encode($array);	
@@ -67,5 +76,9 @@ try
 } 
 catch (PDOException $e) 
 {
-	echo 'Error con la base de datos: ' . $e->getMessage();
+	// echo 'Error con la base de datos: ' . $e->getMessage();
+	$objeto =["respuesta" => "Información introducida no válida."];
+	array_push($array, $objeto);
+	$json = json_encode($array);	
+	echo $json;
 }

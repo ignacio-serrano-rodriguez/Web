@@ -206,7 +206,7 @@ function actualizarUsuario()
 	};
 	xhttp.open("POST", "../php/actualizarUsuario.php", true);
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	xhttp.send(`idLogin=${idLogin}&usuarioLogin=${usuarioLogin}&mailLogin=${mailLogin}&usuarioActualizacion=${usuarioActualizacion}&mailActualizacion=${mailActualizacion}&nombreActualizacion=${nombreActualizacion}&apellidosActualizacion=${apellidosActualizacion}&edadActualizacion=${edadActualizacion}&contraseniaActualizacion_1=${contraseniaActualizacion_1}&contraseniaActualizacion_2=${contraseniaActualizacion_2}`);
+	xhttp.send(`idLogin=${idLogin}&usuarioLogin=${usuarioLogin}&mailLogin=${mailLogin}&usuarioActualizacion=${usuarioActualizacion}&mailActualizacion=${mailActualizacion}&nombreActualizacion=${nombreActualizacion}&apellidosActualizacion=${apellidosActualizacion}&edadActualizacion=${parseInt(edadActualizacion)}&contraseniaActualizacion_1=${contraseniaActualizacion_1}&contraseniaActualizacion_2=${contraseniaActualizacion_2}`);
 }
 
 function crearUsuario() 

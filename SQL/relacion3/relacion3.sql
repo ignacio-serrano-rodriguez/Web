@@ -248,7 +248,17 @@ WHERE c.CIF IN
 
 /* 37. Obtén un listado de los nombres de las personas que se han registrado por Internet,
 junto al nombre de los programas para los que ha efectuado el registro. */
-
+-- ????
+SELECT DISTINCT c.nombre, r.medio
+FROM cliente c, registra r
+WHERE c.dni IN 
+	(SELECT r.dni
+	FROM registra r 
+	WHERE r.medio='online' && r.código IN
+		(SELECT p.código
+		FROM programa p, registra r
+		WHERE p.código = r.código)	
+	);
 
 -- 37 b) Además el nombre del fabricante debe ser microsoft.
 
