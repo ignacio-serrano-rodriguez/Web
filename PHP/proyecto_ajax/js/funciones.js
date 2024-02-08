@@ -20,10 +20,8 @@ function gestionarUsuario()
 					<h2>Tu información</h2>
 					<form>
 						<input type="hidden" value="${respuesta[1]["id"]}" id="idLogin" />
-						<input type="hidden" value="${respuesta[6]["usuario"]}" id="usuarioLogin" />
-						<input type="hidden" value="${respuesta[5]["mail"]}" id="mailLogin" />
-						<input type="hidden" value="${respuesta[8]["rol"]}" id="rolLogin" />
-						<input type="hidden" value="${respuesta[7]["contrasenia"]}" id="contraseniaLogin" />
+						<input type="hidden" value="${respuesta[7]["rol"]}" id="rolLogin" />
+						<input type="hidden" value="" id="contraseniaLogin" />
 						usuario <input type="text" value="${respuesta[6]["usuario"]}"  id="usuarioActualizacion"/><br/>
 						mail <input type="text" value="${respuesta[5]["mail"]}"  id="mailActualizacion"/> <br/>
 						nombre <input type="text" value="${respuesta[2]["nombre"]}" id="nombreActualizacion"/> <br/>
@@ -38,9 +36,8 @@ function gestionarUsuario()
 					<br/>
 					<hr/>
 				`
-
 				// Usuario normal
-				if(respuesta[8]["rol"] == 1)
+				if(respuesta[7]["rol"] == 1)
 				{
 					document.getElementById("contenidoEspecifico").innerHTML="";
 					document.getElementById("contenidoEspecifico").innerHTML+=`
@@ -76,7 +73,7 @@ function gestionarUsuario()
 					`
 				}
 				// Usuario admin
-				else if(respuesta[8]["rol"] == 0)
+				else if(respuesta[7]["rol"] == 0)
 				{
 					document.getElementById("contenidoEspecifico").innerHTML="";
 					document.getElementById("contenidoEspecifico").innerHTML+=`<h2>Eliminar usuario</h2>`;
@@ -158,8 +155,8 @@ function cerrarSesion()
 function actualizarUsuario() 
 {
 	let idLogin = document.getElementById("idLogin").value.trim();
-	let usuarioLogin = document.getElementById("usuarioLogin").value.trim();
-	let mailLogin = document.getElementById("mailLogin").value.trim();
+	let usuarioLogin = document.getElementById("usuarioActualizacion").value.trim();
+	let mailLogin = document.getElementById("mailActualizacion").value.trim();
 	let usuarioActualizacion = document.getElementById("usuarioActualizacion").value.trim();
 	let mailActualizacion = document.getElementById("mailActualizacion").value.trim();
 	let nombreActualizacion = document.getElementById("nombreActualizacion").value.trim();
@@ -180,20 +177,17 @@ function actualizarUsuario()
 			{
 				document.getElementById("consola").innerHTML = "Información del usuario actualizada.";
 				document.getElementById("contenido").innerHTML=`
-					<h1>${respuesta[6]["usuario"]}</h1>
+					<h1>${respuesta[0]["usuario"]}</h1>
 					<h2>Tu información</h2>
 					<form>
-						<input type="hidden" value="${respuesta[1]["id"]}" id="idLogin" />
-						<input type="hidden" value="${respuesta[6]["usuario"]}" id="usuarioLogin" />
-						<input type="hidden" value="${respuesta[5]["mail"]}" id="mailLogin" />
-						usuario: <input type="text" value="${respuesta[6]["usuario"]}"  id="usuarioActualizacion"/><br/>
-						mail <input type="text" value="${respuesta[5]["mail"]}"  id="mailActualizacion"/> <br/>
-						nombre <input type="text" value="${respuesta[2]["nombre"]}" id="nombreActualizacion"/> <br/>
-						apellidos <input type="text" value="${respuesta[3]["apellidos"]}" id="apellidosActualizacion"/> <br/>
-						edad <input type="text" value="${respuesta[4]["edad"]}" id="edadActualizacion"/> <br/>
+						<input type="hidden" value="${respuesta[0]["id"]}" id="idLogin" />
+						usuario: <input type="text" value="${respuesta[0]["usuario"]}"  id="usuarioActualizacion"/><br/>
+						mail <input type="text" value="${respuesta[0]["mail"]}"  id="mailActualizacion"/> <br/>
+						nombre <input type="text" value="${respuesta[0]["nombre"]}" id="nombreActualizacion"/> <br/>
+						apellidos <input type="text" value="${respuesta[0]["apellidos"]}" id="apellidosActualizacion"/> <br/>
+						edad <input type="text" value="${respuesta[0]["edad"]}" id="edadActualizacion"/> <br/>
 						contraseña antigua <input type="password" value="" id="contraseniaAntigua"/> <br/>
 						contraseña nueva <input type="password" value="" id="contraseniaActualizacion_1"/> <br/>
-						contraseña antigua <input type="password" value="" id="contraseniaAntigua"/> <br/>
 						repite la contraseña nueva <input type="password" value="" id="contraseniaActualizacion_2"/> <br/><br/>
 						<input type="button" onclick="actualizarUsuario()" value="Actualizar información"><br/><br/>
 						<input type="button" onclick="cerrarSesion()" value="Cerrar sesión"><br/>

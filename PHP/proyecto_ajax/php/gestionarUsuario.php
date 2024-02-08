@@ -34,8 +34,6 @@ try
 			array_push($array, $objeto);
 			$objeto = array("usuario" => $usuario['usuario']);
 			array_push($array, $objeto);
-			$objeto = array("contrasenia" => $usuario['contrasenia']);
-			array_push($array, $objeto);
 			$objeto = array("rol" => $usuario['rol']);
 			array_push($array, $objeto);
 

@@ -76,5 +76,10 @@ try
 } 
 catch (PDOException $e) 
 {
-	echo 'Error con la base de datos: ' . $e->getMessage();
+	// echo 'Error con la base de datos: ' . $e->getMessage();
+	$array = [];
+	$objeto = array("respuesta" => "La edad no puede ser una cadena vacía.");
+	array_push($array, $objeto);
+	$json = json_encode($array);	
+	echo $json;
 }

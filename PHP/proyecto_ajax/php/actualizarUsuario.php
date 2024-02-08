@@ -79,8 +79,7 @@ try
 						"apellidos" 	=> $apellidosActualizacion, 
 						"edad" 			=> $edadActualizacion,
 						"mail" 			=> $mailActualizacion, 
-						"usuario" 		=> $usuarioActualizacion, 
-						"contrasenia" 	=> ""
+						"usuario" 		=> $usuarioActualizacion
 					];
 
 					array_push($array, $objeto);
