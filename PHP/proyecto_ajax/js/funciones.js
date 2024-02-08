@@ -347,7 +347,7 @@ function crearLista()
 					};
 					xhttp.open("POST", "../php/mostrarListas.php", true);
 					xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-					xhttp.send(`idLogin=${idLogin.value}`);
+					xhttp.send(`idLogin=${idLogin}`);
 			}
 			else
 			{
@@ -357,7 +357,7 @@ function crearLista()
 	};
 	xhttp.open("POST", "../php/crearLista.php", true);
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	xhttp.send(`idLogin=${idLogin.value}&nombreLista=${document.getElementById("nombreLista").value.trim()}`);
+	xhttp.send(`idLogin=${idLogin}&nombreLista=${document.getElementById("nombreLista").value.trim()}`);
 }
 
 function gestionarLista(nombreLista)
