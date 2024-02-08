@@ -24,8 +24,8 @@ try
 			array_push($array, $objeto);
 			$usuarioEliminado = true;
 
-			$query = $BD->prepare("DELETE FROM usuarios WHERE usuario = '$usuarioIntroducido'");
-			$query->execute();
+			$query = $BD->prepare("DELETE FROM usuarios WHERE usuario = :usuarioIntroducido");
+			$query->execute(array('usuarioIntroducido' => $usuarioIntroducido));
 
 			break;
 		}

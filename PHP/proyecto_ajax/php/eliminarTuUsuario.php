@@ -12,8 +12,8 @@ try
 	$objeto = array("respuesta" => "Tu usuario ha sido eliminado.");
 	array_push($array, $objeto);
 
-	$query = $BD->prepare("DELETE FROM usuarios WHERE usuario = '$usuarioLogin'");
-	$query->execute();
+	$query = $BD->prepare("DELETE FROM usuarios WHERE usuario = :usuarioLogin");
+	$query->execute(array(':usuarioLogin' => $usuarioLogin));
 
 	$json = json_encode($array);	
 	echo $json;

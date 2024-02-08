@@ -68,8 +68,9 @@ try
 
 				if($usuarioMailEnUso == false)
 				{
-					$query = $BD->prepare("UPDATE usuarios SET nombre='$nombreActualizacion', apellidos='$apellidosActualizacion', edad='$edadActualizacion', mail='$mailActualizacion', usuario='$usuarioActualizacion', contrasenia='$contraseniaActualizacion_1' WHERE id=$idLogin");
-					$query->execute();
+
+					$query = $BD->prepare("UPDATE usuarios SET nombre = :nombreActualizacion, apellidos = :apellidosActualizacion, edad = :edadActualizacion, mail = :mailActualizacion, usuario = :usuarioActualizacion, contrasenia = :contraseniaActualizacion_1 WHERE id = :idLogin");
+					$query->execute(array(':nombreActualizacion' => $nombreActualizacion, ':apellidosActualizacion' => $apellidosActualizacion, ':edadActualizacion' => $edadActualizacion, ':mailActualizacion' => $mailActualizacion, ':usuarioActualizacion' => $usuarioActualizacion, ':contraseniaActualizacion_1' => $contraseniaActualizacion_1, ':idLogin' => $idLogin));
 
 					$objeto = 
 					[

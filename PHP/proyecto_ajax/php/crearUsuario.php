@@ -65,8 +65,9 @@ try
 			{
 				$objeto = array("respuesta" => "correcto");
 				array_push($array, $objeto);
-				$query = $BD->prepare("insert into usuarios(nombre, apellidos, edad, mail, usuario, contrasenia, rol) values('$nombreRegistro', '$apellidosRegistro', '$edadRegistro', '$mailRegistro', '$usuarioRegistro', '$contraseniaRegistro_1', '1')");
-				$query->execute();
+				
+				$query = $BD->prepare("insert into usuarios(nombre, apellidos, edad, mail, usuario, contrasenia, rol) values(:nombreRegistro, :apellidosRegistro, :edadRegistro, :mailRegistro, :usuarioRegistro, :contraseniaRegistro_1, '1')");
+				$query->execute(array(':nombreRegistro' => $nombreRegistro, ':apellidosRegistro' => $apellidosRegistro, ':edadRegistro' => $edadRegistro, ':mailRegistro' => $mailRegistro, ':usuarioRegistro' => $usuarioRegistro, ':contraseniaRegistro_1' => $contraseniaRegistro_1));
 			}
 		}
 	}

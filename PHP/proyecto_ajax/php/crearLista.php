@@ -31,8 +31,9 @@ try
 		array_push($array, $objeto);
 		$objeto = array("nombreLista" => $nombreLista);
 		array_push($array, $objeto);
-		$queryCreacion = $BD->prepare("insert into listas(nombre, id_usuario) values('$nombreLista', '$idLogin')");
-		$queryCreacion->execute();
+		
+		$queryCreacion = $BD->prepare("insert into listas(nombre, id_usuario) values(:nombreLista, :idLogin)");
+		$queryCreacion->execute(array(':nombreLista' => $nombreLista, ':idLogin' => $idLogin));
 	}
 
 	$json = json_encode($array);	
