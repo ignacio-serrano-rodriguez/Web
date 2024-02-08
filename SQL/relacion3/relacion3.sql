@@ -224,7 +224,7 @@ WHERE f.nombre = 'freddy hardest';
 	-- inner join
 	SELECT p.nombre, r.medio
 	FROM programa p
-	INNER JOIN registra r ON p.código  = r.código 
+	INNER JOIN registra r ON p.código = r.código 
 	WHERE r.medio  = 'cp';
 
 	-- subconsulta
@@ -248,34 +248,77 @@ WHERE c.CIF IN
 
 /* 37. Obtén un listado de los nombres de las personas que se han registrado por Internet,
 junto al nombre de los programas para los que ha efectuado el registro. */
--- ????
-SELECT DISTINCT c.nombre, r.medio
-FROM cliente c, registra r
-WHERE c.dni IN 
-	(SELECT r.dni
-	FROM registra r 
-	WHERE r.medio='online' && r.código IN
-		(SELECT p.código
-		FROM programa p, registra r
-		WHERE p.código = r.código)	
-	);
+SELECT DISTINCT c.nombre, r.dni, p.nombre
+FROM cliente c
+INNER JOIN registra r ON c.dni = r.dni
+INNER JOIN programa p ON r.código = p.código
+WHERE r.medio = 'internet';
 
 -- 37 b) Además el nombre del fabricante debe ser microsoft.
+SELECT DISTINCT c.nombre, r.medio, p.nombre, f.nombre
+FROM cliente c
+INNER JOIN registra r ON c.dni = r.dni
+INNER JOIN programa p ON r.código = p.código
+INNER JOIN fabricante f ON p.id_fab = f.id_fab
+WHERE r.medio = 'internet' && f.nombre = 'microsoft';
 
+/* 38. Genera un listado en el que aparezca cada cliente junto al programa que ha registrado,
+el medio con el que lo ha hecho y el comercio en el que lo ha adquirido. */
+SELECT DISTINCT c.nombre, p.nombre, r.medio, f.nombre
+FROM cliente c
+INNER JOIN registra r ON c.dni = r.dni
+INNER JOIN programa p ON r.código = p.código
+INNER JOIN fabricante f ON p.id_fab = f.id_fab;
 
+-- 39. Genera un listado con las ciudades en las que se pueden obtener los productos de Oracle.
+SELECT c.ciudad, f.nombre 
+FROM comercio c
+INNER JOIN distribuye d ON c.CIF = d.CIF 
+INNER JOIN programa p ON d.código = p.código 
+INNER JOIN fabricante f ON p.id_fab = f.id_fab
+WHERE f.nombre = 'oracle';
 
-
--- 38. Genera un listado en el que aparezca cada cliente junto al programa que ha registrado,
--- el medio con el que lo ha hecho y el comercio en el que lo ha adquirido.
--- 39. Genera un listado con las ciudades en las que se pueden obtener los productos de
--- Oracle.
 -- 40. Obtén el nombre de los usuarios que han registrado Excel.
+SELECT c.nombre, p.nombre
+FROM cliente c
+INNER JOIN registra r ON c.dni = r.dni 
+INNER JOIN programa p ON r.código = p.código
+WHERE p.nombre = 'excel';
+
 -- 41. Nombre de aquellos fabricantes cuyo país es el mismo que ʻOracleʼ. (Subconsulta).
+SELECT *
+FROM fabricante f
+WHERE f.país IN 
+	(SELECT f2.país
+	FROM fabricante f2
+	WHERE f2.nombre = 'oracle');
+
 -- 42. Nombre de aquellos clientes que tienen la misma edad que Pepe Pérez. (Subconsulta).
--- 43. Genera un listado con los comercios que tienen su sede en la misma ciudad que tiene
--- el comercio ʻFNACʼ. (Subconsulta).
--- 44. Nombre de aquellos clientes que han registrado un producto de la misma forma que el
--- cliente ʻPepe Pérezʼ. (Subconsulta).
+SELECT c.nombre
+FROM cliente c
+WHERE c.nombre <> 'Pere Pérez' && c.edad IN 
+	(SELECT c2.edad
+	FROM cliente c2
+	WHERE c2.nombre = 'Pepe Pérez');
+
+/* 43. Genera un listado con los comercios que tienen su sede en la misma ciudad que tiene
+el comercio ʻFNACʼ. (Subconsulta). */
+SELECT *
+FROM comercio c
+WHERE c.nombre <> 'fnac' && c.ciudad IN
+	(SELECT c2.ciudad
+	FROM comercio c2
+	WHERE c2.nombre = 'fnac');
+
+/* 44. Nombre de aquellos clientes que han registrado un producto de la misma forma que el
+cliente ʻPepe Pérezʼ. (Subconsulta). */
+SELECT c.nombre, r.medio
+FROM cliente c, registra r
+WHERE c.nombre <> 'pepe pérez' && c.dni = r.dni && r.medio IN
+	(SELECT r.medio
+	FROM registra r2 
+	WHERE r.medio = r2.medio && c.nombre = 'pepe pérez');
+
 -- 45. Obtener el número de programas que hay en la tabla programas.
 -- 46. Calcula el número de clientes cuya edad es mayor de 40 años.
 -- 47. Calcula el número de productos que ha vendido el establecimiento cuyo CIF es 1.
