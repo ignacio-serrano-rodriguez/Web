@@ -24,13 +24,14 @@ function gestionarUsuario()
 						<input type="hidden" value="${respuesta[5]["mail"]}" id="mailLogin" />
 						<input type="hidden" value="${respuesta[8]["rol"]}" id="rolLogin" />
 						<input type="hidden" value="${respuesta[7]["contrasenia"]}" id="contraseniaLogin" />
-						usuario: <input type="text" value="${respuesta[6]["usuario"]}"  id="usuarioActualizacion"/><br/>
-						mail: <input type="text" value="${respuesta[5]["mail"]}"  id="mailActualizacion"/> <br/>
-						nombre: <input type="text" value="${respuesta[2]["nombre"]}" id="nombreActualizacion"/> <br/>
-						apellidos: <input type="text" value="${respuesta[3]["apellidos"]}" id="apellidosActualizacion"/> <br/>
-						edad: <input type="text" value="${respuesta[4]["edad"]}" id="edadActualizacion"/> <br/>
-						contraseña: <input type="password" value="" id="contraseniaActualizacion_1"/> <br/>
-						repite la contraseña: <input type="password" value="" id="contraseniaActualizacion_2"/> <br/><br/>
+						usuario <input type="text" value="${respuesta[6]["usuario"]}"  id="usuarioActualizacion"/><br/>
+						mail <input type="text" value="${respuesta[5]["mail"]}"  id="mailActualizacion"/> <br/>
+						nombre <input type="text" value="${respuesta[2]["nombre"]}" id="nombreActualizacion"/> <br/>
+						apellidos <input type="text" value="${respuesta[3]["apellidos"]}" id="apellidosActualizacion"/> <br/>
+						edad <input type="text" value="${respuesta[4]["edad"]}" id="edadActualizacion"/> <br/>
+						contraseña antigua <input type="password" value="" id="contraseniaAntigua"/> <br/>
+						contraseña nueva <input type="password" value="" id="contraseniaActualizacion_1"/> <br/>
+						repite la contraseña nueva <input type="password" value="" id="contraseniaActualizacion_2"/> <br/><br/>
 						<input type="button" onclick="actualizarUsuario()" value="Actualizar información"><br/><br/>
 						<input type="button" onclick="cerrarSesion()" value="Cerrar sesión"><br/>
 					</form>
@@ -164,6 +165,7 @@ function actualizarUsuario()
 	let nombreActualizacion = document.getElementById("nombreActualizacion").value.trim();
 	let apellidosActualizacion = document.getElementById("apellidosActualizacion").value.trim();
 	let edadActualizacion = document.getElementById("edadActualizacion").value.trim();
+	let contraseniaAntigua = document.getElementById("contraseniaAntigua").value.trim();
 	let contraseniaActualizacion_1 = document.getElementById("contraseniaActualizacion_1").value.trim();
 	let contraseniaActualizacion_2 = document.getElementById("contraseniaActualizacion_2").value.trim();
 
@@ -185,12 +187,14 @@ function actualizarUsuario()
 						<input type="hidden" value="${respuesta[6]["usuario"]}" id="usuarioLogin" />
 						<input type="hidden" value="${respuesta[5]["mail"]}" id="mailLogin" />
 						usuario: <input type="text" value="${respuesta[6]["usuario"]}"  id="usuarioActualizacion"/><br/>
-						mail: <input type="text" value="${respuesta[5]["mail"]}"  id="mailActualizacion"/> <br/>
-						nombre: <input type="text" value="${respuesta[2]["nombre"]}" id="nombreActualizacion"/> <br/>
-						apellidos: <input type="text" value="${respuesta[3]["apellidos"]}" id="apellidosActualizacion"/> <br/>
-						edad: <input type="text" value="${respuesta[4]["edad"]}" id="edadActualizacion"/> <br/>
-						contraseña: <input type="password" value="" id="contraseniaActualizacion_1"/> <br/>
-						repite la contraseña: <input type="password" value="" id="contraseniaActualizacion_2"/> <br/><br/>
+						mail <input type="text" value="${respuesta[5]["mail"]}"  id="mailActualizacion"/> <br/>
+						nombre <input type="text" value="${respuesta[2]["nombre"]}" id="nombreActualizacion"/> <br/>
+						apellidos <input type="text" value="${respuesta[3]["apellidos"]}" id="apellidosActualizacion"/> <br/>
+						edad <input type="text" value="${respuesta[4]["edad"]}" id="edadActualizacion"/> <br/>
+						contraseña antigua <input type="password" value="" id="contraseniaAntigua"/> <br/>
+						contraseña nueva <input type="password" value="" id="contraseniaActualizacion_1"/> <br/>
+						contraseña antigua <input type="password" value="" id="contraseniaAntigua"/> <br/>
+						repite la contraseña nueva <input type="password" value="" id="contraseniaActualizacion_2"/> <br/><br/>
 						<input type="button" onclick="actualizarUsuario()" value="Actualizar información"><br/><br/>
 						<input type="button" onclick="cerrarSesion()" value="Cerrar sesión"><br/>
 					</form>
@@ -206,7 +210,7 @@ function actualizarUsuario()
 	};
 	xhttp.open("POST", "../php/actualizarUsuario.php", true);
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	xhttp.send(`idLogin=${idLogin}&usuarioLogin=${usuarioLogin}&mailLogin=${mailLogin}&usuarioActualizacion=${usuarioActualizacion}&mailActualizacion=${mailActualizacion}&nombreActualizacion=${nombreActualizacion}&apellidosActualizacion=${apellidosActualizacion}&edadActualizacion=${parseInt(edadActualizacion)}&contraseniaActualizacion_1=${contraseniaActualizacion_1}&contraseniaActualizacion_2=${contraseniaActualizacion_2}`);
+	xhttp.send(`idLogin=${idLogin}&usuarioLogin=${usuarioLogin}&mailLogin=${mailLogin}&usuarioActualizacion=${usuarioActualizacion}&mailActualizacion=${mailActualizacion}&nombreActualizacion=${nombreActualizacion}&apellidosActualizacion=${apellidosActualizacion}&edadActualizacion=${parseInt(edadActualizacion)}&contraseniaAntigua=${contraseniaAntigua}&contraseniaActualizacion_1=${contraseniaActualizacion_1}&contraseniaActualizacion_2=${contraseniaActualizacion_2}`);
 }
 
 function crearUsuario() 
@@ -416,8 +420,8 @@ function volverPerfil(usuarioLogin, contraseniaLogin)
 						nombre: <input type="text" value="${respuesta[2]["nombre"]}" id="nombreActualizacion"/> <br/>
 						apellidos: <input type="text" value="${respuesta[3]["apellidos"]}" id="apellidosActualizacion"/> <br/>
 						edad: <input type="text" value="${respuesta[4]["edad"]}" id="edadActualizacion"/> <br/>
-						contraseña: <input type="password" value="" id="contraseniaActualizacion_1"/> <br/>
-						repite la contraseña: <input type="password" value="" id="contraseniaActualizacion_2"/> <br/><br/>
+						contraseña nueva: <input type="password" value="" id="contraseniaActualizacion_1"/> <br/>
+						repite la contraseña nueva: <input type="password" value="" id="contraseniaActualizacion_2"/> <br/><br/>
 						<input type="button" onclick="actualizarUsuario()" value="Actualizar información"><br/><br/>
 						<input type="button" onclick="cerrarSesion()" value="Cerrar sesión"><br/>
 					</form>
@@ -526,7 +530,6 @@ function eliminarTuUsuario()
 		</form>
 		<h2> Registro de usuario </h2>
 		<form>
-
 			<label for="nombreRegistro"> nombre </label>
 			<input type="text" id="nombreRegistro"> <br/>
 			<label for="apellidosRegistro"> apellidos </label>
