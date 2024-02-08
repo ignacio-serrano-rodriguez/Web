@@ -1,8 +1,6 @@
 <?php
 try 
 {
-	$rolLogin = $_POST["rolLogin"] ?? null;
-
 	$conexion = 'mysql:dbname=proyecto_php;host=127.0.0.1:3306';
 	$usuarioBD = 'root';
 	$claveBD = '';
