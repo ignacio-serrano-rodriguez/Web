@@ -494,3 +494,15 @@ function volverPerfil()
 		xhttp.send();
 	}
 }
+
+function eliminarTuUsuario() 
+{
+	var xhttp = new XMLHttpRequest();       
+	xhttp.onreadystatechange = function(){};
+	xhttp.open("POST", "../php/eliminarTuUsuario.php", true);
+	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xhttp.send(`usuarioLogin=${usuarioLogin}`);
+
+	cerrarSesion();
+	document.getElementById("consola").innerHTML=`Tu usuario (${usuarioLogin}) ha sido eliminado`;
+}
