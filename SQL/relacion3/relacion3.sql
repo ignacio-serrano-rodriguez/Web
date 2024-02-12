@@ -320,16 +320,81 @@ WHERE c.nombre <> 'pepe pérez' && c.dni = r.dni && r.medio IN
 	WHERE r.medio = r2.medio && c.nombre = 'pepe pérez');
 
 -- 45. Obtener el número de programas que hay en la tabla programas.
+SELECT COUNT(*) as 'Número de programas'
+FROM programa p;
+
 -- 46. Calcula el número de clientes cuya edad es mayor de 40 años.
+SELECT COUNT(*) as 'Número clientes edad > 40'
+FROM cliente c
+WHERE c.edad > 40;
+
 -- 47. Calcula el número de productos que ha vendido el establecimiento cuyo CIF es 1.
+SELECT COUNT(*) as 'Número de productos comercio con CIF 1'
+FROM programa p
+WHERE p.código IN
+	(SELECT d.código
+	FROM distribuye d
+	WHERE p.código = d.código AND
+		(SELECT c.CIF
+		FROM comercio c
+		WHERE d.CIF = c.CIF AND c.CIF = 1));
+
 -- 48. Calcula la media de programas que se venden cuyo código es 7.
+SELECT COUNT(*) as 'Cantidad programas vendidos con código 7'
+FROM programa p
+WHERE p.código = 7;
+
 -- 49. Calcula la mínima cantidad de programas de código 7 que se ha vendido.
+SELECT COUNT(*) as 'Cantidad programas vendidos con código 7'
+FROM programa p
+WHERE p.código = 7;
+
 -- 50. Calcula la máxima cantidad de programas de código 7 que se ha vendido.
+SELECT COUNT(*) as 'Cantidad programas vendidos con código 7'
+FROM programa p
+WHERE p.código = 7;
+
 -- 51. ¿En cuántos establecimientos se vende el programa cuyo código es 7?
+SELECT COUNT(*) as 'Número comercios tienen programa con código 7'
+FROM programa p
+WHERE p.código = 7 AND p.código IN 
+	(SELECT d.código
+	FROM distribuye d
+	WHERE p.código = d.código AND d.CIF IN
+		(SELECT c.CIF
+		FROM comercio c
+		WHERE d.CIF = c.CIF));
+
 -- 52. Calcular el número de registros que se han realizado por Internet.
+SELECT COUNT(*) as 'Número de registros hechos por internet'
+FROM registra r 
+WHERE r.medio = 'internet';
+
 -- 53. Obtener el número total de programas que se han vendido en ʻSevillaʼ.
--- 54. Calcular el número total de programas que han desarrollado los fabricantes cuyo país
--- es ʻEstados Unidosʼ.
--- 55. Visualiza el nombre de todos los clientes en mayúscula. En el resultado de la consulta
--- debe aparecer también la longitud de la cadena nombre.
--- 56. Con una consulta concatena los campos nombre y versión de la tabla PROGRAMA.
+SELECT COUNT(*) as 'Número de programas vendidos en Sevilla' 
+FROM programa p
+WHERE p.código IN
+	(SELECT d.código
+	FROM distribuye d
+	WHERE d.CIF IN
+		(SELECT c.CIF
+		FROM comercio c
+		WHERE c.ciudad = 'sevilla'));
+
+/* 54. Calcular el número total de programas que han desarrollado los fabricantes cuyo país
+es ʻEstados Unidosʼ. */
+SELECT *
+FROM programa p 
+WHERE p.id_fab IN
+	(SELECT f.id_fab
+	FROM fabricante f
+	WHERE f.país = 'estados unidos');
+
+/* 55. Visualiza el nombre de todos los clientes en mayúscula. En el resultado de la consulta
+debe aparecer también la longitud de la cadena nombre. */
+SELECT UPPER(c.nombre) as 'NOMBRE', LENGTH(c.nombre) as 'LONGITUD' 
+FROM cliente c;
+
+-- 56. Con una consulta concatena los campos nombre y versión de la tabla PROGRAMA.	
+SELECT CONCAT(p.nombre, '  ', p.versión) as 'Nombre y versión'
+FROM programa p;
