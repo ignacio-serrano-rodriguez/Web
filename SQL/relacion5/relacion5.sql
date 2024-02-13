@@ -107,10 +107,16 @@ WHERE c.EDAD =
 	FROM CICLISTA c2);
 
 -- 18. Obtener el número de ciclistas de cada equipo.
-
+SELECT EQUIPO_EQUIPO AS Equipo, COUNT(*) AS 'Número de ciclistas'
+FROM CICLISTA c
+GROUP BY EQUIPO_EQUIPO;
 
 -- 19. Obtener el nombre de los equipos que tengan más de 5 ciclistas.
-
+SELECT E.NOMBRE AS Equipo
+FROM EQUIPO E
+JOIN CICLISTA C ON E.EQUIPO = C.EQUIPO_EQUIPO
+GROUP BY E.NOMBRE
+HAVING COUNT(*) > 5;
 
 -- 20. Obtener el número de puertos que ha ganado cada ciclista.
 
