@@ -124,19 +124,43 @@ WHERE
 		WHERE e.EQUIPO = c.EQUIPO_EQUIPO)> 5;
 
 -- 20. Obtener el número de puertos que ha ganado cada ciclista.
-
+SELECT
+	c.NOMBRE,
+	(SELECT COUNT(*)
+		FROM PUERTO p
+		WHERE c.DORSAL = p.CICLISTA_DORSAL) as 'Número de puertos ganados'
+FROM CICLISTA c;
 
 -- 21. Obtener el nombre de los ciclistas que han ganado más de un puerto.
-
+SELECT c.NOMBRE
+FROM CICLISTA c
+WHERE 
+	(SELECT COUNT(*)
+		FROM PUERTO p
+		WHERE c.DORSAL = p.CICLISTA_DORSAL) > 1;
 
 -- 22. Nombre de los ciclistas que no hayan ganado ninguna etapa.
-
+SELECT c.NOMBRE
+FROM CICLISTA c
+WHERE 
+	(SELECT COUNT(*)
+		FROM ETAPA e
+		WHERE c.DORSAL = e.CICLISTA_DORSAL) = 0;
 
 -- 23. Nombre de los ciclistas que no hayan ganado ningún puerto de montaña.
-
+SELECT c.NOMBRE
+FROM CICLISTA c
+WHERE c.DORSAL NOT IN
+	(SELECT p.CICLISTA_DORSAL
+		FROM PUERTO p);
 
 -- 24. Nombre de los ciclistas que hayan ganado más de un puerto de montaña.
-
+SELECT c.NOMBRE
+FROM CICLISTA c
+WHERE 
+	(SELECT COUNT(*)
+		FROM PUERTO p
+		WHERE c.DORSAL = p.CICLISTA_DORSAL) > 1;
 
 -- 25. De cada equipo obtener la edad media, la máxima edad y la mínima edad.
 
