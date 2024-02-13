@@ -1,55 +1,110 @@
 -- 1. Obtener el código, el tipo, el color y el premio de todos los maillots que hay.
+SELECT * 
+from MAILLOT m;
 
-
--- 2. Obtener el dorsal y el nombre de los ciclistas cuya edad sea menor o igual que 25
--- años.
-
+/* 2. Obtener el dorsal y el nombre de los ciclistas cuya edad sea menor o igual que 25
+años. */
+SELECT c.DORSAL, c.NOMBRE
+from CICLISTA c
+WHERE c.EDAD <= 25;
 
 -- 3. Obtener el nombre y la altura de todos los puertos de categoría ʻEʼ (Especial).
+SELECT p.ID, p.ALTURA
+from PUERTO p
+WHERE p.CATEGORIA = 'e';
 
-
--- 4. Obtener el valor del atributo netapa de aquellas etapas con salida y llegada en la
--- misma ciudad.
-
+/* 4. Obtener el valor del atributo netapa de aquellas etapas con salida y llegada en la
+misma ciudad. */
+SELECT *
+FROM ETAPA e
+WHERE e.SALIDA = e.LLEGADA;
 
 -- 5. ¿Cuántos ciclistas hay?
-
+SELECT COUNT(*) as 'Número de ciclistas' 
+FROM CICLISTA c;
 
 -- 6. ¿Cuántos ciclistas hay con edad superior a 25 años?
-
+SELECT COUNT(*) as 'Número de ciclistas con edad > 25' 
+FROM CICLISTA c
+WHERE c.EDAD > 25;
 
 -- 7. ¿Cuántos equipos hay?
-
+SELECT COUNT(*) as 'Número de equipos'
+FROM EQUIPO e;
 
 -- 8. Obtener la media de edad de los ciclistas.
-
+SELECT AVG(c.EDAD) as 'Edad media de los ciclistas' 
+FROM CICLISTA c;
 
 -- 9. Obtener la altura mínima y máxima de los puertos de montaña.
-
+SELECT MIN(p.ALTURA) as 'altura mínima', MAX(p.ALTURA) as 'altura máxima'  
+FROM PUERTO p;
 
 -- 10. Obtener el nombre de cada ciclista junto con el nombre del equipo al que pertenece
-
+SELECT 
+	c.NOMBRE, 
+	(SELECT e.NOMBRE
+		FROM EQUIPO e
+		WHERE c.EQUIPO_EQUIPO = e.EQUIPO) as 'EQUIPO'
+FROM CICLISTA c;
 
 -- 11. Obtener el nombre de los ciclistas que sean de Banesto.
-
+SELECT c.NOMBRE
+FROM CICLISTA c
+WHERE c.EQUIPO_EQUIPO IN 
+	(SELECT e.EQUIPO
+	FROM EQUIPO e
+	WHERE e.NOMBRE = 'banesto');
 
 -- 12. ¿Cuántos ciclistas pertenecen al equipo Amore Vita?
-
+SELECT COUNT(*) as 'Número de ciclistas que pertenecen a Amore Vita' 
+FROM CICLISTA c
+WHERE c.EQUIPO_EQUIPO IN 
+	(SELECT e.EQUIPO
+	FROM EQUIPO e
+	WHERE e.NOMBRE = 'amore vita');
 
 -- 13. Edad media de los ciclistas del equipo TVM.
-
+SELECT AVG(c.EDAD) as 'Edad media del equipo TVM'
+FROM CICLISTA c
+WHERE c.EQUIPO_EQUIPO IN 
+	(SELECT e.EQUIPO
+	FROM EQUIPO e
+	WHERE e.NOMBRE = 'tvm');
 
 -- 14. Nombre de los ciclistas que pertenezcan al mismo equipo que Miguel Indurain.
-
+SELECT c.NOMBRE
+FROM CICLISTA c
+WHERE c.EQUIPO_EQUIPO IN 
+	(SELECT c2.EQUIPO_EQUIPO
+		FROM CICLISTA c2 
+		WHERE c2.NOMBRE = 'miguel indurain')
+AND c.NOMBRE <> 'miguel indurain';
 
 -- 15. Nombre de los ciclistas que han ganado alguna etapa.
-
+SELECT c.NOMBRE
+FROM CICLISTA c
+WHERE c.DORSAL IN
+	(SELECT e.CICLISTA_DORSAL
+	FROM ETAPA e);
 
 -- 16. Nombre de los ciclistas que han llevado maillots amarillos.
-
+SELECT c.NOMBRE
+FROM CICLISTA c
+WHERE c.DORSAL IN
+	(SELECT l.CICLISTA_DORSAL
+	FROM LLEVAR l
+	WHERE l.MAILLOT_CODIGO IN
+		(SELECT m.CODIGO
+		FROM MAILLOT m
+		WHERE m.COLOR = 'amarillo'));
 
 -- 17. Obtener el nombre del ciclista más joven
-
+SELECT c.NOMBRE
+FROM CICLISTA c
+WHERE c.EDAD =
+	(SELECT MIN(c2.EDAD) 
+	FROM CICLISTA c2);
 
 -- 18. Obtener el número de ciclistas de cada equipo.
 
