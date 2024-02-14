@@ -56,7 +56,7 @@ switch ($metodo) {
             $persona = [
                 "id" => $recursoId, 
                 "nombre" => $_POST["nombre"]
-            ]
+            ];
             $datos[$recursoId] = $persona;
             $respuesta = [
                 "mensaje" => "Persona actualizada",
