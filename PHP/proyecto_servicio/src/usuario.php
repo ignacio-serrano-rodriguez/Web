@@ -16,7 +16,14 @@ class Usuario
 		// Constructor
 		function __construct($id, $nombre, $apellidos, $edad, $mail, $usuario, $contrasenia, $rol) 
 		{
+			$this->id = $id;
 			$this->nombre = $nombre;
+			$this->apellidos = $apellidos;
+			$this->edad = $edad;
+			$this->mail = $mail;
+			$this->usuario = $usuario;
+			$this->contrasenia = $contrasenia;
+			$this->rol = $rol;
 		}
 
 		// Getters
@@ -86,7 +93,10 @@ class Usuario
 		{
 			$this->rol = $rol;
 		}
-}
 
-// $usuario = new Usuario();
-// echo $usuario;
+		// Métods
+		public function hola_mundo() 
+		{
+			echo "hola mundo";
+		}
+}
