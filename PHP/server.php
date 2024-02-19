@@ -14,9 +14,6 @@ class Server
 
         $uri = $_SERVER['REQUEST_URI'];
         $method = $_SERVER['REQUEST_METHOD'];
-
-        // var_dump($uri);
-        // var_dump($method);
         
 		// (explode) transforma la cadena (uri) en un array (paths) usando como separador el caracter (/)
         $paths = explode('/', $this->paths($uri));
