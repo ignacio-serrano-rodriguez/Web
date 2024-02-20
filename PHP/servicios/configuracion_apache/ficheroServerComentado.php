@@ -92,7 +92,10 @@ class Server
         /* PUT requests need to be handled
          * by reading from standard input.
          */
+
+        //
 		parse_str(file_get_contents('php://input'), $data);
+        
 		// Enviar información del usuario por (Body) en (x-www-form-urlencoded)
         // $data = json_decode(file_get_contents('php://input'));
 
