@@ -27,6 +27,11 @@ class Server
 		else 
 		{
             header('HTTP/1.1 404 Not Found');
+            header('Content-type: application/json');
+            $array = [];
+            $objeto = array("error" => "recurso no encontrado.");
+            array_push($array, $objeto);
+            echo json_encode($array);
         } 
     }
 
@@ -45,7 +50,12 @@ class Server
 				break;
 			default:
 				header('HTTP/1.1 405 Method Not Allowed');
+                header('Content-type: application/json');
 				header('Allow: GET');
+                $array = [];
+                $objeto = array("error" => "metodo utilizado no permitido.");
+                array_push($array, $objeto);
+                echo json_encode($array);
 				break;
         }
     }
@@ -81,9 +91,7 @@ class Server
 				break;
         }
     }
-    
-    
-    
+  
 	private static function mostrar_usuarios() 
 	{
 		header('Content-type: application/json');
@@ -91,14 +99,19 @@ class Server
 	}
 
     private static function mostrar_usuario($usuario) 
-	{        
+	{      
+        header('Content-type: application/json');  
+
         if(Usuarios::get($usuario) == null)
         {
             header('HTTP/1.1 404 Not Found');
+            $array = [];
+            $objeto = array("error" => "usuario no encontrado.");
+            array_push($array, $objeto);
+            echo json_encode($array);
         }
         else
         {
-            header('Content-type: application/json');
             echo json_encode(Usuarios::get($usuario));
         }
 	}

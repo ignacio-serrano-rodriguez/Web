@@ -71,9 +71,10 @@ class Usuarios
 			{
 				if ($usuario['usuario'] == $informacion->usuario || $usuario['mail'] == $informacion->mail) 
 				{
-					$objeto = array("error" => "informacion introducida no valida");
+					header('HTTP/1.1 422 Unprocessable Entity');
+					$objeto = array("error" => "usuario o mail ya en uso.");
 					array_push($array, $objeto);
-					return($objeto);
+					return($array);
 				}
 			}
 
@@ -102,7 +103,19 @@ class Usuarios
 		}
 		catch(PDOException $e)
 		{
-			return($e->getMessage());
+			if($e->getCode() == "23000")
+			{
+				header('HTTP/1.1 422 Unprocessable Entity');
+				$array = [];
+				$objeto = array("error" => "la información introducida no es completa.");
+				array_push($array, $objeto);
+				return($array);
+			}
+			else
+			{
+				return($e->getCode());
+			}
+			
 		}
 	}
 
@@ -111,7 +124,6 @@ class Usuarios
 	{
 		echo "put (actualizar)<br/>";
 	}
-
 
 	// Eliminar
 	public static function delete($usuario)
