@@ -7,6 +7,7 @@ class Server
     {
         $uri = $_SERVER['REQUEST_URI'];
         $method = $_SERVER['REQUEST_METHOD'];
+        header('Content-type: application/json');
         
         $paths = explode('/', self::paths($uri));
         array_shift($paths); 
@@ -27,7 +28,6 @@ class Server
 		else 
 		{
             header('HTTP/1.1 404 Not Found');
-            header('Content-type: application/json');
             $array = [];
             $objeto = array("error" => "recurso no encontrado.");
             array_push($array, $objeto);
@@ -53,7 +53,6 @@ class Server
                 break;
 			default:
 				header('HTTP/1.1 405 Method Not Allowed');
-                header('Content-type: application/json');
 				header('Allow: GET');
                 $array = [];
                 $objeto = array("error" => "metodo utilizado no permitido.");
@@ -97,14 +96,11 @@ class Server
   
 	private static function mostrar_usuarios() 
 	{
-		header('Content-type: application/json');
 		echo json_encode(Usuarios::get(null));
 	}
 
     private static function mostrar_usuario($usuario) 
 	{      
-        header('Content-type: application/json');  
-
         if(Usuarios::get($usuario) == null)
         {
             header('HTTP/1.1 404 Not Found');
@@ -121,7 +117,6 @@ class Server
 
     private static function crear_usuario()
     {
-        header('Content-type: application/json');
         $resultado = Usuarios::post(json_decode(file_get_contents('php://input')));
         $array = [];
 
@@ -140,7 +135,6 @@ class Server
 
     private static function eliminar_usuario($usuario)
     {
-        header('Content-type: application/json'); 
         $resultado = Usuarios::delete($usuario);
         $array = [];
         
