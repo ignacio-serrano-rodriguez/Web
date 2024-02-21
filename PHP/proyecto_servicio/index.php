@@ -48,6 +48,9 @@ class Server
 			case 'GET':
 			    self::mostrar_usuarios();
 				break;
+            case 'POST':
+                self::crear_usuario();
+                break;
 			default:
 				header('HTTP/1.1 405 Method Not Allowed');
                 header('Content-type: application/json');
@@ -74,15 +77,15 @@ class Server
 				 self::crear_usuario();
 				break;
 
+            // ELIMINAR
+			case 'DELETE':
+				self::eliminar_usuario($usuario);
+				break;
+
             // ACTUALIZAR
 			case 'PUT':
                 // self::actualizar_usuario($usuario);
-               break;
-
-            // ELIMINAR
-			case 'DELETE':
-				// $this->delete_contact($nom);
-				break;
+               break;            
 		
             // MÉTODO NO VÁLIDO
 			default:
@@ -119,8 +122,48 @@ class Server
     private static function crear_usuario()
     {
         header('Content-type: application/json');
-        $info = json_encode(Usuarios::post(json_decode(file_get_contents('php://input'))));
-        echo $info;
+        $resultado = Usuarios::post(json_decode(file_get_contents('php://input')));
+        $array = [];
+
+        if(gettype($resultado) == "string")
+        {
+            header('HTTP/1.1 422 Unprocessable Entity');
+            $objeto = array("error" => $resultado);
+            array_push($array, $objeto);
+            echo(json_encode($array));
+        }
+        else
+        {
+            echo(json_encode($resultado));
+        }
+    }
+
+    private static function eliminar_usuario($usuario)
+    {
+        header('Content-type: application/json'); 
+        $resultado = Usuarios::delete($usuario);
+        $array = [];
+        
+        if($resultado == 1)
+        {
+            $objeto = array("correcto" => "usuario $usuario eliminado.");
+            array_push($array, $objeto);
+            echo json_encode($array);
+        }
+        else if($resultado == 0)
+        {
+            header('HTTP/1.1 404 Not Found');
+            $objeto = array("error" => "usuario inexistente.");
+            array_push($array, $objeto);
+            echo json_encode($array);
+        }
+        else
+        {
+            header('HTTP/1.1 404 Not Found');
+            $objeto = array("error" => "no se ha podido borrar el usuario.");
+            array_push($array, $objeto);
+            echo json_encode($array);
+        }
     }
 }
 
