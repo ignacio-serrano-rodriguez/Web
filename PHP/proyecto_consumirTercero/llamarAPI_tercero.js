@@ -22,7 +22,7 @@ async function mostrar_pais(nombrePais)
 
 	if(nombrePais == '')
 	{
-		document.getElementById("contenido").innerHTML = "No introducir una cadena vacía.";
+		document.getElementById("contenido").innerHTML = "<p>No introducir una cadena vacía.</p>";
 	}
 	else
 	{
@@ -31,7 +31,7 @@ async function mostrar_pais(nombrePais)
 
 		if(datos.status == 404)
 		{
-			document.getElementById("contenido").innerHTML = "País inexistente.";
+			document.getElementById("contenido").innerHTML = "<p>País inexistente.</p>";
 		}
 		else
 		{
