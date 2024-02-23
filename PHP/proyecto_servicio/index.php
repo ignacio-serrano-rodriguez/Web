@@ -85,7 +85,7 @@ class Server
 
             // ACTUALIZAR
 			case 'PUT':
-                self::actualizar_usuario($usuario);
+                self::actualizar_usuario();
                break;     
 		
             // MÉTODO NO VÁLIDO
