@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Almacén</title>
+</head>
+<body>
+	<h1>Almacén</h1>
+	<h2>Añadir producto</h2>
+	<div id="consolaAniadir"></div>
+	<strong>Nombre</strong> <input id="nombre" type="text"/><br/>
+	<strong>Precio</strong> <input id="precio" type="text"/><br/>
+	<strong>Cantidad</strong> <input id="cantidad" type="text"/><br/>
+	<strong>Tipo</strong> <input id="tipo" type="text"/><br/>
+	<strong>Ventas</strong> <input id="ventas" type="text"/><br/><br/>
+	<input onclick="aniadir_producto()" type="button" value="✅ Añadir"/><br/>
+	<h2>Listado productos</h2>
+	<input onclick="mostrar_productos()" type="button" value="💯 Mostrar todos"/><br/><br/>
+	<input id="idProductoBuscar" type="text" placeholder="Introduce un ID">
+	<input onclick="buscar_producto()" type="button" value="🔎 Buscar"/><br/><br/>
+	<div id="consola"></div>
+	<div id="contenido"></div>
+	<script src="llamarAPI_companiero.js"></script>
+</body>
+</html>
