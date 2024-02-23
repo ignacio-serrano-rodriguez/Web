@@ -53,6 +53,10 @@ class Server
                 self::crear_usuario();
                 break;
 
+            case 'PUT':
+                self::actualizar_usuario();
+                break;
+
 			default:
 				header('HTTP/1.1 405 Method Not Allowed');
 				header('Allow: GET');
@@ -170,7 +174,7 @@ class Server
         }
     }
 
-    // PUT /usuarios/(nombreUsuario) "Body raw en formato json"
+    // PUT /usuarios/(idUsuario) "Body raw en formato json"
     private static function actualizar_usuario()
     {
         $resultado = Usuarios::put(json_decode(file_get_contents('php://input')));
