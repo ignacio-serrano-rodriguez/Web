@@ -108,7 +108,6 @@ class Usuarios
 			{
 				return("situacion inesperada.");
 			}
-			
 		}
 	}
 
@@ -129,8 +128,54 @@ class Usuarios
 	}
 
 	// Actualizar
-	public static function put($usuario)
+	public static function put($informacion)
 	{
-		echo "put (actualizar)<br/>";
+		$array = [];
+
+		try
+		{
+			$BD = new PDO('mysql:dbname=proyecto_php;host=127.0.0.1:3306', 'root', '');
+
+			$query = $BD->prepare("UPDATE usuarios SET nombre = :nombreActualizacion, apellidos = :apellidosActualizacion, edad = :edadActualizacion, mail = :mailActualizacion, usuario = :usuarioActualizacion, contrasenia = :contraseniaActualizacion_1 WHERE id = :idLogin");
+			$query->execute(array(':nombreActualizacion' => $informacion->nombre, ':apellidosActualizacion' => $informacion->apellidos, ':edadActualizacion' => $informacion->edad, ':mailActualizacion' => $informacion->mail, ':usuarioActualizacion' => $informacion->usuario, ':contraseniaActualizacion_1' => $informacion->contrasenia, ':idLogin' => $informacion->id));
+
+			if($query->rowCount() != 0)
+			{
+				$query = $BD->prepare("SELECT id, nombre, apellidos, edad, mail, usuario, rol  FROM usuarios WHERE usuario = :usuarioIntroducido");
+				$query->execute(array('usuarioIntroducido' => $informacion->usuario));
+				
+				foreach ($query as $usuario) 
+				{
+					$objeto = array
+					(
+						"id" => $usuario['id'],
+						"rol" => $usuario['rol'],
+						"usuario" => $usuario['usuario'],
+						"mail" => $usuario['mail'],
+						"nombre" => $usuario['nombre'],
+						"apellidos" => $usuario['apellidos'],
+						"edad" => $usuario['edad'],
+					);
+					array_push($array, $objeto);
+				}
+
+				return ($array);
+			}
+			else
+			{
+				return("no se ha modificado ninguna información.");
+			}
+		}
+		catch(PDOException $e)
+		{
+			if($e->getCode() == "23000")
+			{
+				return ("falta informacion para actualizar al usuario.");
+			}
+			else
+			{
+				return("situacion inesperada.");
+			}
+		}
 	}
 }

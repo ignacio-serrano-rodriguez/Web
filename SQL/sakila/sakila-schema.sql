@@ -50,7 +50,7 @@ CREATE TABLE actor (
   KEY idx_actor_last_name (last_name)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
+--  
 -- Table structure for table `address`
 --
 
@@ -120,7 +120,7 @@ CREATE TABLE customer (
   email VARCHAR(50) DEFAULT NULL,
   address_id SMALLINT UNSIGNED NOT NULL,
   active BOOLEAN NOT NULL DEFAULT TRUE,
-  create_date DATETIME NOT NULL,
+  create_date    NOT NULL,
   last_update TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY  (customer_id),
   KEY idx_fk_store_id (store_id),

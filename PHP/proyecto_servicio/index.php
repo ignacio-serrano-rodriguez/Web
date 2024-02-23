@@ -48,9 +48,11 @@ class Server
 			case 'GET':
 			    self::mostrar_usuarios();
 				break;
+
             case 'POST':
                 self::crear_usuario();
                 break;
+
 			default:
 				header('HTTP/1.1 405 Method Not Allowed');
 				header('Allow: GET');
@@ -83,22 +85,28 @@ class Server
 
             // ACTUALIZAR
 			case 'PUT':
-                // self::actualizar_usuario($usuario);
-               break;            
+                self::actualizar_usuario($usuario);
+               break;     
 		
             // MÉTODO NO VÁLIDO
 			default:
 				header('HTTP/1.1 405 Method Not Allowed');
 				header('Allow: GET, PUT, DELETE');
+                $array = [];
+                $objeto = array("error" => "metodo utilizado no permitido.");
+                array_push($array, $objeto);
+                echo json_encode($array);
 				break;
         }
     }
   
+    // GET localhost/usuarios
 	private static function mostrar_usuarios() 
 	{
 		echo json_encode(Usuarios::get(null));
 	}
 
+    // GET /usuarios/(nombreUsuario)
     private static function mostrar_usuario($usuario) 
 	{      
         if(Usuarios::get($usuario) == null)
@@ -115,6 +123,7 @@ class Server
         }
 	}
 
+    // POST /usuarios "Body raw en formato json"
     private static function crear_usuario()
     {
         $resultado = Usuarios::post(json_decode(file_get_contents('php://input')));
@@ -133,6 +142,7 @@ class Server
         }
     }
 
+    // DELETE /usuarios/(nombreUsuario)
     private static function eliminar_usuario($usuario)
     {
         $resultado = Usuarios::delete($usuario);
@@ -157,6 +167,25 @@ class Server
             $objeto = array("error" => "no se ha podido borrar el usuario.");
             array_push($array, $objeto);
             echo json_encode($array);
+        }
+    }
+
+    // PUT /usuarios/(nombreUsuario) "Body raw en formato json"
+    private static function actualizar_usuario()
+    {
+        $resultado = Usuarios::put(json_decode(file_get_contents('php://input')));
+
+        if(gettype($resultado) == "string")
+        {
+            header('HTTP/1.1 422 Unprocessable Entity');
+            $objeto = array("error" => $resultado);
+            $array = [];
+            array_push($array, $objeto);
+            echo(json_encode($array));
+        }
+        else
+        {
+            echo(json_encode($resultado));
         }
     }
 }
